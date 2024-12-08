@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "ESNext"],
+    "module": "ESNext",
+    "rootDir": ".",
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./docs/**/*/ts",
+    "./docs/.vitepress/**/*.ts",
+    "./docs/.vitepress/**/*.vue",
+    "./docs/**/*.d.ts",
+    "./typings/**/*.d.ts",
+    "./scripts/**/*.ts",
+    "./tests/**/*.ts",
+    "*.config.ts",
+    "eslint.config.mjs"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
