@@ -29,8 +29,8 @@ import pluginSvg from 'eslint-plugin-svg'
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
-  ...pluginSvg.configs.recommended,
   // Other configs...
+  ...pluginSvg.configs.recommended,
 ]
 ```
 

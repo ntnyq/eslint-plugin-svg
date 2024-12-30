@@ -42,7 +42,12 @@ export function createConfig(options: CreateConfigOptions = {}) {
 export const recommended = [
   createConfig({
     name: 'svg/recommended',
-    rules: {},
+    // @keep-sorted
+    rules: {
+      'svg/no-empty-desc': 'error',
+      'svg/no-empty-text': 'error',
+      'svg/no-empty-title': 'error',
+    },
   }),
 ]
 

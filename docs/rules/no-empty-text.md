@@ -1,18 +1,18 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: svg/no-empty-desc
-description: Disallow empty desc element.
+title: svg/no-empty-text
+description: Disallow empty text element.
 since: v0.0.1
 ---
 
-# svg/no-empty-desc
+# svg/no-empty-text
 
-> Disallow empty desc element.
+> Disallow empty text element.
 
 ## :book: Rule Details
 
-This rule reports when elememt desc is empty.
+This rule reports when elememt text is empty.
 
 ## :wrench: Options
 
@@ -24,7 +24,7 @@ Nothing.
 
 ```xml
 <svg>
-  <desc>foo</desc>
+  <text>foo</text>
 </svg>
 ```
 
@@ -34,7 +34,7 @@ Nothing.
 
 ```xml eslint-check
 <svg>
-  <desc></desc>
+  <text></text>
 </svg>
 ```
 
@@ -44,9 +44,9 @@ Nothing.
 
 ```xml eslint-check
 <svg>
-  <desc>
+  <text>
     <!-- foobar -->
-  </desc>
+  </text>
 </svg>
 ```
 
@@ -56,9 +56,9 @@ Nothing.
 
 ```xml eslint-check
 <svg>
-  <desc>
+  <text>
     <circle r="10" />
-  </desc>
+  </text>
 </svg>
 ```
 
@@ -70,5 +70,5 @@ This rule was introduced in eslint-plugin-svg v0.0.1
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/ntnyq/eslint-plugin-svg/blob/main/src/rules/no-empty-desc.ts)
-- [Test source](https://github.com/ntnyq/eslint-plugin-svg/blob/main/tests/rules/no-empty-desc.test.ts)
+- [Rule source](https://github.com/ntnyq/eslint-plugin-svg/blob/main/src/rules/no-empty-text.ts)
+- [Test source](https://github.com/ntnyq/eslint-plugin-svg/blob/main/tests/rules/no-empty-text.test.ts)

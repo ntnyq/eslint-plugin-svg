@@ -13,3 +13,4 @@ sidebarDepth: 0
 | :-------------------------------------- | :--------------------------- | :-: | :-: | :-: |
 | [no-empty-title](/rules/no-empty-title) | Disallow empty title element | ✅  |     |     |
 | [no-empty-desc](/rules/no-empty-desc)   | Disallow empty desc element  | ✅  |     |     |
+| [no-empty-text](/rules/no-empty-text)   | Disallow empty text element  | ✅  |     |     |
