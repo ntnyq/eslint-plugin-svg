@@ -46,35 +46,29 @@ _See also: [http://eslint.org/docs/user-guide/configuring](http://eslint.org/doc
 
 ```ts [eslint.config.mjs] twoslash
 // @noErrors
-import { createRecommendedConfig } from 'eslint-plugin-svg'
+import { createConfig } from 'eslint-plugin-svg'
 
 /**
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
-  // Create a single config based on the recommended config
-  createRecommendedConfig({
+  // other configs
+  createConfig({
     // config name
     name: 'svg',
 
     // files to include
     files: ['**/*.svg'],
 
-    // overrides built-in recommended rules
-    overridesRules: {},
+    // rules to enable
+    rules: {},
   }),
 ]
 ```
 
-## Options of `createRecommendedConfig`
+## Options of `createConfig`
 
-### name
-
-The name of the config.
-
-- Type: `string`
-- Required: `false`
-- Default: `svg/recommended`
+All fields of ESLint `Linter.Config` are supported, but bellow fields have default value:
 
 ### files
 
@@ -84,18 +78,18 @@ The files to be linted.
 - Required: `false`
 - Default: `['**/*.svg']`
 
-### ignores
+### languageOptions.parser
 
-The files to be ignored. negated patterns for force lint.
+The parser to use, this is set by default and can't be overridden.
 
-- Type: `string[]`
+- Type: `Linter.Parser`
 - Required: `false`
-- Default: `[]`
+- Default: [svg-eslint-parser](https://github.com/ntnyq/svg-eslint-parser)
 
-### overridesRules
+### plugins
 
-Override rules in the `recommended` preset.
+The plugins to use.
 
-- Type: `Record<string, Linter.RuleEntry>`
+- Type: `Record<string, ESLint.Plugin>`
 - Required: `false`
-- Default: `undefined`
+- Default: key `svg` set to this plugin

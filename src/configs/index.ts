@@ -36,8 +36,10 @@ export function createConfig(options: CreateConfigOptions = {}) {
   return config
 }
 
+/**
+ * recommended config preset
+ */
 export const recommended = [
-  // flat recommended config
   createConfig({
     name: 'svg/recommended',
     rules: {},
