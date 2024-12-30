@@ -52,8 +52,35 @@ export interface RuleCreateAndOptions<
   ) => RuleListener
 }
 export interface RuleListener {
+  // document
+  Document?: (node: AST.DocumentNode) => void
+  'Document:exit'?: (node: AST.DocumentNode) => void
+
+  // program
   Program?: (node: AST.Program) => void
   'Program:exit'?: (node: AST.Program) => void
+
+  // text
+  Text?: (node: AST.TextNode) => void
+  'Text:exit'?: (node: AST.TextNode) => void
+
+  // comment
+  Comment?: (node: AST.CommentNode) => void
+  'Comment:exit'?: (node: AST.CommentNode) => void
+
+  // doctype
+  Doctype?: (node: AST.DoctypeNode) => void
+  'Doctype:exit'?: (node: AST.DoctypeNode) => void
+  DoctypeAttribute?: (node: AST.DoctypeAttributeNode) => void
+  'DoctypeAttribute:exit'?: (node: AST.DoctypeAttributeNode) => void
+
+  // tag
+  Tag?: (node: AST.TagNode) => void
+  'Tag:exit'?: (node: AST.TagNode) => void
+
+  // attribute
+  Attribute?: (node: AST.AttributeNode) => void
+  'Attribute:exit'?: (node: AST.AttributeNode) => void
   [key: string]: ((node: never) => void) | undefined
 }
 

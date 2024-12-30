@@ -9,22 +9,37 @@ export default createESLintRule({
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'disallow empty title',
+      description: 'disallow empty title element',
       recommended: true,
     },
     schema: [],
     messages: {
-      invalid: '',
+      invalid: 'Element title must not be empty',
     },
   },
   defaultOptions: [],
   create(context) {
     return {
-      Program(node) {
-        context.report({
-          node,
-          messageId: 'invalid',
-        })
+      Tag(node) {
+        if (node.name !== 'title') {
+          return
+        }
+
+        const textNode = node.children.find(n => n.type === 'Text')
+
+        if (textNode) {
+          if (!textNode.value.trim()) {
+            return context.report({
+              node,
+              messageId: 'invalid',
+            })
+          }
+        } else {
+          return context.report({
+            node,
+            messageId: 'invalid',
+          })
+        }
       },
     }
   },

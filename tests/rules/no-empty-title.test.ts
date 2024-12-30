@@ -5,7 +5,16 @@ import { $, run } from '../internal'
 run({
   name: RULE_NAME,
   rule,
-  valid: [],
+  valid: [
+    {
+      filename: 'valid.svg',
+      code: $`
+        <svg>
+          <title>foo</title>
+        </svg>
+      `,
+    },
+  ],
   invalid: [
     {
       filename: 'empty-title.svg',
@@ -18,13 +27,67 @@ run({
         expect(errors).toMatchInlineSnapshot(`
           [
             {
-              "column": 1,
-              "endColumn": 5,
-              "endLine": 3,
-              "line": 1,
-              "message": "",
+              "column": 3,
+              "endColumn": 16,
+              "endLine": 2,
+              "line": 2,
+              "message": "Element title must not be empty",
               "messageId": "invalid",
-              "nodeType": "Program",
+              "nodeType": "Tag",
+              "ruleId": "no-empty-title",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'title-comment.svg',
+      code: $`
+        <svg>
+          <title>
+            <!-- foobar -->
+          </title>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 9,
+              "endLine": 4,
+              "line": 2,
+              "message": "Element title must not be empty",
+              "messageId": "invalid",
+              "nodeType": "Tag",
+              "ruleId": "no-empty-title",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'title-no-text.svg',
+      code: $`
+        <svg>
+          <title>
+            <circle r="10" />
+          </title>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 9,
+              "endLine": 4,
+              "line": 2,
+              "message": "Element title must not be empty",
+              "messageId": "invalid",
+              "nodeType": "Tag",
               "ruleId": "no-empty-title",
               "severity": 2,
             },
