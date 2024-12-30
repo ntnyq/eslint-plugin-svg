@@ -1,6 +1,6 @@
 import { isNonEmptyString } from '@ntnyq/utils'
 import { CONTAINER_ELEMENTS } from '../constants'
-import { createESLintRule } from '../utils'
+import { createESLintRule, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'no-empty-container'
 export type MessageIds = 'invalid'
@@ -62,12 +62,19 @@ export default createESLintRule<Options, MessageIds>({
   defaultOptions: [defaultOptions],
   create(context) {
     const {
-      elements = CONTAINER_ELEMENTS,
+      elements = [],
       ignores = [],
       ignoreComments = true,
       ignoreWhitespace = true,
-    } = context.options?.[0] || {}
-    const containerElements = new Set(elements.filter(v => !ignores.includes(v)))
+    } = resolveOptions(context.options)
+    const containerElements = new Set(
+      [
+        // built-in container elements
+        ...CONTAINER_ELEMENTS,
+        // user defined container elements
+        ...elements,
+      ].filter(v => !ignores.includes(v)),
+    )
 
     return {
       Tag(node) {

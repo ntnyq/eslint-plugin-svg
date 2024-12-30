@@ -15,8 +15,6 @@ hero:
       link: /guide/
 ---
 
-[eslint-plugin-svg](https://www.npmjs.com/package/eslint-plugin-svg) is an ESLint plugin that provide rules for consistent, readable and valid SVG files.
-
 <div id="package_status">
 
 [![CI](https://github.com/ntnyq/eslint-plugin-svg/workflows/CI/badge.svg)](https://github.com/ntnyq/eslint-plugin-svg/actions)
@@ -33,9 +31,9 @@ See [Guide](./guide/index.md).
 
 ## :white_check_mark: Rules
 
-See [Available Rules](./rules/index.md).
+See [Rules](./rules/index.md).
 
-## :book: Release Note
+## :book: Releases
 
 See [Releases](https://github.com/ntnyq/eslint-plugin-svg/releases).
 

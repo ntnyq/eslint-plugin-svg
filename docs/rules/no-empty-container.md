@@ -14,7 +14,7 @@ since: v0.0.1
 
 This rule reports when container elememt is empty.
 
-Container elements:
+Built-in container elements:
 
 - `a`
 - `defs`
@@ -36,7 +36,7 @@ export type Options = {
   /**
    * container elements to be checked
    *
-   * @default ['a', 'defs', 'g', 'marker', 'mask', 'missing-glyph', 'pattern', 'svg', 'switch', 'symbol']
+   * @default []
    */
   elements?: string[]
 

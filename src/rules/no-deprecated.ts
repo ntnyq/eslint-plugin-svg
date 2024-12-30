@@ -1,5 +1,5 @@
 import { DEPRECATED_ELEMENTS } from '../constants'
-import { createESLintRule } from '../utils'
+import { createESLintRule, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'no-deprecated'
 export type MessageIds = 'deprecatedElement'
@@ -40,7 +40,7 @@ export default createESLintRule<Options, MessageIds>({
   },
   defaultOptions: [defaultOptions],
   create(context) {
-    const { allowElements = [] } = context.options?.[0] || {}
+    const { allowElements = [] } = resolveOptions(context.options)
     const deprecatedElements = new Set(
       DEPRECATED_ELEMENTS.filter(element => !allowElements.includes(element)),
     )

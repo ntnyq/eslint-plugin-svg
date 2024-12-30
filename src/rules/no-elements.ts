@@ -1,4 +1,4 @@
-import { createESLintRule } from '../utils'
+import { createESLintRule, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'no-elements'
 export type MessageIds = 'invalid'
@@ -39,7 +39,7 @@ export default createESLintRule<Options, MessageIds>({
   },
   defaultOptions: [defaultOptions],
   create(context) {
-    const { elements = [] } = context.options?.[0] || {}
+    const { elements = [] } = resolveOptions(context.options)
 
     if (!elements.length) {
       return {}

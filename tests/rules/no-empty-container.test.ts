@@ -27,17 +27,6 @@ run({
         </svg>
       `,
     },
-    {
-      filename: 'empty-elements.svg',
-      options: {
-        elements: [],
-      },
-      code: $`
-        <svg>
-          <a></a>
-        </svg>
-      `,
-    },
   ],
   invalid: [
     {
@@ -83,6 +72,34 @@ run({
               "endLine": 4,
               "line": 2,
               "message": "Container element 'a' must not be empty",
+              "messageId": "invalid",
+              "nodeType": "Tag",
+              "ruleId": "no-empty-container",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'user-defined.svg',
+      options: {
+        elements: ['metadata'],
+      },
+      code: $`
+        <svg>
+          <metadata></metadata>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 22,
+              "endLine": 2,
+              "line": 2,
+              "message": "Container element 'metadata' must not be empty",
               "messageId": "invalid",
               "nodeType": "Tag",
               "ruleId": "no-empty-container",
