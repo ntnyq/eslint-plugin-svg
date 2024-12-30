@@ -15,3 +15,4 @@ sidebarDepth: 0
 | [no-empty-desc](/rules/no-empty-desc)           | Disallow empty desc element      | ✅  |     |     |
 | [no-empty-text](/rules/no-empty-text)           | Disallow empty text element      | ✅  |     |     |
 | [no-empty-container](/rules/no-empty-container) | Disallow empty container element | ✅  |     |     |
+| [no-deprecated](/rules/no-deprecated)           | Disallow deprecated elements     | ✅  |     |     |

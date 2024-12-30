@@ -24,6 +24,7 @@
     "bumpp",
     "changelogithub",
     "codecov",
+    "hkern",
     "iconify",
     "lcov",
     "pnpm",
@@ -33,7 +34,8 @@
     "unplugin",
     "vite",
     "vitepress",
-    "vitest"
+    "vitest",
+    "vkern"
   ],
   "cSpell.allowCompoundWords": true
 }

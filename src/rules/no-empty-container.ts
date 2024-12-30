@@ -1,21 +1,6 @@
 import { isNonEmptyString } from '@ntnyq/utils'
+import { CONTAINER_ELEMENTS } from '../constants'
 import { createESLintRule } from '../utils'
-
-/**
- * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Element#container_elements}
- */
-const CONTAINER_ELEMENTS = [
-  'a',
-  'defs',
-  'g',
-  'marker',
-  'mask',
-  'missing-glyph',
-  'pattern',
-  'svg',
-  'switch',
-  'symbol',
-]
 
 export const RULE_NAME = 'no-empty-container'
 export type MessageIds = 'invalid'
@@ -30,7 +15,7 @@ export type Options = [
 
 const defaultOptions: Options[0] = {}
 
-export default createESLintRule({
+export default createESLintRule<Options, MessageIds>({
   name: RULE_NAME,
   meta: {
     type: 'suggestion',

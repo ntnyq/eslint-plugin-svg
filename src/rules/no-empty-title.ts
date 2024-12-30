@@ -4,7 +4,7 @@ export const RULE_NAME = 'no-empty-title'
 export type MessageIds = 'invalid'
 export type Options = []
 
-export default createESLintRule({
+export default createESLintRule<Options, MessageIds>({
   name: RULE_NAME,
   meta: {
     type: 'suggestion',

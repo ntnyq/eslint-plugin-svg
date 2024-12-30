@@ -56,6 +56,7 @@ export default [
 | [no-empty-desc](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-desc)           | Disallow empty desc element      | ✅  |     |     |
 | [no-empty-text](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-text)           | Disallow empty text element      | ✅  |     |     |
 | [no-empty-container](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-container) | Disallow empty container element | ✅  |     |     |
+| [no-deprecated](https://eslint-plugin-svg.ntnyq.com/rules/no-deprecated)           | Disallow deprecated elements     | ✅  |     |     |
 
 ## License
 
