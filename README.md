@@ -8,8 +8,8 @@
 
 > Rules for consistent, readable and valid SVG files.
 
-> [!WARNING]
-> This plugin is Work In Progress. API may change at every release. Please use with caution.
+> [!CAUTION]
+> Status: Work In Progress. Not ready for use.
 
 ## Install
 

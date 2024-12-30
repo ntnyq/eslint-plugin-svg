@@ -1,4 +1,4 @@
-# User Guide
+# Guide
 
 ## Install
 
@@ -55,13 +55,19 @@ export default [
   // other configs
   createConfig({
     // config name
-    name: 'svg',
+    name: 'svg/rules',
 
     // files to include
     files: ['**/*.svg'],
 
     // rules to enable
-    rules: {},
+    rules: {
+      'svg/no-deprecated': 'error',
+      'svg/no-empty-container': 'error',
+      'svg/no-empty-desc': 'error',
+      'svg/no-empty-text': 'error',
+      'svg/no-empty-title': 'error',
+    },
   }),
 ]
 ```
