@@ -5,10 +5,10 @@ hero:
   name: ESLint Plugin
   text: SVG
   tagline: Rules for consistent, readable and valid SVG files
-  image:
-    light: /logo-light.svg
-    dark: /logo-dark.svg
-    alt: ESLint Plugin SVG Logo
+  # image:
+  #   light: /logo-light.svg
+  #   dark: /logo-dark.svg
+  #   alt: ESLint Plugin SVG Logo
   actions:
     - theme: brand
       text: Get Started
@@ -35,9 +35,9 @@ See [Guide](./guide/index.md).
 
 See [Available Rules](./rules/index.md).
 
-## :book: Changelog
+## :book: Release Note
 
-See [CHANGELOG](https://github.com/ntnyq/eslint-plugin-svg/releases).
+See [Releases](https://github.com/ntnyq/eslint-plugin-svg/releases).
 
 ## :lock: License
 

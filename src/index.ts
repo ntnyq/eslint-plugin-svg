@@ -16,9 +16,9 @@ export const plugin = {
   configs,
 } satisfies ESLint.Plugin
 
-export default plugin
-
 export * from './dts'
 export * from './meta'
 export * from './rules'
 export * from './configs'
+
+export default plugin

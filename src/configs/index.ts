@@ -1,40 +1,36 @@
+import * as parserSVG from 'svg-eslint-parser'
 import { plugin } from '..'
 import type { Linter } from 'eslint'
 import type { RulesWithPluginName } from '../dts'
 
-export interface RecommendedOptions extends Linter.Config {
-  /**
-   * Overrides rules.
-   */
-  overridesRules?: RulesWithPluginName
+export type CreateConfigOptions = Omit<Linter.Config, 'rules'> & {
+  rules?: Partial<RulesWithPluginName>
 }
 
 /**
- * Create recommended config in flat style.
+ * Create a ESLint config.
  *
- * @param options - Create recommended config {@link RecommendedOptions}.
- * @returns flat recommended config.
+ * @param options - ESLint Linter.Config with type support.
+ * @returns ESLint config.
  */
-export function createRecommendedConfig(options: RecommendedOptions = {}) {
+export function createConfig(options: CreateConfigOptions = {}) {
   const config: Linter.Config = {
     ...options,
-
-    // Overrides
-    name: options.name || 'svg/recommended',
     files: options.files || ['**/*.svg'],
-    ignores: options.ignores || [],
-    languageOptions: options.languageOptions,
     plugins: {
       ...(options.plugins || {}),
-
       /* v8 ignore start */
       get svg() {
         return plugin
       },
       /* v8 ignore stop */
     },
+    languageOptions: {
+      ...(options.languageOptions || {}),
+      parser: parserSVG,
+    },
     rules: {
-      ...(options.overridesRules || {}),
+      ...options.rules,
     },
   }
   return config
@@ -42,7 +38,10 @@ export function createRecommendedConfig(options: RecommendedOptions = {}) {
 
 export const recommended = [
   // flat recommended config
-  createRecommendedConfig(),
+  createConfig({
+    name: 'svg/recommended',
+    rules: {},
+  }),
 ]
 
 export const configs = {
