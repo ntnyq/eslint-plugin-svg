@@ -50,11 +50,12 @@ export default [
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
-| Name                                                                       | Description                  | 💼  | 🔧  | 💡  |
-| :------------------------------------------------------------------------- | :--------------------------- | :-: | :-: | :-: |
-| [no-empty-title](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-title) | Disallow empty title element | ✅  |     |     |
-| [no-empty-desc](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-desc)   | Disallow empty desc element  | ✅  |     |     |
-| [no-empty-text](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-text)   | Disallow empty text element  | ✅  |     |     |
+| Name                                                                               | Description                      | 💼  | 🔧  | 💡  |
+| :--------------------------------------------------------------------------------- | :------------------------------- | :-: | :-: | :-: |
+| [no-empty-title](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-title)         | Disallow empty title element     | ✅  |     |     |
+| [no-empty-desc](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-desc)           | Disallow empty desc element      | ✅  |     |     |
+| [no-empty-text](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-text)           | Disallow empty text element      | ✅  |     |     |
+| [no-empty-container](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-container) | Disallow empty container element | ✅  |     |     |
 
 ## License
 

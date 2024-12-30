@@ -44,6 +44,7 @@ export const recommended = [
     name: 'svg/recommended',
     // @keep-sorted
     rules: {
+      'svg/no-empty-container': 'error',
       'svg/no-empty-desc': 'error',
       'svg/no-empty-text': 'error',
       'svg/no-empty-title': 'error',
