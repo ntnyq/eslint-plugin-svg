@@ -45,6 +45,7 @@ export const recommended = [
     // @keep-sorted
     rules: {
       'svg/no-deprecated': 'error',
+      'svg/no-doctype': 'error',
       'svg/no-empty-container': 'error',
       'svg/no-empty-desc': 'error',
       'svg/no-empty-text': 'error',

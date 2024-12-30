@@ -17,3 +17,4 @@ sidebarDepth: 0
 | [no-empty-container](/rules/no-empty-container) | Disallow empty container element | ✅  |     |     |
 | [no-deprecated](/rules/no-deprecated)           | Disallow deprecated elements     | ✅  |     |     |
 | [no-elements](/rules/no-elements)               | Disallow elements by name        |     |     |     |
+| [no-doctype](/rules/no-doctype)                 | Disallow doctype                 | ✅  |     |     |
