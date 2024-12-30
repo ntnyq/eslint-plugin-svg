@@ -7,22 +7,16 @@ export type ReportDescriptor<TMessageIds extends string> =
   ReportDescriptorWithSuggestion<TMessageIds> &
     (ReportDescriptorLocOnly | ReportDescriptorNodeOptionalLoc)
 
-export type ReportDescriptorBase<TMessageIds extends string> = {
-  readonly messageId: TMessageIds
-  readonly data?: ReportDescriptorMessageData
-  readonly fix?: Rule.ReportFixer
-}
-
 export type ReportDescriptorLocOnly = {
   loc: Readonly<AST.Position> | Readonly<AST.SourceLocation>
 }
 
 export type ReportDescriptorMessageData = Readonly<Record<string, unknown>>
+
 export type ReportDescriptorNodeOptionalLoc = {
   readonly node: AST.AnyNode
   readonly loc?: Readonly<AST.Position> | Readonly<AST.SourceLocation>
 }
-
 export interface ReportDescriptorWithSuggestion<TMessageIds extends string>
   extends ReportDescriptorBase<TMessageIds> {
   readonly suggest?: readonly Rule.SuggestionReportDescriptor[]
@@ -31,7 +25,7 @@ export interface RuleContext<TMessageIds extends string, TOptions extends readon
   id: string
   options: TOptions
   parserPath: string
-  settings: { yml?: YMLSettings; [name: string]: any }
+  settings: { svg?: SVGSettings; [name: string]: any }
   getAncestors(): AST.AnyNode[]
   getFilename(): string
   getSourceCode(): SourceCode
@@ -94,7 +88,7 @@ export interface RuleModule<
   create(context: RuleContext<TMessageIds, TOptions>): RuleListener
 }
 
-type YMLSettings = { indent?: number }
+type SVGSettings = { indent?: number }
 
 /**
  * Rule meta related
@@ -142,4 +136,35 @@ export interface RuleWithMetaAndName<
 > extends RuleCreateAndOptions<TOptions, TMessageIds> {
   meta: NamedCreateRuleMeta<TMessageIds, TDocs, TOptions>
   name: string
+}
+
+/**
+ * rule fixer
+ */
+export type Fix = {
+  range: AST.Range
+  text: string
+}
+export type ReportDescriptorBase<TMessageIds extends string> = {
+  readonly messageId: TMessageIds
+  readonly data?: ReportDescriptorMessageData
+  readonly fix?: ReportFixer
+}
+export type ReportFixer = (fixer: RuleFixer) => Fix | Fix[] | IterableIterator<Fix> | null
+export type RuleFixer = {
+  insertTextAfter(nodeOrToken: AST.AnyNode | AST.Token, text: string): Fix
+
+  insertTextAfterRange(range: AST.Range, text: string): Fix
+
+  insertTextBefore(nodeOrToken: AST.AnyNode | AST.Token, text: string): Fix
+
+  insertTextBeforeRange(range: AST.Range, text: string): Fix
+
+  remove(nodeOrToken: AST.AnyNode | AST.Token): Fix
+
+  removeRange(range: AST.Range): Fix
+
+  replaceText(nodeOrToken: AST.AnyNode | AST.Token, text: string): Fix
+
+  replaceTextRange(range: AST.Range, text: string): Fix
 }

@@ -24,6 +24,15 @@ run({
           <text>foo</text>
         </svg>
       `,
+      output(output) {
+        // FIXME: parser has issue to parse DOCTYPE
+        expect(output).toMatchInlineSnapshot(`
+          "">
+          <svg>
+            <text>foo</text>
+          </svg>"
+        `)
+      },
       errors(errors) {
         expect(errors).toMatchInlineSnapshot(`
           [
@@ -31,6 +40,13 @@ run({
               "column": 1,
               "endColumn": 97,
               "endLine": 1,
+              "fix": {
+                "range": [
+                  0,
+                  96,
+                ],
+                "text": "",
+              },
               "line": 1,
               "message": "Doctype is not allowed",
               "messageId": "invalid",

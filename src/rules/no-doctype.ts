@@ -12,6 +12,7 @@ export default createESLintRule<Options, MessageIds>({
       description: 'disallow doctype',
       recommended: true,
     },
+    fixable: 'code',
     schema: [],
     messages: {
       invalid: 'Doctype is not allowed',
@@ -24,6 +25,7 @@ export default createESLintRule<Options, MessageIds>({
         context.report({
           node,
           messageId: 'invalid',
+          fix: fixer => fixer.remove(node),
         })
       },
     }
