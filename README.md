@@ -53,6 +53,7 @@ export default [
 | Name                                                                       | Description                  | 💼  | 🔧  | 💡  |
 | :------------------------------------------------------------------------- | :--------------------------- | :-: | :-: | :-: |
 | [no-empty-title](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-title) | Disallow empty title element | ✅  |     |     |
+| [no-empty-desc](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-desc)   | Disallow empty desc element  | ✅  |     |     |
 
 ## License
 

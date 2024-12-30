@@ -5,7 +5,16 @@ import { $, run } from '../internal'
 run({
   name: RULE_NAME,
   rule,
-  valid: [],
+  valid: [
+    {
+      filename: 'valid.svg',
+      code: $`
+        <svg>
+          <desc>foo</desc>
+        </svg>
+      `,
+    },
+  ],
   invalid: [
     {
       filename: 'empty-desc.svg',
@@ -18,13 +27,67 @@ run({
         expect(errors).toMatchInlineSnapshot(`
           [
             {
-              "column": 1,
-              "endColumn": 5,
-              "endLine": 3,
-              "line": 1,
-              "message": "",
+              "column": 3,
+              "endColumn": 14,
+              "endLine": 2,
+              "line": 2,
+              "message": "Element desc must not be empty",
               "messageId": "invalid",
-              "nodeType": "Program",
+              "nodeType": "Tag",
+              "ruleId": "no-empty-desc",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'desc-comment.svg',
+      code: $`
+        <svg>
+          <desc>
+            <!-- foobar -->
+          </desc>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 8,
+              "endLine": 4,
+              "line": 2,
+              "message": "Element desc must not be empty",
+              "messageId": "invalid",
+              "nodeType": "Tag",
+              "ruleId": "no-empty-desc",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'desc-no-text.svg',
+      code: $`
+        <svg>
+          <desc>
+            <circle r="10" />
+          </desc>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 8,
+              "endLine": 4,
+              "line": 2,
+              "message": "Element desc must not be empty",
+              "messageId": "invalid",
+              "nodeType": "Tag",
               "ruleId": "no-empty-desc",
               "severity": 2,
             },

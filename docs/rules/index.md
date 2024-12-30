@@ -12,3 +12,4 @@ sidebarDepth: 0
 | Name                                    | Description                  | 💼  | 🔧  | 💡  |
 | :-------------------------------------- | :--------------------------- | :-: | :-: | :-: |
 | [no-empty-title](/rules/no-empty-title) | Disallow empty title element | ✅  |     |     |
+| [no-empty-desc](/rules/no-empty-desc)   | Disallow empty desc element  | ✅  |     |     |
