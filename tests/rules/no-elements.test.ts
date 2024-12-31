@@ -33,7 +33,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 16,
+              "endColumn": 18,
               "endLine": 3,
               "line": 3,
               "message": "Element 'style' is not allowed",
@@ -44,7 +44,7 @@ run({
             },
             {
               "column": 3,
-              "endColumn": 18,
+              "endColumn": 20,
               "endLine": 4,
               "line": 4,
               "message": "Element 'script' is not allowed",

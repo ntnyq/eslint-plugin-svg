@@ -10,6 +10,8 @@ since: v0.0.2
 
 > Disallow doctype.
 
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+
 ## :book: Rule Details
 
 This rule reports when svg includes a DOCTYPE.

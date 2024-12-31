@@ -41,7 +41,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 8,
+              "endColumn": 10,
               "endLine": 2,
               "line": 2,
               "message": "Container element 'a' must not be empty",
@@ -68,7 +68,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 5,
+              "endColumn": 7,
               "endLine": 4,
               "line": 2,
               "message": "Container element 'a' must not be empty",
@@ -96,7 +96,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 22,
+              "endColumn": 24,
               "endLine": 2,
               "line": 2,
               "message": "Container element 'metadata' must not be empty",

@@ -25,9 +25,8 @@ run({
         </svg>
       `,
       output(output) {
-        // FIXME: parser has issue to parse DOCTYPE
         expect(output).toMatchInlineSnapshot(`
-          "">
+          "
           <svg>
             <text>foo</text>
           </svg>"
@@ -38,12 +37,12 @@ run({
           [
             {
               "column": 1,
-              "endColumn": 97,
+              "endColumn": 99,
               "endLine": 1,
               "fix": {
                 "range": [
                   0,
-                  96,
+                  98,
                 ],
                 "text": "",
               },

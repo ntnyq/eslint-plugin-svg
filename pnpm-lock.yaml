@@ -20,8 +20,8 @@ importers:
         specifier: ^7.0.15
         version: 7.0.15
       svg-eslint-parser:
-        specifier: ^0.0.0
-        version: 0.0.0
+        specifier: ^0.0.1
+        version: 0.0.1
     devDependencies:
       '@ntnyq/eslint-config':
         specifier: ^3.10.4
@@ -3027,8 +3027,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svg-eslint-parser@0.0.0:
-    resolution: {integrity: sha512-cwFDB7WVk6ERIVte/S5ZT+L+bZ312WPVmld7SjvOWnW2nGwz0GNtYTQfJdmDaiXZ3RLw4xvFqMSqVe8AFmK1Lg==}
+  svg-eslint-parser@0.0.1:
+    resolution: {integrity: sha512-vSnbFxJDuHHtdP8h2cXLGONmbAnk3tRjQFDII9lg/Qb0EilxajLwDo3nZjuY75+svcESicWXBRUF7z+YMFSbiQ==}
     engines: {node: '>=18.18.0'}
 
   svgo@4.0.0-rc.1:
@@ -6700,7 +6700,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svg-eslint-parser@0.0.0:
+  svg-eslint-parser@0.0.1:
     dependencies:
       '@ntnyq/utils': 0.4.2(patch_hash=3scar7yyur2r45g4ddgozjx47y)
       eslint-visitor-keys: 4.2.0

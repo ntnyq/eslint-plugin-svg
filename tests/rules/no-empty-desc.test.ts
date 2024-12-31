@@ -28,7 +28,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 14,
+              "endColumn": 16,
               "endLine": 2,
               "line": 2,
               "message": "Element desc must not be empty",
@@ -55,7 +55,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 8,
+              "endColumn": 10,
               "endLine": 4,
               "line": 2,
               "message": "Element desc must not be empty",
@@ -82,7 +82,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 8,
+              "endColumn": 10,
               "endLine": 4,
               "line": 2,
               "message": "Element desc must not be empty",

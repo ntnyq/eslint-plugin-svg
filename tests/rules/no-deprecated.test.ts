@@ -44,7 +44,7 @@ run({
           [
             {
               "column": 3,
-              "endColumn": 14,
+              "endColumn": 16,
               "endLine": 2,
               "line": 2,
               "message": "Element 'font' is deprecated",
@@ -55,7 +55,7 @@ run({
             },
             {
               "column": 3,
-              "endColumn": 24,
+              "endColumn": 26,
               "endLine": 3,
               "line": 3,
               "message": "Element 'font-face' is deprecated",
@@ -66,7 +66,7 @@ run({
             },
             {
               "column": 3,
-              "endColumn": 38,
+              "endColumn": 40,
               "endLine": 4,
               "line": 4,
               "message": "Element 'font-face-format' is deprecated",
@@ -77,7 +77,7 @@ run({
             },
             {
               "column": 3,
-              "endColumn": 34,
+              "endColumn": 36,
               "endLine": 5,
               "line": 5,
               "message": "Element 'font-face-name' is deprecated",
@@ -88,7 +88,7 @@ run({
             },
             {
               "column": 3,
-              "endColumn": 16,
+              "endColumn": 18,
               "endLine": 6,
               "line": 6,
               "message": "Element 'glyph' is deprecated",
@@ -99,7 +99,7 @@ run({
             },
             {
               "column": 3,
-              "endColumn": 18,
+              "endColumn": 20,
               "endLine": 7,
               "line": 7,
               "message": "Element 'cursor' is deprecated",

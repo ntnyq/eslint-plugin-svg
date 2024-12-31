@@ -60,7 +60,7 @@
   "dependencies": {
     "@ntnyq/utils": "^0.4.2",
     "@types/json-schema": "^7.0.15",
-    "svg-eslint-parser": "^0.0.0"
+    "svg-eslint-parser": "^0.0.1"
   },
   "devDependencies": {
     "@ntnyq/eslint-config": "^3.10.4",
