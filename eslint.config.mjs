@@ -1,19 +1,12 @@
 // @ts-check
 
 import { defineESLintConfig } from '@ntnyq/eslint-config'
-import pluginESLintPlugin from 'eslint-plugin-eslint-plugin'
 
-export default defineESLintConfig(
-  {
-    ignores: ['**/tests/fixtures'],
-  },
-  {
-    ...pluginESLintPlugin.configs['flat/all'],
-    rules: {
-      ...pluginESLintPlugin.configs['flat/all'].rules,
-      // injected by `createRule`
+export default defineESLintConfig({
+  ignores: ['**/tests/fixtures'],
+  eslintPlugin: {
+    overrides: {
       'eslint-plugin/require-meta-default-options': 'off',
-      'eslint-plugin/require-meta-docs-url': 'off',
     },
   },
-)
+})
