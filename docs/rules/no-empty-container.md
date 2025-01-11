@@ -10,6 +10,8 @@ since: v0.0.1
 
 > Disallow empty container element.
 
+- 💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ntnyq/eslint-plugin-svg#rules).
+
 ## :book: Rule Details
 
 This rule reports when container elememt is empty.

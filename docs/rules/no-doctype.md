@@ -10,6 +10,7 @@ since: v0.0.2
 
 > Disallow doctype.
 
+- 💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ntnyq/eslint-plugin-svg#rules).
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details

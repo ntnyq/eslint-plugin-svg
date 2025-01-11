@@ -50,15 +50,16 @@ export default [
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
-| Name                                                                               | Description                      | 💼  | 🔧  | 💡  |
-| :--------------------------------------------------------------------------------- | :------------------------------- | :-: | :-: | :-: |
-| [no-empty-title](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-title)         | Disallow empty title element     | ✅  |     |     |
-| [no-empty-desc](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-desc)           | Disallow empty desc element      | ✅  |     |     |
-| [no-empty-text](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-text)           | Disallow empty text element      | ✅  |     |     |
-| [no-empty-container](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-container) | Disallow empty container element | ✅  |     |     |
-| [no-deprecated](https://eslint-plugin-svg.ntnyq.com/rules/no-deprecated)           | Disallow deprecated elements     | ✅  |     |     |
-| [no-elements](https://eslint-plugin-svg.ntnyq.com/rules/no-elements)               | Disallow elements by name        |     |     |     |
-| [no-doctype](https://eslint-plugin-svg.ntnyq.com/rules/no-doctype)                 | Disallow doctype                 | ✅  | 🔧  |     |
+| Name                                                                               | Description                              | 💼  | 🔧  | 💡  |
+| :--------------------------------------------------------------------------------- | :--------------------------------------- | :-: | :-: | :-: |
+| [no-empty-title](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-title)         | Disallow empty title element             | ✅  |     |     |
+| [no-empty-desc](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-desc)           | Disallow empty desc element              | ✅  |     |     |
+| [no-empty-text](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-text)           | Disallow empty text element              | ✅  |     |     |
+| [no-empty-container](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-container) | Disallow empty container element         | ✅  |     |     |
+| [no-deprecated](https://eslint-plugin-svg.ntnyq.com/rules/no-deprecated)           | Disallow deprecated elements             | ✅  |     |     |
+| [no-elements](https://eslint-plugin-svg.ntnyq.com/rules/no-elements)               | Disallow elements by name                |     |     |     |
+| [no-doctype](https://eslint-plugin-svg.ntnyq.com/rules/no-doctype)                 | Disallow doctype                         | ✅  | 🔧  |     |
+| [no-invalid-role](https://eslint-plugin-svg.ntnyq.com/rules/no-invalid-role)       | Disallow invalid value of role attribute | ✅  |     |     |
 
 ## License
 

@@ -10,6 +10,8 @@ since: v0.0.1
 
 > Disallow deprecated elements.
 
+- 💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ntnyq/eslint-plugin-svg#rules).
+
 ## :book: Rule Details
 
 This rule reports when element is deprecated.

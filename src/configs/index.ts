@@ -29,9 +29,6 @@ export function createConfig(options: CreateConfigOptions = {}) {
       ...(options.languageOptions || {}),
       parser: parserSVG,
     },
-    rules: {
-      ...options.rules,
-    },
   }
   return config
 }
@@ -50,6 +47,7 @@ export const recommended = [
       'svg/no-empty-desc': 'error',
       'svg/no-empty-text': 'error',
       'svg/no-empty-title': 'error',
+      'svg/no-invalid-role': 'error',
     },
   }),
 ]

@@ -5,6 +5,7 @@ import noEmptyContainer from './no-empty-container'
 import noEmptyDesc from './no-empty-desc'
 import noEmptyText from './no-empty-text'
 import noEmptyTitle from './no-empty-title'
+import noInvalidRole from './no-invalid-role'
 
 // @keep-sorted
 export const rules = {
@@ -15,4 +16,5 @@ export const rules = {
   'no-empty-desc': noEmptyDesc,
   'no-empty-text': noEmptyText,
   'no-empty-title': noEmptyTitle,
+  'no-invalid-role': noInvalidRole,
 }
