@@ -40,10 +40,15 @@ export default createESLintRule<Options, MessageIds>({
   },
   defaultOptions: [defaultOptions],
   create(context) {
-    const { allowElements = [] } = resolveOptions(context.options)
+    const { allowElements = [] } = resolveOptions(
+      context.options,
+      defaultOptions,
+    )
+
     const deprecatedElements = new Set(
       DEPRECATED_ELEMENTS.filter(element => !allowElements.includes(element)),
     )
+
     return {
       Tag(node) {
         if (deprecatedElements.has(node.name)) {

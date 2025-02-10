@@ -39,7 +39,7 @@ export default createESLintRule<Options, MessageIds>({
   },
   defaultOptions: [defaultOptions],
   create(context) {
-    const { elements = [] } = resolveOptions(context.options)
+    const { elements = [] } = resolveOptions(context.options, defaultOptions)
 
     if (!elements.length) {
       return {}

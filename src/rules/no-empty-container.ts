@@ -66,7 +66,8 @@ export default createESLintRule<Options, MessageIds>({
       ignores = [],
       ignoreComments = true,
       ignoreWhitespace = true,
-    } = resolveOptions(context.options)
+    } = resolveOptions(context.options, defaultOptions)
+
     const containerElements = new Set(
       [
         // built-in container elements

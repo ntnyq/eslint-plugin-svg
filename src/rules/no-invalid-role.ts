@@ -42,7 +42,8 @@ export default createESLintRule<Options, MessageIds>({
   },
   defaultOptions: [defaultOptions],
   create(context) {
-    const { roles = [] } = resolveOptions(context.options)
+    const { roles = [] } = resolveOptions(context.options, defaultOptions)
+
     const allowedRoles = roles.length
       ? roles.filter(v => ARIA_ROLES.includes(v))
       : ARIA_ROLES
