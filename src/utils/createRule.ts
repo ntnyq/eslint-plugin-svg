@@ -13,7 +13,10 @@ export interface PluginDocs {
   recommended?: boolean
 }
 
-function createRule<TOptions extends readonly unknown[], TMessageIds extends string>({
+function createRule<
+  TOptions extends readonly unknown[],
+  TMessageIds extends string,
+>({
   create,
   defaultOptions,
   meta,
@@ -23,16 +26,27 @@ function createRule<TOptions extends readonly unknown[], TMessageIds extends str
   PluginDocs
 > {
   return {
-    create: ((context: Readonly<RuleContext<TMessageIds, TOptions>>): RuleListener => {
-      const optionsCount = Math.max(context.options.length, defaultOptions.length)
-      const optionsWithDefault = Array.from({ length: optionsCount }, (_, i) => {
-        /* v8 ignore start */
-        if (isObjectNotArray(context.options[i]) && isObjectNotArray(defaultOptions[i])) {
-          return deepMerge(defaultOptions[i], context.options[i])
-        }
-        return context.options[i] ?? defaultOptions[i]
-        /* v8 ignore stop */
-      }) as unknown as TOptions
+    create: ((
+      context: Readonly<RuleContext<TMessageIds, TOptions>>,
+    ): RuleListener => {
+      const optionsCount = Math.max(
+        context.options.length,
+        defaultOptions.length,
+      )
+      const optionsWithDefault = Array.from(
+        { length: optionsCount },
+        (_, i) => {
+          /* v8 ignore start */
+          if (
+            isObjectNotArray(context.options[i])
+            && isObjectNotArray(defaultOptions[i])
+          ) {
+            return deepMerge(defaultOptions[i], context.options[i])
+          }
+          return context.options[i] ?? defaultOptions[i]
+          /* v8 ignore stop */
+        },
+      ) as unknown as TOptions
       return create(context, optionsWithDefault)
     }) as any,
     defaultOptions,
@@ -44,14 +58,16 @@ function createRule<TOptions extends readonly unknown[], TMessageIds extends str
 }
 
 function RuleCreator(urlCreator: (name: string) => string) {
-  return function createNamedRule<TOptions extends readonly unknown[], TMessageIds extends string>({
+  return function createNamedRule<
+    TOptions extends readonly unknown[],
+    TMessageIds extends string,
+  >({
     name,
     meta,
     ...rule
-  }: Readonly<RuleWithMetaAndName<TOptions, TMessageIds, PluginDocs>>): RuleModule<
-    TMessageIds,
-    TOptions
-  > {
+  }: Readonly<
+    RuleWithMetaAndName<TOptions, TMessageIds, PluginDocs>
+  >): RuleModule<TMessageIds, TOptions> {
     return createRule<TOptions, TMessageIds>({
       meta: {
         ...meta,
@@ -65,11 +81,15 @@ function RuleCreator(urlCreator: (name: string) => string) {
   }
 }
 
-export const createESLintRule: <TOptions extends readonly unknown[], TMessageIds extends string>({
+export const createESLintRule: <
+  TOptions extends readonly unknown[],
+  TMessageIds extends string,
+>({
   name,
   meta,
   ...rule
-}: Readonly<RuleWithMetaAndName<TOptions, TMessageIds, PluginDocs>>) => RuleModule<
-  TMessageIds,
-  TOptions
-> = RuleCreator(ruleName => `${docsUrl}${ruleName}.html`)
+}: Readonly<
+  RuleWithMetaAndName<TOptions, TMessageIds, PluginDocs>
+>) => RuleModule<TMessageIds, TOptions> = RuleCreator(
+  ruleName => `${docsUrl}${ruleName}.html`,
+)

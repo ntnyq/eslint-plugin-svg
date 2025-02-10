@@ -2,7 +2,14 @@
  * @file Casing utils
  */
 
-import { camelCase, kebabCase, pascalCase, snakeCase, titleCase, trainCase } from '@ntnyq/utils'
+import {
+  camelCase,
+  kebabCase,
+  pascalCase,
+  snakeCase,
+  capitalCase as titleCase,
+  trainCase,
+} from 'change-case'
 
 export const CASING = {
   camelCase: 'camelCase',

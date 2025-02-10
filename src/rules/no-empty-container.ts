@@ -84,7 +84,12 @@ export default createESLintRule<Options, MessageIds>({
 
         const children = node.children
           .filter(n => !ignoreComments || n.type !== 'Comment')
-          .filter(n => !ignoreWhitespace || n.type !== 'Text' || isNonEmptyString(n.value.trim()))
+          .filter(
+            n =>
+              !ignoreWhitespace
+              || n.type !== 'Text'
+              || isNonEmptyString(n.value.trim()),
+          )
 
         if (children.length === 0) {
           context.report({
