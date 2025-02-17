@@ -4,7 +4,7 @@ import type { SourceCode } from './sourceCode'
 import type { AST } from './svg'
 
 /**
- * rule fixer
+ * Rule fixer
  */
 export type Fix = {
   range: AST.Range
@@ -77,19 +77,19 @@ export interface RuleCreateAndOptions<
   ) => RuleListener
 }
 export type RuleFixer = {
-  insertTextAfter(nodeOrToken: AST.AnyNode | AST.Token, text: string): Fix
+  insertTextAfter(nodeOrToken: AST.AnyNode | AST.AnyToken, text: string): Fix
 
   insertTextAfterRange(range: AST.Range, text: string): Fix
 
-  insertTextBefore(nodeOrToken: AST.AnyNode | AST.Token, text: string): Fix
+  insertTextBefore(nodeOrToken: AST.AnyNode | AST.AnyToken, text: string): Fix
 
   insertTextBeforeRange(range: AST.Range, text: string): Fix
 
-  remove(nodeOrToken: AST.AnyNode | AST.Token): Fix
+  remove(nodeOrToken: AST.AnyNode | AST.AnyToken): Fix
 
   removeRange(range: AST.Range): Fix
 
-  replaceText(nodeOrToken: AST.AnyNode | AST.Token, text: string): Fix
+  replaceText(nodeOrToken: AST.AnyNode | AST.AnyToken, text: string): Fix
 
   replaceTextRange(range: AST.Range, text: string): Fix
 }

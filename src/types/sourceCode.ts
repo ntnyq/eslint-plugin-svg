@@ -8,17 +8,17 @@ export interface SourceCode {
   commentsExistBetween(left: SVGNodeOrToken, right: SVGNodeOrToken): boolean
   getAllComments(): AST.CommentNode[]
 
-  getCommentsAfter(nodeOrToken: SVGNodeOrToken): AST.Comment[]
+  getCommentsAfter(nodeOrToken: SVGNodeOrToken): AST.CommentNode[]
 
-  getCommentsBefore(nodeOrToken: SVGNodeOrToken): AST.Comment[]
+  getCommentsBefore(nodeOrToken: SVGNodeOrToken): AST.CommentNode[]
 
-  getCommentsInside(node: AST.AnyNode): AST.Comment[]
+  getCommentsInside(node: AST.AnyNode): AST.CommentNode[]
 
-  getFirstToken(node: AST.AnyNode): AST.Token
+  getFirstToken(node: AST.AnyNode): AST.AnyToken
 
   getIndexFromLoc(loc: AST.Position): number
 
-  getLastToken(node: AST.AnyNode): AST.Token
+  getLastToken(node: AST.AnyNode): AST.AnyToken
 
   getLastTokens(node: AST.AnyNode, options?: CursorWithCountOptions): SVGToken[]
 
@@ -30,9 +30,9 @@ export interface SourceCode {
   getLocFromIndex(index: number): AST.Position
 
   getNodeByRangeIndex(index: number): AST.AnyNode | null
-  getTokenAfter(node: SVGNodeOrToken): AST.Token | null
+  getTokenAfter(node: SVGNodeOrToken): AST.AnyToken | null
 
-  getTokenBefore(node: SVGNodeOrToken): AST.Token | null
+  getTokenBefore(node: SVGNodeOrToken): AST.AnyToken | null
 
   isSpaceBetweenTokens(first: SVGToken, second: SVGToken): boolean
   visitorKeys: {
@@ -45,8 +45,8 @@ export interface SourceCode {
   }
 
   getComments(node: SVGNodeOrToken): {
-    leading: AST.Comment[]
-    trailing: AST.Comment[]
+    leading: AST.CommentNode[]
+    trailing: AST.CommentNode[]
   }
   getFirstToken(
     node: AST.AnyNode,

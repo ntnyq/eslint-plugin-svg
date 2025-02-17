@@ -1,6 +1,6 @@
 import { transformerRenderWhitespace } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
-import pluginSvg from 'eslint-plugin-svg'
+import pluginSVG from 'eslint-plugin-svg'
 import MarkdownItContainer from 'markdown-it-container'
 import { createTwoslasher } from 'twoslash-eslint'
 import { defineConfig } from 'vitepress'
@@ -67,13 +67,8 @@ export default defineConfig({
             return code.replace(/⏎(?=\n)/gu, '').replace(/⏎$/gu, '\n')
           },
           eslintConfig: [
-            {
-              files: ['**'],
-              plugins: {
-                svg: pluginSvg,
-              },
-              languageOptions: {},
-            },
+            // other configs
+            ...pluginSVG.configs.recommended,
           ],
         }),
       }),

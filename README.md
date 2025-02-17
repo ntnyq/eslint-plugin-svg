@@ -13,15 +13,15 @@
 
 ## Install
 
-```bash
+```shell
 npm install eslint-plugin-svg -D
 ```
 
-```bash
+```shell
 yarn add eslint-plugin-svg -D
 ```
 
-```bash
+```shell
 pnpm add eslint-plugin-svg -D
 ```
 
@@ -30,14 +30,14 @@ pnpm add eslint-plugin-svg -D
 Config in ESLint config files:
 
 ```ts
-import pluginSvg from 'eslint-plugin-svg'
+import pluginSVG from 'eslint-plugin-svg'
 
 /**
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
   // Other configs...
-  ...pluginSvg.configs.recommended,
+  ...pluginSVG.configs.recommended,
 ]
 ```
 

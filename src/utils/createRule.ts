@@ -7,8 +7,6 @@ import type {
   RuleWithMetaAndName,
 } from '../types/eslint'
 
-const docsUrl = 'https://eslint-plugin-svg.ntnyq.com/rules/'
-
 export interface PluginDocs {
   recommended?: boolean
 }
@@ -91,5 +89,5 @@ export const createESLintRule: <
 }: Readonly<
   RuleWithMetaAndName<TOptions, TMessageIds, PluginDocs>
 >) => RuleModule<TMessageIds, TOptions> = RuleCreator(
-  ruleName => `${docsUrl}${ruleName}.html`,
+  ruleName => `https://eslint-plugin-svg.ntnyq.com/rules/${ruleName}.html`,
 )

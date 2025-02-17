@@ -1,24 +1,15 @@
 import * as parserSVG from 'svg-eslint-parser'
 import { plugin } from '..'
 import type { Linter } from 'eslint'
-import type { RulesWithPluginName } from '../dts'
-
-export type CreateConfigOptions = Omit<Linter.Config, 'rules'> & {
-  rules?: Partial<RulesWithPluginName>
-}
 
 /**
- * Create a ESLint config.
- *
- * @param options - ESLint Linter.Config with type support.
- * @returns ESLint config.
+ * recommended config preset
  */
-export function createConfig(options: CreateConfigOptions = {}) {
-  const config: Linter.Config = {
-    ...options,
-    files: options.files || ['**/*.svg'],
+export const recommended: Linter.Config[] = [
+  {
+    name: 'svg/recommended',
+    files: ['**/*.svg'],
     plugins: {
-      ...(options.plugins || {}),
       /* v8 ignore start */
       get svg() {
         return plugin
@@ -26,19 +17,8 @@ export function createConfig(options: CreateConfigOptions = {}) {
       /* v8 ignore stop */
     },
     languageOptions: {
-      ...(options.languageOptions || {}),
       parser: parserSVG,
     },
-  }
-  return config
-}
-
-/**
- * recommended config preset
- */
-export const recommended = [
-  createConfig({
-    name: 'svg/recommended',
     // @keep-sorted
     rules: {
       'svg/no-deprecated': 'error',
@@ -49,7 +29,7 @@ export const recommended = [
       'svg/no-empty-title': 'error',
       'svg/no-invalid-role': 'error',
     },
-  }),
+  },
 ]
 
 export const configs = {

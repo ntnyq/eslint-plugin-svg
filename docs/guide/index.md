@@ -4,15 +4,15 @@
 
 ::: code-group
 
-```bash [npm]
+```shell [npm]
 npm i eslint-plugin-svg -D
 ```
 
-```bash [yarn]
+```shell [yarn]
 yarn add eslint-plugin-svg -D
 ```
 
-```bash [pnpm]
+```shell [pnpm]
 pnpm add eslint-plugin-svg -D
 ```
 
@@ -23,14 +23,14 @@ pnpm add eslint-plugin-svg -D
 Highly recommended to use `eslint.config.mjs` as config file.
 
 ```ts [eslint.config.mjs] twoslash
-import pluginSvg from 'eslint-plugin-svg'
+import pluginSVG from 'eslint-plugin-svg'
 
 /**
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
   // Other configs...
-  ...pluginSvg.configs.recommended,
+  ...pluginSVG.configs.recommended,
 ]
 ```
 
@@ -46,19 +46,30 @@ _See also: [http://eslint.org/docs/user-guide/configuring](http://eslint.org/doc
 
 ```ts [eslint.config.mjs] twoslash
 // @noErrors
-import { createConfig } from 'eslint-plugin-svg'
+import pluginSVG from 'eslint-plugin-svg'
+import parserSVG from 'svg-eslint-parser'
 
 /**
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
   // other configs
-  createConfig({
+  {
     // config name
     name: 'svg/rules',
 
     // files to include
     files: ['**/*.svg'],
+
+    // use eslint-plugin-svg
+    plugins: {
+      svg: pluginSVG,
+    },
+
+    // use svg-eslint-parser
+    languageOptions: {
+      parser: parserSVG,
+    },
 
     // rules to enable
     rules: {
@@ -68,34 +79,6 @@ export default [
       'svg/no-empty-text': 'error',
       'svg/no-empty-title': 'error',
     },
-  }),
+  },
 ]
 ```
-
-## Options of `createConfig`
-
-All fields of ESLint `Linter.Config` are supported, but bellow fields have default value:
-
-### files
-
-The files to be linted.
-
-- Type: `string[]`
-- Required: `false`
-- Default: `['**/*.svg']`
-
-### languageOptions.parser
-
-The parser to use, this is set by default and can't be overridden.
-
-- Type: `Linter.Parser`
-- Required: `false`
-- Default: [svg-eslint-parser](https://github.com/ntnyq/svg-eslint-parser)
-
-### plugins
-
-The plugins to use.
-
-- Type: `Record<string, ESLint.Plugin>`
-- Required: `false`
-- Default: key `svg` set to this plugin
