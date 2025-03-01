@@ -2,7 +2,7 @@
   "name": "eslint-plugin-svg",
   "type": "module",
   "version": "0.0.3",
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.5.2",
   "description": "Rules for consistent, readable and valid SVG files.",
   "keywords": [
     "eslint",
@@ -66,7 +66,7 @@
   "devDependencies": {
     "@ntnyq/eslint-config": "^4.0.0-beta.8",
     "@ntnyq/prettier-config": "^2.0.0",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.8",
     "@vitest/coverage-v8": "catalog:",
     "bumpp": "^10.0.3",
     "eslint": "^9.21.0",
@@ -77,8 +77,8 @@
     "npm-run-all2": "^7.0.2",
     "prettier": "^3.5.2",
     "tinyglobby": "^0.2.12",
-    "tsup": "^8.3.6",
-    "typescript": "^5.7.3",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
     "vitest": "catalog:"
   },
   "engines": {
@@ -90,13 +90,13 @@
     ]
   },
   "resolutions": {
-    "@shikijs/core": "^3.0.0",
-    "@shikijs/markdown-it": "^3.0.0",
-    "@shikijs/rehype": "^3.0.0",
-    "@shikijs/transformers": "^3.0.0",
-    "@shikijs/types": "^3.0.0",
+    "@shikijs/core": "^3.1.0",
+    "@shikijs/markdown-it": "^3.1.0",
+    "@shikijs/rehype": "^3.1.0",
+    "@shikijs/transformers": "^3.1.0",
+    "@shikijs/types": "^3.1.0",
     "esbuild": "^0.25.0",
-    "shiki": "^3.0.0"
+    "shiki": "^3.1.0"
   },
   "nano-staged": {
     "*.{js,ts,mjs,cjs,vue,svg,json,md,yml,yaml}": "eslint --fix",
