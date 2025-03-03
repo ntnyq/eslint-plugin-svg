@@ -58,7 +58,7 @@
     "eslint": "^9.5.0"
   },
   "dependencies": {
-    "@ntnyq/utils": "^0.6.0",
+    "@ntnyq/utils": "^0.6.1",
     "@types/json-schema": "^7.0.15",
     "change-case": "^5.4.4",
     "svg-eslint-parser": "catalog:"
@@ -75,7 +75,7 @@
     "husky": "^9.1.7",
     "nano-staged": "^0.8.0",
     "npm-run-all2": "^7.0.2",
-    "prettier": "^3.5.2",
+    "prettier": "^3.5.3",
     "tinyglobby": "^0.2.12",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
