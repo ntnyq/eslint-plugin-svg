@@ -17,7 +17,7 @@
     "svg-eslint-parser": "catalog:",
     "twoslash": "catalog:",
     "twoslash-eslint": "catalog:",
-    "unocss": "^66.1.0-beta.8",
+    "unocss": "^66.1.0-beta.10",
     "unplugin-vue-components": "^28.4.1",
     "vite": "^6.2.4",
     "vitepress": "^1.6.3",
