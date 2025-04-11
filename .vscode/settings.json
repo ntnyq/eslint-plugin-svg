@@ -35,6 +35,7 @@
     "rehype",
     "shiki",
     "shikijs",
+    "tinyglobby",
     "tses",
     "tsup",
     "unplugin",

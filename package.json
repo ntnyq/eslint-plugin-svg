@@ -2,7 +2,7 @@
   "name": "eslint-plugin-svg",
   "type": "module",
   "version": "0.0.3",
-  "packageManager": "pnpm@10.7.1",
+  "packageManager": "pnpm@10.8.0",
   "description": "Rules for consistent, readable and valid SVG files.",
   "keywords": [
     "eslint",
@@ -22,30 +22,23 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "unbuild",
     "coverage": "vitest --coverage",
     "deploy": "run-s build docs:build",
-    "dev": "tsup --watch src",
+    "dev": "unbuild --watch",
     "docs:build": "pnpm -C docs run build",
     "docs:dev": "pnpm -C docs run dev",
-    "lint": "eslint .",
+    "lint": "eslint",
     "prepare": "husky",
     "prepublishOnly": "pnpm run build",
     "release": "run-s release:check release:publish",
@@ -58,27 +51,27 @@
     "eslint": "^9.5.0"
   },
   "dependencies": {
-    "@ntnyq/utils": "^0.6.3",
-    "@types/json-schema": "^7.0.15",
-    "change-case": "^5.4.4",
+    "@ntnyq/utils": "catalog:",
+    "@types/json-schema": "catalog:",
+    "change-case": "catalog:",
     "svg-eslint-parser": "catalog:"
   },
   "devDependencies": {
-    "@ntnyq/eslint-config": "^4.0.3",
-    "@ntnyq/prettier-config": "^2.0.0",
-    "@types/node": "^22.14.0",
+    "@ntnyq/eslint-config": "catalog:",
+    "@ntnyq/prettier-config": "catalog:",
+    "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
-    "bumpp": "^10.1.0",
-    "eslint": "^9.24.0",
-    "eslint-plugin-eslint-plugin": "^6.4.0",
-    "eslint-vitest-rule-tester": "^2.2.0",
-    "husky": "^9.1.7",
-    "nano-staged": "^0.8.0",
-    "npm-run-all2": "^7.0.2",
-    "prettier": "^3.5.3",
-    "tinyglobby": "^0.2.12",
-    "tsup": "^8.4.0",
-    "typescript": "^5.8.3",
+    "bumpp": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-eslint-plugin": "catalog:",
+    "eslint-vitest-rule-tester": "catalog:",
+    "husky": "catalog:",
+    "nano-staged": "catalog:",
+    "npm-run-all2": "catalog:",
+    "prettier": "catalog:",
+    "tinyglobby": "catalog:",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
     "vitest": "catalog:"
   },
   "engines": {
