@@ -54,8 +54,8 @@
   "dependencies": {
     "@ntnyq/utils": "catalog:",
     "@types/json-schema": "catalog:",
-    "change-case": "catalog:",
-    "svg-eslint-parser": "catalog:"
+    "svg-eslint-parser": "catalog:",
+    "uncase": "catalog:"
   },
   "devDependencies": {
     "@ntnyq/eslint-config": "catalog:",

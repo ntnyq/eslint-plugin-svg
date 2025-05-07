@@ -39,6 +39,7 @@
     "tses",
     "tsup",
     "unplugin",
+    "unrs",
     "vite",
     "vitepress",
     "vitest",
