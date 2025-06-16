@@ -10,10 +10,10 @@ catalog:
   '@shikijs/vitepress-twoslash': ^3.6.0
   '@types/json-schema': ^7.0.15
   '@types/markdown-it-container': ^2.0.10
-  '@types/node': ^22.15.30
-  '@vitest/coverage-v8': ^3.2.2
+  '@types/node': ^22.15.32
+  '@vitest/coverage-v8': ^3.2.3
   bumpp: ^10.1.1
-  eslint: ^9.28.0
+  eslint: ^9.29.0
   eslint-plugin-eslint-plugin: ^6.4.0
   eslint-vitest-rule-tester: ^2.2.0
   husky: ^9.1.7
@@ -28,12 +28,12 @@ catalog:
   typescript: ^5.8.3
   unbuild: ^3.5.0
   uncase: ^0.1.0
-  unocss: ^66.1.4
+  unocss: ^66.2.1
   unplugin-vue-components: ^28.7.0
   vite: ^6.3.5
-  vitepress: ^2.0.0-alpha.5
+  vitepress: ^2.0.0-alpha.6
   vitepress-plugin-group-icons: ^1.6.0
-  vitest: ^3.2.2
+  vitest: ^3.2.3
   vue: ^3.5.16
 overrides:
   esbuild: ^0.25.4
