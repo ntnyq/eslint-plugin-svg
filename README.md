@@ -30,15 +30,13 @@ pnpm add eslint-plugin-svg -D
 Config in ESLint config files:
 
 ```ts
+import { defineConfig } from 'eslint/config'
 import pluginSVG from 'eslint-plugin-svg'
 
-/**
- * @type {import('eslint').Linter.Config[]}
- */
-export default [
+export default defineConfig([
   // Other configs...
   ...pluginSVG.configs.recommended,
-]
+])
 ```
 
 :apple: For advanced usaged, please check [Advanced Usage](https://eslint-plugin-svg.ntnyq.com/guide/#advanced-usage)

@@ -50,7 +50,9 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Attribute(node) {
-        if (!node.value || node.key.value !== 'role') return
+        if (!node.value || node.key.value !== 'role') {
+          return
+        }
 
         if (!allowedRoles.includes(node.value.value)) {
           context.report({
