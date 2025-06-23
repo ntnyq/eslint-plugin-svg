@@ -4,7 +4,7 @@ packages:
 catalog:
   '@iconify-json/ri': ^1.2.5
   '@ntnyq/eslint-config': ^4.3.0
-  '@ntnyq/prettier-config': ^2.2.0
+  '@ntnyq/prettier-config': ^3.0.1
   '@ntnyq/utils': ^0.7.2
   '@shikijs/transformers': ^3.6.0
   '@shikijs/vitepress-twoslash': ^3.6.0
