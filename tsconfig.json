@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ESNext",
     "lib": ["DOM", "ES2022"],
     "module": "ESNext",
     "rootDir": ".",

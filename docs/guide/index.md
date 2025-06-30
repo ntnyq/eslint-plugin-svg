@@ -23,13 +23,12 @@ pnpm add eslint-plugin-svg -D
 Highly recommended to use `eslint.config.mjs` as config file.
 
 ```ts [eslint.config.mjs] twoslash
-import { defineConfig } from 'eslint/config'
 import pluginSVG from 'eslint-plugin-svg'
 
-export default defineConfig([
+export default [
   // Other configs...
   ...pluginSVG.configs.recommended,
-])
+]
 ```
 
 ### The recommended preset
@@ -44,11 +43,10 @@ _See also: [http://eslint.org/docs/user-guide/configuring](http://eslint.org/doc
 
 ```ts [eslint.config.mjs] twoslash
 // @noErrors
-import { defineConfig } from 'eslint/config'
 import pluginSVG from 'eslint-plugin-svg'
 import parserSVG from 'svg-eslint-parser'
 
-export default defineConfig([
+export default [
   // other configs
   {
     // config name
@@ -76,5 +74,5 @@ export default defineConfig([
       'svg/no-empty-title': 'error',
     },
   },
-])
+]
 ```

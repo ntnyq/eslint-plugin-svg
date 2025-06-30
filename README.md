@@ -3,7 +3,6 @@
 [![CI](https://github.com/ntnyq/eslint-plugin-svg/workflows/CI/badge.svg)](https://github.com/ntnyq/eslint-plugin-svg/actions)
 [![NPM VERSION](https://img.shields.io/npm/v/eslint-plugin-svg.svg)](https://www.npmjs.com/package/eslint-plugin-svg)
 [![NPM DOWNLOADS](https://img.shields.io/npm/dy/eslint-plugin-svg.svg)](https://www.npmjs.com/package/eslint-plugin-svg)
-[![CODECOV](https://codecov.io/github/ntnyq/eslint-plugin-svg/branch/main/graph/badge.svg)](https://codecov.io/github/ntnyq/eslint-plugin-svg)
 [![LICENSE](https://img.shields.io/github/license/ntnyq/eslint-plugin-svg.svg)](https://github.com/ntnyq/eslint-plugin-svg/blob/main/LICENSE)
 
 > Rules for consistent, readable and valid SVG files.

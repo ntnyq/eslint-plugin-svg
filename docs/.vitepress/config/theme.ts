@@ -7,7 +7,7 @@ import type { DefaultTheme } from 'vitepress'
 const VERSIONS: DefaultTheme.NavItemWithLink[] = [
   { text: `v${version} (current)`, link: '/' },
   {
-    text: `Release Notes`,
+    text: 'Release Notes',
     link: `https://github.com/ntnyq/${packageName}/releases`,
   },
 ]
