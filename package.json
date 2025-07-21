@@ -57,9 +57,9 @@
     "uncase": "^0.1.0"
   },
   "devDependencies": {
-    "@ntnyq/eslint-config": "^5.0.0",
+    "@ntnyq/eslint-config": "^5.1.0",
     "@ntnyq/prettier-config": "^3.0.1",
-    "@types/node": "^24.0.13",
+    "@types/node": "^24.0.15",
     "bumpp": "^10.2.0",
     "eslint": "^9.31.0",
     "eslint-plugin-eslint-plugin": "^6.5.0",
