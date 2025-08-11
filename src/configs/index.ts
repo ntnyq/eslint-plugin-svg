@@ -1,16 +1,18 @@
 import * as parserSVG from 'svg-eslint-parser'
 import { plugin } from '..'
 import type { Linter } from 'eslint'
+import type { PluginSVG } from '../types/plugin'
 
 /**
  * recommended config preset
  */
-export const recommended: Linter.Config[] = [
+export const recommended: Linter.Config<Linter.RulesRecord>[] = [
   {
     name: 'svg/recommended',
     files: ['**/*.svg'],
     plugins: {
       /* v8 ignore start */
+      // @ts-expect-error types
       get svg() {
         return plugin
       },
@@ -32,6 +34,6 @@ export const recommended: Linter.Config[] = [
   },
 ]
 
-export const configs = {
+export const configs: PluginSVG['configs'] = {
   recommended,
 }

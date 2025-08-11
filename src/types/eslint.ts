@@ -56,7 +56,6 @@ export interface RuleContext<
   options: TOptions
   parserPath: string
   settings: { svg?: SVGSettings; [name: string]: any }
-  getAncestors(): AST.AnyNode[]
   getFilename(): string
   getSourceCode(): SourceCode
   report(descriptor: ReportDescriptor<TMessageIds>): void

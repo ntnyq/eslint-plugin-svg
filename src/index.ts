@@ -1,7 +1,7 @@
 import { configs } from './configs'
 import { meta } from './meta'
 import { rules } from './rules'
-import type { ESLint, Rule } from 'eslint'
+import type { PluginSVG } from './types/plugin'
 
 /**
  * eslint-plugin-svg
@@ -9,11 +9,11 @@ import type { ESLint, Rule } from 'eslint'
  *
  * @see {@link https://github.com/ntnyq/eslint-plugin-svg}
  */
-export const plugin = {
+export const plugin: PluginSVG = {
   meta,
-  rules: rules as unknown as Record<string, Rule.RuleModule>,
+  rules,
   configs,
-} satisfies ESLint.Plugin
+}
 
 export * from './dts'
 export * from './meta'

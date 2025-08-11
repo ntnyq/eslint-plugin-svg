@@ -2,7 +2,7 @@
   "name": "eslint-plugin-svg",
   "type": "module",
   "version": "0.0.3",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.22.0",
   "description": "Rules for consistent, readable and valid SVG files.",
   "keywords": [
     "eslint",
@@ -22,19 +22,19 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "tsdown",
     "deploy": "run-s build docs:build",
-    "dev": "unbuild --watch",
+    "dev": "tsdown --watch",
     "docs:build": "pnpm -C docs run build",
     "docs:dev": "pnpm -C docs run dev",
     "lint": "eslint",
@@ -51,30 +51,30 @@
     "eslint": "^9.5.0"
   },
   "dependencies": {
-    "@ntnyq/utils": "^0.8.1",
+    "@ntnyq/utils": "^0.9.2",
     "@types/json-schema": "^7.0.15",
     "svg-eslint-parser": "^0.0.4",
-    "uncase": "^0.1.0"
+    "uncase": "^0.2.0"
   },
   "devDependencies": {
-    "@ntnyq/eslint-config": "^5.2.0",
+    "@ntnyq/eslint-config": "^5.7.0",
     "@ntnyq/prettier-config": "^3.0.1",
-    "@types/node": "^24.1.0",
-    "bumpp": "^10.2.0",
-    "eslint": "^9.32.0",
-    "eslint-plugin-eslint-plugin": "^6.5.0",
-    "eslint-vitest-rule-tester": "^2.2.0",
+    "@types/node": "^24.10.1",
+    "bumpp": "^10.3.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-eslint-plugin": "^7.2.0",
+    "eslint-vitest-rule-tester": "^3.0.0",
     "husky": "^9.1.7",
     "nano-staged": "^0.8.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
-    "tinyglobby": "^0.2.14",
-    "typescript": "^5.8.3",
-    "unbuild": "^3.6.0",
-    "vitest": "^3.2.4"
+    "tinyglobby": "^0.2.15",
+    "tsdown": "^0.16.4",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.8"
   },
   "engines": {
-    "node": "^20.9.0 || >=21.1.0"
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "nano-staged": {
     "*.{js,ts,mjs,cjs,vue,md,svg,yml,yaml,toml,json}": "eslint --fix",
