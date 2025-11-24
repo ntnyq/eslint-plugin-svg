@@ -57,7 +57,7 @@
     "uncase": "^0.2.0"
   },
   "devDependencies": {
-    "@ntnyq/eslint-config": "^5.7.0",
+    "@ntnyq/eslint-config": "^5.8.0",
     "@ntnyq/prettier-config": "^3.0.1",
     "@types/node": "^24.10.1",
     "bumpp": "^10.3.1",
@@ -71,7 +71,7 @@
     "tinyglobby": "^0.2.15",
     "tsdown": "^0.16.4",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.9"
   },
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24"
