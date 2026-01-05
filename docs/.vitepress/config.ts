@@ -20,11 +20,12 @@ export default defineConfig({
   themeConfig: getThemeConfig(),
   markdown: {
     config(md) {
+      // @ts-expect-error types
       md.use(groupIconMdPlugin)
 
       type MarkdownIt = Parameters<typeof MarkdownItContainer>[0]
 
-      MarkdownItContainer(md as MarkdownIt, 'correct', {
+      MarkdownItContainer(md as unknown as MarkdownIt, 'correct', {
         render(tokens: any[], idx: number) {
           if (tokens[idx].nesting === 1) {
             const next = tokens[idx + 1]
@@ -38,7 +39,7 @@ export default defineConfig({
         },
       })
 
-      MarkdownItContainer(md as MarkdownIt, 'incorrect', {
+      MarkdownItContainer(md as unknown as MarkdownIt, 'incorrect', {
         render(tokens: any[], idx: number) {
           if (tokens[idx].nesting === 1) {
             const next = tokens[idx + 1]

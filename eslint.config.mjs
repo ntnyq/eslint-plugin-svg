@@ -9,4 +9,9 @@ export default defineESLintConfig({
       'eslint-plugin/require-meta-default-options': 'off',
     },
   },
+  test: {
+    overridesVitestRules: {
+      'vitest/no-standalone-expect': 'off',
+    },
+  },
 })

@@ -39,8 +39,9 @@ export type ReportDescriptorNodeOptionalLoc = {
   readonly node: AST.AnyNode
   readonly loc?: Readonly<AST.Position> | Readonly<AST.SourceLocation>
 }
-export interface ReportDescriptorWithSuggestion<TMessageIds extends string>
-  extends ReportDescriptorBase<TMessageIds> {
+export interface ReportDescriptorWithSuggestion<
+  TMessageIds extends string,
+> extends ReportDescriptorBase<TMessageIds> {
   readonly suggest?: readonly Rule.SuggestionReportDescriptor[]
 }
 
