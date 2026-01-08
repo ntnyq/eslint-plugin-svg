@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-svg",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@10.27.0",
   "description": "Rules for consistent, readable and valid SVG files.",
   "keywords": [
