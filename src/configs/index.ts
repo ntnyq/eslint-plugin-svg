@@ -33,6 +33,7 @@ export const recommended: Linter.Config<Linter.RulesRecord>[] = [
       'svg/no-inline-styles': 'error',
       'svg/no-invalid-role': 'error',
       'svg/no-script-tags': 'error',
+      'svg/require-viewbox': 'error',
     },
   },
 ]

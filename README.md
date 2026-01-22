@@ -56,6 +56,7 @@ export default defineConfig([
 | [no-empty-groups](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-groups)       | Disallow empty g element                 | ✅  |     |     |
 | [no-inline-styles](https://eslint-plugin-svg.ntnyq.com/rules/no-inline-styles)     | Disallow inline style attribute          | ✅  |     |     |
 | [no-script-tags](https://eslint-plugin-svg.ntnyq.com/rules/no-script-tags)         | Disallow script elements                 | ✅  |     |     |
+| [require-viewbox](https://eslint-plugin-svg.ntnyq.com/rules/require-viewbox)       | Require viewBox on svg elements          | ✅  |     |     |
 | [no-deprecated](https://eslint-plugin-svg.ntnyq.com/rules/no-deprecated)           | Disallow deprecated elements             | ✅  |     |     |
 | [no-elements](https://eslint-plugin-svg.ntnyq.com/rules/no-elements)               | Disallow elements by name                |     |     |     |
 | [no-doctype](https://eslint-plugin-svg.ntnyq.com/rules/no-doctype)                 | Disallow doctype                         | ✅  | 🔧  |     |

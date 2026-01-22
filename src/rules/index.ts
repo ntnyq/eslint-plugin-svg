@@ -9,6 +9,7 @@ import noEmptyTitle from './no-empty-title'
 import noInlineStyles from './no-inline-styles'
 import noInvalidRole from './no-invalid-role'
 import noScriptTags from './no-script-tags'
+import requireViewbox from './require-viewbox'
 
 // @keep-sorted
 export const rules = {
@@ -23,4 +24,5 @@ export const rules = {
   'no-inline-styles': noInlineStyles,
   'no-invalid-role': noInvalidRole,
   'no-script-tags': noScriptTags,
+  'require-viewbox': requireViewbox,
 }
