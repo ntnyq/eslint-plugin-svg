@@ -6,6 +6,7 @@ import noEmptyDesc from './no-empty-desc'
 import noEmptyGroups from './no-empty-groups'
 import noEmptyText from './no-empty-text'
 import noEmptyTitle from './no-empty-title'
+import noInlineStyles from './no-inline-styles'
 import noInvalidRole from './no-invalid-role'
 
 // @keep-sorted
@@ -18,5 +19,6 @@ export const rules = {
   'no-empty-groups': noEmptyGroups,
   'no-empty-text': noEmptyText,
   'no-empty-title': noEmptyTitle,
+  'no-inline-styles': noInlineStyles,
   'no-invalid-role': noInvalidRole,
 }
