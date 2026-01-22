@@ -25,16 +25,13 @@ export default createESLintRule<Options, MessageIds>({
           return
         }
 
-        const textNode = node.children.find(n => n.type === 'Text')
-
-        if (textNode) {
-          if (!textNode.value.trim()) {
-            return context.report({
-              node,
-              messageId: 'invalid',
-            })
-          }
-        } else {
+        if (
+          !node.children
+          || node.children.length === 0
+          || node.children.every(
+            child => child.type === 'Text' && !child.value.trim(),
+          )
+        ) {
           return context.report({
             node,
             messageId: 'invalid',

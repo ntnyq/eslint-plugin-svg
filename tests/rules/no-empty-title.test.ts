@@ -14,6 +14,26 @@ run({
         </svg>
       `,
     },
+    {
+      filename: 'title-no-text.svg',
+      code: $`
+        <svg>
+          <title>
+            <circle r="10" />
+          </title>
+        </svg>
+      `,
+    },
+    {
+      filename: 'title-comment.svg',
+      code: $`
+        <svg>
+          <title>
+            <!-- foobar -->
+          </title>
+        </svg>
+      `,
+    },
   ],
   invalid: [
     {
@@ -42,11 +62,10 @@ run({
       },
     },
     {
-      filename: 'title-comment.svg',
+      filename: 'empty-title.svg',
       code: $`
         <svg>
           <title>
-            <!-- foobar -->
           </title>
         </svg>
       `,
@@ -56,34 +75,7 @@ run({
             {
               "column": 3,
               "endColumn": 11,
-              "endLine": 4,
-              "line": 2,
-              "message": "Element title must not be empty",
-              "messageId": "invalid",
-              "nodeType": "Tag",
-              "ruleId": "no-empty-title",
-              "severity": 2,
-            },
-          ]
-        `)
-      },
-    },
-    {
-      filename: 'title-no-text.svg',
-      code: $`
-        <svg>
-          <title>
-            <circle r="10" />
-          </title>
-        </svg>
-      `,
-      errors(errors) {
-        expect(errors).toMatchInlineSnapshot(`
-          [
-            {
-              "column": 3,
-              "endColumn": 11,
-              "endLine": 4,
+              "endLine": 3,
               "line": 2,
               "message": "Element title must not be empty",
               "messageId": "invalid",

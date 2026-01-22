@@ -31,6 +31,7 @@
     "iconify",
     "lcov",
     "mpath",
+    "oxlint",
     "pnpm",
     "rehype",
     "shiki",

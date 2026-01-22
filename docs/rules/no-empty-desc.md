@@ -32,6 +32,18 @@ Nothing.
 
 :::
 
+::: correct
+
+```xml eslint-check
+<svg>
+  <desc>
+    <circle r="10" />
+  </desc>
+</svg>
+```
+
+:::
+
 ::: incorrect
 
 ```xml eslint-check
@@ -48,18 +60,6 @@ Nothing.
 <svg>
   <desc>
     <!-- foobar -->
-  </desc>
-</svg>
-```
-
-:::
-
-::: incorrect
-
-```xml eslint-check
-<svg>
-  <desc>
-    <circle r="10" />
   </desc>
 </svg>
 ```

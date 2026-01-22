@@ -8,10 +8,12 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['vitepress'],
   },
+
   plugins: [
     UnoCSS({
       inspector: false,
     }),
+
     VueComponents({
       dts: fileURLToPath(new URL('./components.d.ts', import.meta.url)),
       extensions: ['vue', 'md'],
@@ -20,6 +22,7 @@ export default defineConfig({
         fileURLToPath(new URL('./.vitepress/components', import.meta.url)),
       ],
     }),
+
     groupIconVitePlugin(),
   ],
 })
