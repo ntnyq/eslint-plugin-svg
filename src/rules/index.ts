@@ -8,6 +8,7 @@ import noEmptyText from './no-empty-text'
 import noEmptyTitle from './no-empty-title'
 import noInlineStyles from './no-inline-styles'
 import noInvalidRole from './no-invalid-role'
+import noScriptTags from './no-script-tags'
 
 // @keep-sorted
 export const rules = {
@@ -21,4 +22,5 @@ export const rules = {
   'no-empty-title': noEmptyTitle,
   'no-inline-styles': noInlineStyles,
   'no-invalid-role': noInvalidRole,
+  'no-script-tags': noScriptTags,
 }

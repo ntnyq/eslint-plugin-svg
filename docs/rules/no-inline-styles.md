@@ -3,7 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: svg/no-inline-styles
 description: Disallow inline style attribute usage.
-since: v0.0.6
+since: v0.0.5
 ---
 
 # svg/no-inline-styles
@@ -14,7 +14,9 @@ since: v0.0.6
 
 ## :book: Rule Details
 
-This rule reports whenever an SVG element contains a `style` attribute. Using classes or external styles is preferred to keep SVGs maintainable and cache-friendly.
+This rule reports whenever an SVG element contains a `style` attribute.
+
+Using classes or external styles is preferred to keep SVGs maintainable and cache-friendly.
 
 ## :wrench: Options
 
@@ -44,7 +46,7 @@ This rule has no options.
 
 ## :rocket: Version
 
-This rule was introduced in eslint-plugin-svg v0.0.6
+This rule was introduced in eslint-plugin-svg v0.0.5
 
 ## :mag: Implementation
 
