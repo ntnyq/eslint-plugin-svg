@@ -1,5 +1,7 @@
+import noComments from './no-comments'
 import noDeprecated from './no-deprecated'
 import noDoctype from './no-doctype'
+import noDuplicateIds from './no-duplicate-ids'
 import noElements from './no-elements'
 import noEmptyContainer from './no-empty-container'
 import noEmptyDesc from './no-empty-desc'
@@ -14,8 +16,10 @@ import requireViewbox from './require-viewbox'
 
 // @keep-sorted
 export const rules = {
+  'no-comments': noComments,
   'no-deprecated': noDeprecated,
   'no-doctype': noDoctype,
+  'no-duplicate-ids': noDuplicateIds,
   'no-elements': noElements,
   'no-empty-container': noEmptyContainer,
   'no-empty-desc': noEmptyDesc,

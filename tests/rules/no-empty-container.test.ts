@@ -1,8 +1,9 @@
 import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-empty-container'
 import { $, run } from '../internal'
+import type { Options } from '../../src/rules/no-empty-container'
 
-run({
+run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
@@ -18,9 +19,11 @@ run({
     },
     {
       filename: 'ignore-a.svg',
-      options: {
-        ignores: ['a'],
-      },
+      options: [
+        {
+          ignores: ['a'],
+        },
+      ],
       code: $`
         <svg>
           <a></a>
@@ -83,9 +86,11 @@ run({
     },
     {
       filename: 'user-defined.svg',
-      options: {
-        elements: ['metadata'],
-      },
+      options: [
+        {
+          elements: ['metadata'],
+        },
+      ],
       code: $`
         <svg>
           <metadata></metadata>

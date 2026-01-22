@@ -21,6 +21,8 @@ sidebarDepth: 0
 | [no-script-tags](/rules/no-script-tags)         | Disallow **script** elements             | ✅  |     |     |
 | [require-viewbox](/rules/require-viewbox)       | Require **viewBox** on svg elements      | ✅  |     |     |
 | [no-deprecated](/rules/no-deprecated)           | Disallow deprecated elements             | ✅  |     |     |
-| [no-elements](/rules/no-elements)               | Disallow elements by name                |     |     |     |
 | [no-doctype](/rules/no-doctype)                 | Disallow doctype                         | ✅  | 🔧  |     |
+| [no-duplicate-ids](/rules/no-duplicate-ids)     | Disallow duplicate **id** attributes     | ✅  |     |     |
+| [no-elements](/rules/no-elements)               | Disallow elements by name                |     |     |     |
+| [no-comments](/rules/no-comments)               | Disallow comments in SVG files           |     |     |     |
 | [no-invalid-role](/rules/no-invalid-role)       | Disallow invalid value of role attribute | ✅  |     |     |

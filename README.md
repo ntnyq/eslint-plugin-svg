@@ -59,8 +59,10 @@ export default defineConfig([
 | [no-script-tags](https://eslint-plugin-svg.ntnyq.com/rules/no-script-tags)         | Disallow script elements                 | ✅  |     |     |
 | [require-viewbox](https://eslint-plugin-svg.ntnyq.com/rules/require-viewbox)       | Require viewBox on svg elements          | ✅  |     |     |
 | [no-deprecated](https://eslint-plugin-svg.ntnyq.com/rules/no-deprecated)           | Disallow deprecated elements             | ✅  |     |     |
-| [no-elements](https://eslint-plugin-svg.ntnyq.com/rules/no-elements)               | Disallow elements by name                |     |     |     |
 | [no-doctype](https://eslint-plugin-svg.ntnyq.com/rules/no-doctype)                 | Disallow doctype                         | ✅  | 🔧  |     |
+| [no-duplicate-ids](https://eslint-plugin-svg.ntnyq.com/rules/no-duplicate-ids)     | Disallow duplicate id attributes         | ✅  |     |     |
+| [no-elements](https://eslint-plugin-svg.ntnyq.com/rules/no-elements)               | Disallow elements by name                |     |     |     |
+| [no-comments](https://eslint-plugin-svg.ntnyq.com/rules/no-comments)               | Disallow comments in SVG files           |     |     |     |
 | [no-invalid-role](https://eslint-plugin-svg.ntnyq.com/rules/no-invalid-role)       | Disallow invalid value of role attribute | ✅  |     |     |
 
 ## License

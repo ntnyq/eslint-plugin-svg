@@ -25,6 +25,7 @@ export const recommended: Linter.Config<Linter.RulesRecord>[] = [
     rules: {
       'svg/no-deprecated': 'error',
       'svg/no-doctype': 'error',
+      'svg/no-duplicate-ids': 'error',
       'svg/no-empty-container': 'error',
       'svg/no-empty-desc': 'error',
       'svg/no-empty-groups': 'error',

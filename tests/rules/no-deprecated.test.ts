@@ -1,8 +1,9 @@
 import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-deprecated'
 import { $, run } from '../internal'
+import type { Options } from '../../src/rules/no-deprecated'
 
-run({
+run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
@@ -16,9 +17,11 @@ run({
     },
     {
       filename: 'allow-font.svg',
-      options: {
-        allowElements: ['font'],
-      },
+      options: [
+        {
+          allowElements: ['font'],
+        },
+      ],
       code: $`
         <svg>
           <font></font>

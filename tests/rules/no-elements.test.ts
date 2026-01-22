@@ -1,8 +1,9 @@
 import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-elements'
 import { $, run } from '../internal'
+import type { Options } from '../../src/rules/no-elements'
 
-run({
+run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
@@ -18,9 +19,11 @@ run({
   invalid: [
     {
       filename: 'empty-text.svg',
-      options: {
-        elements: ['script', 'style'],
-      },
+      options: [
+        {
+          elements: ['script', 'style'],
+        },
+      ],
       code: $`
         <svg>
           <text>foo</text>

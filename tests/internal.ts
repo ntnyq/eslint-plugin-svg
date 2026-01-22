@@ -5,7 +5,9 @@ import type {
   TestCasesOptions,
 } from 'eslint-vitest-rule-tester'
 
-export function run(options: TestCasesOptions & RuleTesterInitOptions) {
+export function run<Options = any>(
+  options: TestCasesOptions<Options> & RuleTesterInitOptions,
+) {
   return _run({
     languageOptions: {
       parser: parserSVG,
