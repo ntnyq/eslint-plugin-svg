@@ -3,6 +3,7 @@ import noDoctype from './no-doctype'
 import noElements from './no-elements'
 import noEmptyContainer from './no-empty-container'
 import noEmptyDesc from './no-empty-desc'
+import noEmptyGroups from './no-empty-groups'
 import noEmptyText from './no-empty-text'
 import noEmptyTitle from './no-empty-title'
 import noInvalidRole from './no-invalid-role'
@@ -14,6 +15,7 @@ export const rules = {
   'no-elements': noElements,
   'no-empty-container': noEmptyContainer,
   'no-empty-desc': noEmptyDesc,
+  'no-empty-groups': noEmptyGroups,
   'no-empty-text': noEmptyText,
   'no-empty-title': noEmptyTitle,
   'no-invalid-role': noInvalidRole,

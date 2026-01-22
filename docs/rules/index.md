@@ -11,10 +11,11 @@ sidebarDepth: 0
 
 | Name                                            | Description                              | 💼  | 🔧  | 💡  |
 | :---------------------------------------------- | :--------------------------------------- | :-: | :-: | :-: |
-| [no-empty-title](/rules/no-empty-title)         | Disallow empty title element             | ✅  |     |     |
-| [no-empty-desc](/rules/no-empty-desc)           | Disallow empty desc element              | ✅  |     |     |
-| [no-empty-text](/rules/no-empty-text)           | Disallow empty text element              | ✅  |     |     |
+| [no-empty-title](/rules/no-empty-title)         | Disallow empty **title** element         | ✅  |     |     |
+| [no-empty-desc](/rules/no-empty-desc)           | Disallow empty **desc** element          | ✅  |     |     |
+| [no-empty-text](/rules/no-empty-text)           | Disallow empty **text** element          | ✅  |     |     |
 | [no-empty-container](/rules/no-empty-container) | Disallow empty container element         | ✅  |     |     |
+| [no-empty-groups](/rules/no-empty-groups)       | Disallow empty **g** element             | ✅  |     |     |
 | [no-deprecated](/rules/no-deprecated)           | Disallow deprecated elements             | ✅  |     |     |
 | [no-elements](/rules/no-elements)               | Disallow elements by name                |     |     |     |
 | [no-doctype](/rules/no-doctype)                 | Disallow doctype                         | ✅  | 🔧  |     |
