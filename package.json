@@ -56,7 +56,7 @@
     "uncase": "^0.2.0"
   },
   "devDependencies": {
-    "@ntnyq/eslint-config": "^6.0.0-beta.2",
+    "@ntnyq/eslint-config": "^6.0.0-beta.4",
     "@ntnyq/prettier-config": "^3.0.1",
     "@types/node": "^25.0.10",
     "bumpp": "^10.4.0",
@@ -68,9 +68,9 @@
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
     "tinyglobby": "^0.2.15",
-    "tsdown": "^0.20.0",
+    "tsdown": "^0.20.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.18"
   },
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24"
