@@ -60,7 +60,7 @@
     "@ntnyq/prettier-config": "^3.0.1",
     "@types/node": "^25.2.0",
     "bumpp": "^10.4.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-plugin-eslint-plugin": "^7.3.0",
     "eslint-vitest-rule-tester": "^3.0.1",
     "husky": "^9.1.7",
