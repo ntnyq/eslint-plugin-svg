@@ -54,6 +54,7 @@ export default defineConfig([
 | [no-empty-text](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-text)           | Disallow empty text element              | ✅  |     |     |
 | [no-empty-container](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-container) | Disallow empty container element         | ✅  |     |     |
 | [no-empty-groups](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-groups)       | Disallow empty g element                 | ✅  |     |     |
+| [no-base64-data-url](https://eslint-plugin-svg.ntnyq.com/rules/no-base64-data-url) | Disallow base64 data URLs in attributes  |     |     |     |
 | [no-inline-styles](https://eslint-plugin-svg.ntnyq.com/rules/no-inline-styles)     | Disallow inline style attribute          | ✅  |     |     |
 | [no-event-handlers](https://eslint-plugin-svg.ntnyq.com/rules/no-event-handlers)   | Disallow inline event handlers           | ✅  |     |     |
 | [no-script-tags](https://eslint-plugin-svg.ntnyq.com/rules/no-script-tags)         | Disallow script elements                 | ✅  |     |     |

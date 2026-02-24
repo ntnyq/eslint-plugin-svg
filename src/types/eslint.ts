@@ -148,15 +148,6 @@ export interface RuleMetaDataDocs {
   url?: string
 }
 
-export interface RuleModule<
-  TMessageIds extends string,
-  TOptions extends readonly unknown[] = [],
-  TDocs = unknown,
-> {
-  defaultOptions: TOptions
-  meta?: RuleMetaData<TMessageIds, TDocs, TOptions>
-  create(context: RuleContext<TMessageIds, TOptions>): RuleListener
-}
 export interface RuleWithMeta<
   TOptions extends readonly unknown[],
   TMessageIds extends string,

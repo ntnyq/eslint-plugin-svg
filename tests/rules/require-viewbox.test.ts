@@ -1,3 +1,4 @@
+import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/require-viewbox'
 import { $, run } from '../internal'
 import type { Options } from '../../src/rules/require-viewbox'
@@ -49,11 +50,22 @@ run<Options>({
           <rect width="10" height="10" />
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'missing',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 1,
+              "endColumn": 7,
+              "endLine": 3,
+              "line": 1,
+              "message": "SVG element must include a non-empty viewBox attribute",
+              "messageId": "missing",
+              "ruleId": "require-viewbox",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'empty-viewbox-value',
@@ -64,11 +76,22 @@ run<Options>({
           <circle r="10" />
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'missing',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 15,
+              "endColumn": 15,
+              "endLine": 1,
+              "line": 1,
+              "message": "SVG element must include a non-empty viewBox attribute",
+              "messageId": "missing",
+              "ruleId": "require-viewbox",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'whitespace-viewbox',
@@ -79,11 +102,22 @@ run<Options>({
           <text>foo</text>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'missing',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 15,
+              "endColumn": 18,
+              "endLine": 1,
+              "line": 1,
+              "message": "SVG element must include a non-empty viewBox attribute",
+              "messageId": "missing",
+              "ruleId": "require-viewbox",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'nested-missing-viewbox',
@@ -96,11 +130,22 @@ run<Options>({
           </svg>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'missing',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 9,
+              "endLine": 4,
+              "line": 2,
+              "message": "SVG element must include a non-empty viewBox attribute",
+              "messageId": "missing",
+              "ruleId": "require-viewbox",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
   ],
 })

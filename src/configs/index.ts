@@ -12,7 +12,6 @@ export const recommended: Linter.Config<Linter.RulesRecord>[] = [
     files: ['**/*.svg'],
     plugins: {
       /* v8 ignore start */
-      // @ts-expect-error types
       get svg() {
         return plugin
       },

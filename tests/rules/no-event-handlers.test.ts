@@ -1,3 +1,4 @@
+import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-event-handlers'
 import { $, run } from '../internal'
 import type { Options } from '../../src/rules/no-event-handlers'
@@ -56,11 +57,22 @@ run<Options>({
           <rect onclick="alert('x')" width="10" height="10" />
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 18,
+              "endColumn": 28,
+              "endLine": 2,
+              "line": 2,
+              "message": "Inline event handler 'onclick' is not allowed",
+              "messageId": "invalid",
+              "ruleId": "no-event-handlers",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'nested-onload',
@@ -73,11 +85,22 @@ run<Options>({
           </g>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 20,
+              "endColumn": 25,
+              "endLine": 3,
+              "line": 3,
+              "message": "Inline event handler 'onload' is not allowed",
+              "messageId": "invalid",
+              "ruleId": "no-event-handlers",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'ignore-not-matching',
@@ -93,11 +116,22 @@ run<Options>({
           <text onclick="bar()">foo</text>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 18,
+              "endColumn": 23,
+              "endLine": 2,
+              "line": 2,
+              "message": "Inline event handler 'onclick' is not allowed",
+              "messageId": "invalid",
+              "ruleId": "no-event-handlers",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
   ],
 })

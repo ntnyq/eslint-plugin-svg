@@ -1,3 +1,4 @@
+import noBase64DataUrl from './no-base64-data-url'
 import noComments from './no-comments'
 import noDeprecated from './no-deprecated'
 import noDoctype from './no-doctype'
@@ -16,6 +17,7 @@ import requireViewbox from './require-viewbox'
 
 // @keep-sorted
 export const rules = {
+  'no-base64-data-url': noBase64DataUrl,
   'no-comments': noComments,
   'no-deprecated': noDeprecated,
   'no-doctype': noDoctype,

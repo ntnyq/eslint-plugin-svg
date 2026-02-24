@@ -1,3 +1,4 @@
+import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-script-tags'
 import { $, run } from '../internal'
 import type { Options } from '../../src/rules/no-script-tags'
@@ -39,11 +40,22 @@ run<Options>({
           <script>alert('xss')</script>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 32,
+              "endLine": 2,
+              "line": 2,
+              "message": "Script elements are not allowed in SVG",
+              "messageId": "invalid",
+              "ruleId": "no-script-tags",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'nested-script',
@@ -56,11 +68,22 @@ run<Options>({
           </g>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 5,
+              "endColumn": 69,
+              "endLine": 3,
+              "line": 3,
+              "message": "Script elements are not allowed in SVG",
+              "messageId": "invalid",
+              "ruleId": "no-script-tags",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
   ],
 })
