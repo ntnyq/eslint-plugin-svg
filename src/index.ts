@@ -15,7 +15,6 @@ export const plugin: PluginSVG = {
   configs,
 }
 
-export * from './dts'
 export * from './meta'
 export * from './rules'
 export * from './configs'
