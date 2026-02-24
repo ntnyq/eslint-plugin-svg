@@ -26,6 +26,7 @@
     "bumpp",
     "changelogithub",
     "codecov",
+    "Csvg",
     "esbuild",
     "hkern",
     "iconify",
@@ -45,7 +46,8 @@
     "vite",
     "vitepress",
     "vitest",
-    "vkern"
+    "vkern",
+    "xlink"
   ],
   "cSpell.allowCompoundWords": true
 }

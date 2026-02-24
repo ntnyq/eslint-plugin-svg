@@ -1,3 +1,4 @@
+import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-inline-styles'
 import { $, run } from '../internal'
 import type { Options } from '../../src/rules/no-inline-styles'
@@ -50,11 +51,22 @@ run<Options>({
           <rect width="10" height="10" style="fill: red;" />
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 39,
+              "endColumn": 49,
+              "endLine": 2,
+              "line": 2,
+              "message": "Inline style attributes are not allowed",
+              "messageId": "invalid",
+              "ruleId": "no-inline-styles",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'inline-style-empty',
@@ -65,11 +77,22 @@ run<Options>({
           <circle style="" r="10" />
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 18,
+              "endColumn": 18,
+              "endLine": 2,
+              "line": 2,
+              "message": "Inline style attributes are not allowed",
+              "messageId": "invalid",
+              "ruleId": "no-inline-styles",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'inline-style-nested',
@@ -82,11 +105,22 @@ run<Options>({
           </g>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 18,
+              "endColumn": 34,
+              "endLine": 3,
+              "line": 3,
+              "message": "Inline style attributes are not allowed",
+              "messageId": "invalid",
+              "ruleId": "no-inline-styles",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
   ],
 })

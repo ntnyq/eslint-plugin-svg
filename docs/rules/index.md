@@ -16,6 +16,7 @@ sidebarDepth: 0
 | [no-empty-text](/rules/no-empty-text)           | Disallow empty **text** element          | ✅  |     |     |
 | [no-empty-container](/rules/no-empty-container) | Disallow empty container element         | ✅  |     |     |
 | [no-empty-groups](/rules/no-empty-groups)       | Disallow empty **g** element             | ✅  |     |     |
+| [no-base64-data-url](/rules/no-base64-data-url) | Disallow base64 data URLs in attributes  |     |     |     |
 | [no-inline-styles](/rules/no-inline-styles)     | Disallow inline **style** attribute      | ✅  |     |     |
 | [no-event-handlers](/rules/no-event-handlers)   | Disallow inline event handlers           | ✅  |     |     |
 | [no-script-tags](/rules/no-script-tags)         | Disallow **script** elements             | ✅  |     |     |

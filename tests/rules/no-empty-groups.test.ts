@@ -1,3 +1,4 @@
+import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-empty-groups'
 import { $, run } from '../internal'
 import type { Options } from '../../src/rules/no-empty-groups'
@@ -53,11 +54,22 @@ run<Options>({
           <g></g>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 10,
+              "endLine": 2,
+              "line": 2,
+              "message": "Group element 'g' must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-groups",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'group-only-whitespace',
@@ -66,15 +78,26 @@ run<Options>({
       code: $`
         <svg>
           <g>
-            
+        
           </g>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 7,
+              "endLine": 4,
+              "line": 2,
+              "message": "Group element 'g' must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-groups",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
     {
       name: 'group-only-comment',
@@ -87,11 +110,22 @@ run<Options>({
           </g>
         </svg>
       `,
-      errors: [
-        {
-          messageId: 'invalid',
-        },
-      ],
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 7,
+              "endLine": 4,
+              "line": 2,
+              "message": "Group element 'g' must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-groups",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
     },
   ],
 })
