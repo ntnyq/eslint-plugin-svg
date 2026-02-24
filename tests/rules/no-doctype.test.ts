@@ -50,7 +50,6 @@ run<Options>({
               "line": 1,
               "message": "Doctype is not allowed",
               "messageId": "invalid",
-              "nodeType": "Doctype",
               "ruleId": "no-doctype",
               "severity": 2,
             },
