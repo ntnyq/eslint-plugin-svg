@@ -2,7 +2,7 @@
   "name": "eslint-plugin-svg",
   "type": "module",
   "version": "0.0.6",
-  "packageManager": "pnpm@10.31.0",
+  "packageManager": "pnpm@10.33.0",
   "description": "Rules for consistent, readable and valid SVG files.",
   "keywords": [
     "eslint",
@@ -50,17 +50,17 @@
     "eslint": "^9.5.0 || ^10.0.0"
   },
   "dependencies": {
-    "@ntnyq/utils": "^0.11.0",
+    "@ntnyq/utils": "^0.11.2",
     "@types/json-schema": "^7.0.15",
     "svg-eslint-parser": "^0.0.7",
     "uncase": "^0.2.0"
   },
   "devDependencies": {
-    "@ntnyq/eslint-config": "^6.0.0-beta.12",
+    "@ntnyq/eslint-config": "^6.0.0-beta.15",
     "@ntnyq/prettier-config": "^3.0.1",
-    "@types/node": "^25.3.5",
+    "@types/node": "^25.5.0",
     "bumpp": "^10.4.1",
-    "eslint": "^10.0.3",
+    "eslint": "^10.1.0",
     "eslint-plugin-eslint-plugin": "^7.3.2",
     "eslint-vitest-rule-tester": "^3.1.0",
     "husky": "^9.1.7",
@@ -68,9 +68,9 @@
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
     "tinyglobby": "^0.2.15",
-    "tsdown": "^0.21.0",
+    "tsdown": "^0.21.7",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.2"
   },
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24"
