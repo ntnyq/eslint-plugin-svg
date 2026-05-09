@@ -35,6 +35,25 @@ export default [
 
 The `recommended` config enables a subset of [the rules](#rules) that should be most useful to most users.
 
+Additional presets are available for stricter or targeted checks:
+
+- `strict`: stricter checks for cleanup-oriented workflows.
+- `security`: security-focused checks (scripts, handlers, data URLs).
+- `a11y`: accessibility-focused checks for text alternatives and roles.
+
+```ts [eslint.config.mjs] twoslash
+import pluginSVG from 'eslint-plugin-svg'
+
+export default [
+  // Base checks
+  ...pluginSVG.configs.recommended,
+
+  // Optional layers
+  ...pluginSVG.configs.security,
+  ...pluginSVG.configs.a11y,
+]
+```
+
 ## Advanced Usage
 
 Override/add specific rules configurations.

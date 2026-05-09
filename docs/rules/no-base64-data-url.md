@@ -29,7 +29,8 @@ By default, it only reports base64-encoded data URLs such as `data:image/png;bas
       "attributes": "*",
       "ignoreAttributes": [],
       "checkUrlFunction": true,
-      "allowMimeTypes": []
+      "allowMimeTypes": [],
+      "allowEmptyMimeType": false
     }
   ]
 }
@@ -40,6 +41,7 @@ By default, it only reports base64-encoded data URLs such as `data:image/png;bas
 - `ignoreAttributes`: `string[]` (default: `[]`)
 - `checkUrlFunction`: `boolean` (default: `true`)
 - `allowMimeTypes`: `string[]` (default: `[]`)
+- `allowEmptyMimeType`: `boolean` (default: `false`)
 
 ## :apple: Examples
 

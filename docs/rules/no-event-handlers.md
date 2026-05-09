@@ -10,7 +10,8 @@ since: v0.0.5
 
 > Disallow inline event handler attributes in SVG.
 
-- 💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ntnyq/eslint-plugin-svg#rules).
+- This rule is not enabled in the `recommended` config.
+- This rule is enabled in the `security` and `strict` configs.
 
 ## :book: Rule Details
 
@@ -20,7 +21,11 @@ Inline event handlers carry security risks (e.g., XSS) and make behavior harder 
 
 ### Options
 
-- `ignores`: `string[]` — attribute names (as strings) that will be converted to regular expressions and used to ignore matching inline handlers. Useful for gradual adoption or custom prefixes.
+- `ignoreAttributes`: `string[]` — exact attribute names to ignore.
+- `ignorePatterns`: `string[]` — regular expression patterns used to ignore matching handler names.
+- `ignores`: `string[]` — deprecated alias of `ignorePatterns` kept for backward compatibility.
+
+Invalid regular expression patterns are reported by the rule.
 
 ## :apple: Examples
 
@@ -47,7 +52,7 @@ with config:
 ```json
 {
   "rules": {
-    "svg/no-event-handlers": ["error", { "ignores": ["onclick"] }]
+    "svg/no-event-handlers": ["error", { "ignoreAttributes": ["onclick"] }]
   }
 }
 ```

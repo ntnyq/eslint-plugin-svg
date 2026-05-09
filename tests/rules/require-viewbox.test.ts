@@ -39,6 +39,21 @@ run<Options>({
         </svg>
       `,
     },
+    {
+      name: 'invalid-format-allowed-when-validation-disabled',
+      description: `allows invalid viewBox format when validateFormat is false`,
+      filename: 'invalid-format-opt-out.svg',
+      options: [
+        {
+          validateFormat: false,
+        },
+      ],
+      code: $`
+        <svg viewBox="foo">
+          <rect width="10" height="10" />
+        </svg>
+      `,
+    },
   ],
   invalid: [
     {
@@ -140,6 +155,58 @@ run<Options>({
               "line": 2,
               "message": "SVG element must include a non-empty viewBox attribute",
               "messageId": "missing",
+              "ruleId": "require-viewbox",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      name: 'invalid-viewbox-format',
+      description: `reports svg element with invalid viewBox format`,
+      filename: 'invalid-viewbox-format.svg',
+      code: $`
+        <svg viewBox="foo">
+          <rect width="10" height="10" />
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 15,
+              "endColumn": 18,
+              "endLine": 1,
+              "line": 1,
+              "message": "SVG viewBox must contain four numbers and positive width and height",
+              "messageId": "invalid",
+              "ruleId": "require-viewbox",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      name: 'invalid-viewbox-size',
+      description: `reports svg element when viewBox width or height is not positive`,
+      filename: 'invalid-viewbox-size.svg',
+      code: $`
+        <svg viewBox="0 0 10 0">
+          <rect width="10" height="10" />
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 15,
+              "endColumn": 23,
+              "endLine": 1,
+              "line": 1,
+              "message": "SVG viewBox must contain four numbers and positive width and height",
+              "messageId": "invalid",
               "ruleId": "require-viewbox",
               "severity": 2,
             },

@@ -10,7 +10,8 @@ since: v0.0.1
 
 > Disallow empty container element.
 
-- 💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ntnyq/eslint-plugin-svg#rules).
+- This rule is not enabled in the `recommended` config.
+- This rule is enabled in the `strict` config.
 
 ## :book: Rule Details
 
@@ -25,9 +26,10 @@ Built-in container elements:
 - `mask`
 - `missing-glyph`
 - `pattern`
-- `svg`
 - `switch`
 - `symbol`
+
+By default, the root `svg` element is not checked. Use `checkRootSvg: true` to include it.
 
 See [MDN - SVG container elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Element#container_elements) for detail.
 
@@ -62,6 +64,13 @@ export type Options = {
    * @default true
    */
   ignoreWhitespace?: boolean
+
+  /**
+   * whether check root svg element as a container
+   *
+   * @default false
+   */
+  checkRootSvg?: boolean
 }
 ```
 

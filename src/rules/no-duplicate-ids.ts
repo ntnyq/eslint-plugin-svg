@@ -22,7 +22,7 @@ export default createESLintRule<Options, MessageIds>({
     const seenIds = new Set<string>()
 
     return {
-      Tag(node) {
+      Element(node) {
         const idAttribute = node.attributes?.find(
           attr => attr.key.value === 'id',
         )

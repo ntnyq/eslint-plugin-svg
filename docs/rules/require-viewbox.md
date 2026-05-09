@@ -14,13 +14,23 @@ since: v0.0.5
 
 ## :book: Rule Details
 
-This rule reports any `<svg>` element that omits the `viewBox` attribute or provides an empty value.
+This rule reports any `<svg>` element that omits the `viewBox` attribute, provides an empty value, or has an invalid `viewBox` format.
 
 A proper viewBox keeps SVGs scalable and ensures responsive rendering.
 
 ## :wrench: Options
 
-This rule has no options.
+```ts
+export type Options = {
+  /**
+   * whether to validate viewBox format as four finite numbers with
+   * positive width and height
+   *
+   * @default true
+   */
+  validateFormat?: boolean
+}
+```
 
 ## :apple: Examples
 
@@ -38,6 +48,16 @@ This rule has no options.
 
 ```xml eslint-check
 <svg>
+  <rect width="10" height="10" />
+</svg>
+```
+
+:::
+
+::: incorrect
+
+```xml eslint-check
+<svg viewBox="foo">
   <rect width="10" height="10" />
 </svg>
 ```

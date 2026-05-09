@@ -10,7 +10,8 @@ since: v0.0.5
 
 > Disallow empty group element.
 
-- 💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ntnyq/eslint-plugin-svg#rules).
+- This rule is not enabled in the `recommended` config.
+- This rule is enabled in the `strict` config.
 
 ## :book: Rule Details
 

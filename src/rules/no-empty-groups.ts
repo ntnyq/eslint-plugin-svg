@@ -11,7 +11,7 @@ export default createESLintRule<Options, MessageIds>({
     type: 'suggestion',
     docs: {
       description: 'disallow empty group element',
-      recommended: true,
+      recommended: false,
     },
     schema: [],
     messages: {
@@ -21,7 +21,7 @@ export default createESLintRule<Options, MessageIds>({
   defaultOptions: [],
   create(context) {
     return {
-      Tag(node) {
+      Element(node) {
         if (node.name !== 'g') {
           return
         }

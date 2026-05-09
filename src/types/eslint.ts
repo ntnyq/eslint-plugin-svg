@@ -113,11 +113,16 @@ export interface RuleListener {
   // document
   Document?: (node: AST.DocumentNode) => void
   'Document:exit'?: (node: AST.DocumentNode) => void
+
+  // element
+  Element?: (node: AST.ElementNode) => void
+  'Element:exit'?: (node: AST.ElementNode) => void
+
   // program
   Program?: (node: AST.Program) => void
   'Program:exit'?: (node: AST.Program) => void
 
-  // tag
+  // tag (deprecated alias)
   Tag?: (node: AST.TagNode) => void
   'Tag:exit'?: (node: AST.TagNode) => void
 

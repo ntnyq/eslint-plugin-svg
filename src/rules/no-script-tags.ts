@@ -1,35 +1,13 @@
-import { createESLintRule } from '../utils'
+import { createNoElementRule } from './ruleFactories'
 
 export const RULE_NAME = 'no-script-tags'
 export type MessageIds = 'invalid'
 export type Options = []
 
-export default createESLintRule<Options, MessageIds>({
-  name: RULE_NAME,
-  meta: {
-    type: 'suggestion',
-    docs: {
-      description: 'disallow usage of script elements',
-      recommended: true,
-    },
-    schema: [],
-    messages: {
-      invalid: `Script elements are not allowed in SVG`,
-    },
-  },
-  defaultOptions: [],
-  create(context) {
-    return {
-      Tag(node) {
-        if (node.name !== 'script') {
-          return
-        }
-
-        context.report({
-          node,
-          messageId: 'invalid',
-        })
-      },
-    }
-  },
+export default createNoElementRule({
+  ruleName: RULE_NAME,
+  description: 'disallow usage of script elements',
+  message: `Script elements are not allowed in SVG`,
+  defaultElements: ['script'],
+  allowConfigurableElements: false,
 })

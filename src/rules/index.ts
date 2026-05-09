@@ -1,6 +1,7 @@
 import noBase64DataUrl from './no-base64-data-url'
 import noComments from './no-comments'
 import noDeprecated from './no-deprecated'
+import noDiscouragedRole from './no-discouraged-role'
 import noDoctype from './no-doctype'
 import noDuplicateIds from './no-duplicate-ids'
 import noElements from './no-elements'
@@ -20,6 +21,7 @@ export const rules = {
   'no-base64-data-url': noBase64DataUrl,
   'no-comments': noComments,
   'no-deprecated': noDeprecated,
+  'no-discouraged-role': noDiscouragedRole,
   'no-doctype': noDoctype,
   'no-duplicate-ids': noDuplicateIds,
   'no-elements': noElements,

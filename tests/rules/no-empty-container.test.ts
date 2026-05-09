@@ -8,6 +8,12 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'empty-root-svg.svg',
+      code: $`
+        <svg></svg>
+      `,
+    },
+    {
       filename: 'valid.svg',
       code: $`
         <svg>
@@ -103,6 +109,33 @@ run<Options>({
               "endLine": 2,
               "line": 2,
               "message": "Container element 'metadata' must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-container",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'empty-root-svg.svg',
+      options: [
+        {
+          checkRootSvg: true,
+        },
+      ],
+      code: $`
+        <svg></svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 1,
+              "endColumn": 12,
+              "endLine": 1,
+              "line": 1,
+              "message": "Container element 'svg' must not be empty",
               "messageId": "invalid",
               "ruleId": "no-empty-container",
               "severity": 2,

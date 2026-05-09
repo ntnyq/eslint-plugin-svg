@@ -10,7 +10,7 @@ export default createESLintRule<Options, MessageIds>({
     type: 'suggestion',
     docs: {
       description: 'disallow inline style attribute usage',
-      recommended: true,
+      recommended: false,
     },
     schema: [],
     messages: {

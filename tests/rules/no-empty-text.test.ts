@@ -16,21 +16,11 @@ run<Options>({
       `,
     },
     {
-      filename: 'text-no-text.svg',
+      filename: 'text-with-tspan-text.svg',
       code: $`
         <svg>
           <text>
-            <circle r="10" />
-          </text>
-        </svg>
-      `,
-    },
-    {
-      filename: 'text-comment.svg',
-      code: $`
-        <svg>
-          <text>
-            <!-- foobar -->
+            <tspan>foo</tspan>
           </text>
         </svg>
       `,
@@ -76,6 +66,58 @@ run<Options>({
               "column": 3,
               "endColumn": 10,
               "endLine": 3,
+              "line": 2,
+              "message": "Element text must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-text",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'text-no-readable-text.svg',
+      code: $`
+        <svg>
+          <text>
+            <tspan />
+          </text>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 9,
+              "endLine": 2,
+              "line": 2,
+              "message": "Element text must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-text",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'text-comment-only.svg',
+      code: $`
+        <svg>
+          <text>
+            <!-- foobar -->
+          </text>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 10,
+              "endLine": 4,
               "line": 2,
               "message": "Element text must not be empty",
               "messageId": "invalid",

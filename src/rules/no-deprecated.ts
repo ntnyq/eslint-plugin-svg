@@ -50,7 +50,7 @@ export default createESLintRule<Options, MessageIds>({
     )
 
     return {
-      Tag(node) {
+      Element(node) {
         if (deprecatedElements.has(node.name)) {
           context.report({
             node,

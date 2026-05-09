@@ -1,9 +1,36 @@
 import { isNonEmptyString, toArray } from '@ntnyq/utils'
-import { createESLintRule } from '../utils'
+import { createESLintRule, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'require-viewbox'
-export type MessageIds = 'missing'
-export type Options = []
+export type MessageIds = 'missing' | 'invalid'
+export type Options = [
+  {
+    validateFormat?: boolean
+  },
+]
+
+const defaultOptions: Required<Options[0]> = {
+  validateFormat: true,
+}
+
+function isValidViewBoxValue(value: string): boolean {
+  const parts = value
+    .trim()
+    .split(/[\s,]+/)
+    .filter(Boolean)
+
+  if (parts.length !== 4) {
+    return false
+  }
+
+  const numbers = parts.map(part => Number(part))
+
+  if (numbers.some(number => !Number.isFinite(number))) {
+    return false
+  }
+
+  return numbers[2] > 0 && numbers[3] > 0
+}
 
 export default createESLintRule<Options, MessageIds>({
   name: RULE_NAME,
@@ -14,15 +41,33 @@ export default createESLintRule<Options, MessageIds>({
         'require svg elements to include a non-empty viewBox attribute',
       recommended: true,
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          validateFormat: {
+            type: 'boolean',
+            description:
+              'whether to validate viewBox format as four finite numbers with positive width and height',
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
     messages: {
       missing: `SVG element must include a non-empty viewBox attribute`,
+      invalid: `SVG viewBox must contain four numbers and positive width and height`,
     },
   },
-  defaultOptions: [],
+  defaultOptions: [defaultOptions],
   create(context) {
+    const options = {
+      ...defaultOptions,
+      ...resolveOptions(context.options, defaultOptions),
+    }
+
     return {
-      Tag(node) {
+      Element(node) {
         if (node.name !== 'svg') {
           return
         }
@@ -46,6 +91,14 @@ export default createESLintRule<Options, MessageIds>({
           context.report({
             node: viewBoxAttr.value ?? viewBoxAttr.key,
             messageId: 'missing',
+          })
+          return
+        }
+
+        if (options.validateFormat && !isValidViewBoxValue(value)) {
+          context.report({
+            node: viewBoxAttr.value ?? viewBoxAttr.key,
+            messageId: 'invalid',
           })
         }
       },

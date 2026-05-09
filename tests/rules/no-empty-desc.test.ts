@@ -16,21 +16,11 @@ run<Options>({
       `,
     },
     {
-      filename: 'desc-no-text.svg',
+      filename: 'desc-with-tspan-text.svg',
       code: $`
         <svg>
           <desc>
-            <circle r="10" />
-          </desc>
-        </svg>
-      `,
-    },
-    {
-      filename: 'desc-comment.svg',
-      code: $`
-        <svg>
-          <desc>
-            <!-- foobar -->
+            <tspan>foo</tspan>
           </desc>
         </svg>
       `,
@@ -76,6 +66,58 @@ run<Options>({
               "column": 3,
               "endColumn": 10,
               "endLine": 3,
+              "line": 2,
+              "message": "Element desc must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-desc",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'desc-no-readable-text.svg',
+      code: $`
+        <svg>
+          <desc>
+            <tspan />
+          </desc>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 9,
+              "endLine": 2,
+              "line": 2,
+              "message": "Element desc must not be empty",
+              "messageId": "invalid",
+              "ruleId": "no-empty-desc",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      filename: 'desc-comment-only.svg',
+      code: $`
+        <svg>
+          <desc>
+            <!-- foobar -->
+          </desc>
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 3,
+              "endColumn": 10,
+              "endLine": 4,
               "line": 2,
               "message": "Element desc must not be empty",
               "messageId": "invalid",

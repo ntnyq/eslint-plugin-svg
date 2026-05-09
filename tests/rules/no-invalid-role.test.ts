@@ -40,6 +40,17 @@ run<Options>({
         </svg>
       `,
     },
+    {
+      description: 'allow-abstract-roles',
+      options: [
+        {
+          allowAbstractRoles: true,
+        },
+      ],
+      code: $`
+        <svg role="widget"></svg>
+      `,
+    },
   ],
   invalid: [
     {
@@ -80,6 +91,28 @@ run<Options>({
               "endLine": 2,
               "line": 2,
               "message": "Attribute role value 'foobar' is invalid",
+              "messageId": "invalid",
+              "ruleId": "no-invalid-role",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      description: 'abstract-role.svg',
+      code: $`
+        <svg role="widget"></svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 12,
+              "endColumn": 18,
+              "endLine": 1,
+              "line": 1,
+              "message": "Attribute role value 'widget' is invalid",
               "messageId": "invalid",
               "ruleId": "no-invalid-role",
               "severity": 2,

@@ -81,6 +81,20 @@ run<Options>({
         </svg>
       `,
     },
+    {
+      name: 'allow-empty-mime-type',
+      filename: 'allow-empty-mime-type.svg',
+      options: [
+        {
+          allowEmptyMimeType: true,
+        },
+      ],
+      code: $`
+        <svg>
+          <image href="data:;base64,AAA=" />
+        </svg>
+      `,
+    },
   ],
   invalid: [
     {
@@ -210,6 +224,56 @@ run<Options>({
               "endLine": 2,
               "line": 2,
               "message": "Data URL usage is not allowed in attribute 'fill'",
+              "messageId": "invalid",
+              "ruleId": "no-base64-data-url",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      name: 'quoted-url-function',
+      filename: 'quoted-url-function.svg',
+      code: $`
+        <svg>
+          <rect style="fill: url('data:image/png;base64,AAA=')" />
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 16,
+              "endColumn": 55,
+              "endLine": 2,
+              "line": 2,
+              "message": "Data URL usage is not allowed in attribute 'style'",
+              "messageId": "invalid",
+              "ruleId": "no-base64-data-url",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      name: 'empty-mime-type-default-disallow',
+      filename: 'empty-mime-type.svg',
+      code: $`
+        <svg>
+          <image href="data:;base64,AAA=" />
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 16,
+              "endColumn": 33,
+              "endLine": 2,
+              "line": 2,
+              "message": "Data URL usage is not allowed in attribute 'href'",
               "messageId": "invalid",
               "ruleId": "no-base64-data-url",
               "severity": 2,

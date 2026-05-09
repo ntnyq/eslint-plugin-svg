@@ -8,21 +8,12 @@ run<Options>({
   rule,
   valid: [
     {
-      description: `allows event handler names matching provided pattern to be ignored`,
-      filename: 'no-event-handlers.svg',
-      code: $`
-          ignores: ['^on'],
-          <rect width="10" height="10" />
-        </svg>
-      `,
-    },
-    {
-      name: 'ignore-by-string',
-      description: `allows configured event handler attribute name to be ignored`,
+      name: 'ignore-by-attribute-name',
+      description: `allows exact event handler attribute names to be ignored`,
       filename: 'ignore-string.svg',
       options: [
         {
-          ignores: ['onclick'],
+          ignoreAttributes: ['onclick'],
         },
       ],
       code: $`
@@ -37,7 +28,7 @@ run<Options>({
       filename: 'ignore-regex.svg',
       options: [
         {
-          ignores: ['^onmousemove$'],
+          ignorePatterns: ['^onmousemove$'],
         },
       ],
       code: $`
@@ -108,7 +99,7 @@ run<Options>({
       filename: 'ignore-miss.svg',
       options: [
         {
-          ignores: ['onHover'],
+          ignoreAttributes: ['onhover'],
         },
       ],
       code: $`
@@ -126,6 +117,37 @@ run<Options>({
               "line": 2,
               "message": "Inline event handler 'onclick' is not allowed",
               "messageId": "invalid",
+              "ruleId": "no-event-handlers",
+              "severity": 2,
+            },
+          ]
+        `)
+      },
+    },
+    {
+      name: 'invalid-ignore-pattern',
+      description: `reports invalid regular expression patterns in ignorePatterns`,
+      filename: 'invalid-ignore-pattern.svg',
+      options: [
+        {
+          ignorePatterns: ['('],
+        },
+      ],
+      code: $`
+        <svg>
+          <rect width="10" height="10" />
+        </svg>
+      `,
+      errors(errors) {
+        expect(errors).toMatchInlineSnapshot(`
+          [
+            {
+              "column": 1,
+              "endColumn": 7,
+              "endLine": 3,
+              "line": 1,
+              "message": "Invalid ignore pattern '(' in no-event-handlers: Invalid regular expression: /(/: Unterminated group",
+              "messageId": "invalidPattern",
               "ruleId": "no-event-handlers",
               "severity": 2,
             },

@@ -16,6 +16,8 @@ since: v0.0.4
 
 This rule reports when attribute role value is invalid.
 
+By default, abstract roles are treated as invalid.
+
 See [MDN - WAI-ARIA Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) for detail.
 
 ## :wrench: Options
@@ -28,6 +30,13 @@ export type Options = {
    * @default []
    */
   roles?: string[]
+
+  /**
+   * whether abstract ARIA roles are considered valid
+   *
+   * @default false
+   */
+  allowAbstractRoles?: boolean
 }
 ```
 
@@ -55,6 +64,14 @@ export type Options = {
 <svg>
   <title role="foobar">foobar</title>
 </svg>
+```
+
+:::
+
+::: incorrect
+
+```xml eslint-check
+<svg role="widget"></svg>
 ```
 
 :::

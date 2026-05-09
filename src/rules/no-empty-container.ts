@@ -10,6 +10,7 @@ export type Options = [
     ignores?: string[]
     ignoreComments?: boolean
     ignoreWhitespace?: boolean
+    checkRootSvg?: boolean
   },
 ]
 
@@ -21,7 +22,7 @@ export default createESLintRule<Options, MessageIds>({
     type: 'suggestion',
     docs: {
       description: 'disallow empty container element',
-      recommended: true,
+      recommended: false,
     },
     schema: [
       {
@@ -51,6 +52,10 @@ export default createESLintRule<Options, MessageIds>({
             type: 'boolean',
             description: 'whether ignore whitespace nodes',
           },
+          checkRootSvg: {
+            type: 'boolean',
+            description: 'whether check root svg element as a container',
+          },
         },
         additionalProperties: false,
       },
@@ -66,19 +71,24 @@ export default createESLintRule<Options, MessageIds>({
       ignores = [],
       ignoreComments = true,
       ignoreWhitespace = true,
+      checkRootSvg = false,
     } = resolveOptions(context.options, defaultOptions)
+
+    const builtInContainerElements = checkRootSvg
+      ? CONTAINER_ELEMENTS
+      : CONTAINER_ELEMENTS.filter(v => v !== 'svg')
 
     const containerElements = new Set(
       [
         // built-in container elements
-        ...CONTAINER_ELEMENTS,
+        ...builtInContainerElements,
         // user defined container elements
         ...elements,
       ].filter(v => !ignores.includes(v)),
     )
 
     return {
-      Tag(node) {
+      Element(node) {
         if (!containerElements.has(node.name)) {
           return
         }

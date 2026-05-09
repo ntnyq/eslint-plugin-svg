@@ -34,10 +34,10 @@ Nothing.
 
 ::: correct
 
-```xml eslint-check
+```xml
 <svg>
   <title>
-    <circle r="10" />
+    <tspan>Icon title</tspan>
   </title>
 </svg>
 ```

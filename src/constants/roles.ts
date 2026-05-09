@@ -131,7 +131,6 @@ export const abstractRoles = {
 export const ARIA_ROLES = Array.from(
   new Set(
     [
-      abstractRoles.avoid,
       documentStructureRoles.avoid,
       documentStructureRoles.basic,
       documentStructureRoles.completeness,
@@ -143,4 +142,18 @@ export const ARIA_ROLES = Array.from(
       windowRoles.basic,
     ].flat(),
   ),
+)
+
+/**
+ * ARIA roles that are legal but often discouraged in SVG.
+ */
+export const DISCOURAGED_SVG_ARIA_ROLES = Array.from(
+  new Set([...documentStructureRoles.avoid]),
+)
+
+/**
+ * Includes abstract roles and legal roles.
+ */
+export const ALL_ARIA_ROLES = Array.from(
+  new Set([...ARIA_ROLES, ...abstractRoles.avoid]),
 )

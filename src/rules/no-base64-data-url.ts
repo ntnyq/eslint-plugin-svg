@@ -9,6 +9,7 @@ export type Options = [
     ignoreAttributes?: string[]
     checkUrlFunction?: boolean
     allowMimeTypes?: string[]
+    allowEmptyMimeType?: boolean
   },
 ]
 
@@ -18,6 +19,7 @@ const defaultOptions: Required<Options[0]> = {
   ignoreAttributes: [],
   checkUrlFunction: true,
   allowMimeTypes: [],
+  allowEmptyMimeType: false,
 }
 
 function normalize(value: string): string {
@@ -76,24 +78,66 @@ function extractUrlValues(value: string): string[] {
       break
     }
 
-    const contentStart = openIndex + 4
-    const closeIndex = value.indexOf(')', contentStart)
+    let cursor = openIndex + 4
 
-    if (closeIndex === -1) {
+    while (cursor < value.length && /\s/.test(value[cursor] ?? '')) {
+      cursor += 1
+    }
+
+    if (cursor >= value.length) {
       break
     }
 
-    let content = value.slice(contentStart, closeIndex).trim()
+    let content = ''
+    const quote = value[cursor]
 
-    if (
-      (content.startsWith('"') && content.endsWith('"'))
-      || (content.startsWith("'") && content.endsWith("'"))
-    ) {
-      content = content.slice(1, -1).trim()
+    if (quote === '"' || quote === "'") {
+      cursor += 1
+
+      while (cursor < value.length) {
+        const char = value[cursor] ?? ''
+
+        if (char === '\\' && cursor + 1 < value.length) {
+          content += value[cursor + 1] ?? ''
+          cursor += 2
+          continue
+        }
+
+        if (char === quote) {
+          cursor += 1
+          break
+        }
+
+        content += char
+        cursor += 1
+      }
+
+      while (cursor < value.length && /\s/.test(value[cursor] ?? '')) {
+        cursor += 1
+      }
+
+      if (value[cursor] !== ')') {
+        index = openIndex + 4
+        continue
+      }
+    } else {
+      while (cursor < value.length && value[cursor] !== ')') {
+        content += value[cursor] ?? ''
+        cursor += 1
+      }
+
+      if (cursor >= value.length || value[cursor] !== ')') {
+        break
+      }
     }
 
-    candidates.push(content)
-    index = closeIndex + 1
+    const normalizedContent = content.trim()
+
+    if (normalizedContent) {
+      candidates.push(normalizedContent)
+    }
+
+    index = cursor + 1
   }
 
   return candidates
@@ -103,6 +147,7 @@ function isDisallowedDataUrl(
   value: string,
   mode: Required<Options[0]>['mode'],
   allowedMimeTypes: Set<string>,
+  allowEmptyMimeType: boolean,
 ): boolean {
   const parsed = parseDataUrl(value)
 
@@ -111,6 +156,10 @@ function isDisallowedDataUrl(
   }
 
   if (parsed.mimeType && allowedMimeTypes.has(parsed.mimeType)) {
+    return false
+  }
+
+  if (!parsed.mimeType && allowEmptyMimeType) {
     return false
   }
 
@@ -176,6 +225,10 @@ export default createESLintRule<Options, MessageIds>({
             },
             uniqueItems: true,
           },
+          allowEmptyMimeType: {
+            type: 'boolean',
+            description: 'whether to allow data URLs without an explicit MIME',
+          },
         },
         additionalProperties: false,
       },
@@ -193,6 +246,7 @@ export default createESLintRule<Options, MessageIds>({
       ignoreAttributes,
       checkUrlFunction,
       allowMimeTypes,
+      allowEmptyMimeType,
     } = {
       ...defaultOptions,
       ...resolvedOptions,
@@ -234,7 +288,12 @@ export default createESLintRule<Options, MessageIds>({
 
         if (
           valuesToCheck.some(value =>
-            isDisallowedDataUrl(value, mode, allowedMimeTypes),
+            isDisallowedDataUrl(
+              value,
+              mode,
+              allowedMimeTypes,
+              allowEmptyMimeType,
+            ),
           )
         ) {
           context.report({
