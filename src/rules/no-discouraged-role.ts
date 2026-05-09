@@ -5,6 +5,7 @@ export const RULE_NAME = 'no-discouraged-role'
 export type MessageIds = 'discouraged'
 export type Options = [
   {
+    /** discouraged roles to report */
     roles?: string[]
   },
 ]

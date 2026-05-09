@@ -3,6 +3,9 @@ import { plugin } from '..'
 import type { Linter } from 'eslint'
 import type { PluginSVG } from '../types/plugin'
 
+/**
+ * Create a flat config item for SVG files with parser and plugin prewired.
+ */
 function createConfig(
   name: string,
   rules: Linter.RulesRecord,
@@ -36,6 +39,7 @@ export const recommended: Linter.Config<Linter.RulesRecord>[] = [
     'svg/no-empty-text': 'error',
     'svg/no-empty-title': 'error',
     'svg/no-invalid-role': 'error',
+    'svg/no-unknown-elements': 'error',
     'svg/no-script-tags': 'error',
     'svg/require-viewbox': 'error',
   }),
@@ -57,6 +61,7 @@ export const strict: Linter.Config<Linter.RulesRecord>[] = [
     'svg/no-event-handlers': 'error',
     'svg/no-inline-styles': 'error',
     'svg/no-invalid-role': 'error',
+    'svg/no-unknown-elements': 'error',
     'svg/no-script-tags': 'error',
     'svg/require-viewbox': 'error',
   }),
@@ -70,6 +75,7 @@ export const security: Linter.Config<Linter.RulesRecord>[] = [
     'svg/no-base64-data-url': 'error',
     'svg/no-event-handlers': 'error',
     'svg/no-script-tags': 'error',
+    'svg/no-unsafe-href': 'error',
   }),
 ]
 
@@ -83,6 +89,7 @@ export const a11y: Linter.Config<Linter.RulesRecord>[] = [
     'svg/no-empty-text': 'error',
     'svg/no-empty-title': 'error',
     'svg/no-invalid-role': 'error',
+    'svg/require-accessible-name': 'error',
   }),
 ]
 

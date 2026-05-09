@@ -4,6 +4,7 @@ export const RULE_NAME = 'no-elements'
 export type MessageIds = 'invalid'
 export type Options = [
   {
+    /** elements to disallow */
     elements?: string[]
   },
 ]

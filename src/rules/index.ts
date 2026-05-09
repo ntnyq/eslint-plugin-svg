@@ -14,6 +14,10 @@ import noEventHandlers from './no-event-handlers'
 import noInlineStyles from './no-inline-styles'
 import noInvalidRole from './no-invalid-role'
 import noScriptTags from './no-script-tags'
+import noUnknownElements from './no-unknown-elements'
+import noUnsafeHref from './no-unsafe-href'
+import preferCurrentColor from './prefer-current-color'
+import requireAccessibleName from './require-accessible-name'
 import requireViewbox from './require-viewbox'
 
 // @keep-sorted
@@ -34,5 +38,9 @@ export const rules = {
   'no-inline-styles': noInlineStyles,
   'no-invalid-role': noInvalidRole,
   'no-script-tags': noScriptTags,
+  'no-unknown-elements': noUnknownElements,
+  'no-unsafe-href': noUnsafeHref,
+  'prefer-current-color': preferCurrentColor,
+  'require-accessible-name': requireAccessibleName,
   'require-viewbox': requireViewbox,
 }

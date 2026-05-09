@@ -5,7 +5,9 @@ export const RULE_NAME = 'no-invalid-role'
 export type MessageIds = 'invalid'
 export type Options = [
   {
+    /** role values to validate against */
     roles?: string[]
+    /** whether abstract ARIA roles are accepted */
     allowAbstractRoles?: boolean
   },
 ]

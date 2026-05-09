@@ -1,5 +1,6 @@
 export * from './merge'
 export * from './casing'
+export * from './dataUrl'
 export * from './createRule'
 export * from './getTextContent'
 export * from './resolveOptions'

@@ -9,9 +9,13 @@ import type {
 } from '../types/eslint'
 
 export interface PluginDocs {
+  /** whether this rule is part of the recommended preset */
   recommended?: boolean
 }
 
+/**
+ * Build an ESLint rule module with default option merging support.
+ */
 function createRule<
   TOptions extends readonly unknown[],
   TMessageIds extends string,
@@ -52,6 +56,9 @@ function createRule<
   }
 }
 
+/**
+ * Build a named rule creator that injects docs URL from rule name.
+ */
 function RuleCreator(urlCreator: (name: string) => string) {
   return function createNamedRule<
     TOptions extends readonly unknown[],

@@ -5,6 +5,11 @@ export const RULE_NAME = 'require-viewbox'
 export type MessageIds = 'missing' | 'invalid'
 export type Options = [
   {
+    /**
+     * whether to validate the numeric viewBox format
+     *
+     * @default true
+     */
     validateFormat?: boolean
   },
 ]
@@ -13,6 +18,9 @@ const defaultOptions: Required<Options[0]> = {
   validateFormat: true,
 }
 
+/**
+ * Validate an SVG viewBox value.
+ */
 function isValidViewBoxValue(value: string): boolean {
   const parts = value
     .trim()

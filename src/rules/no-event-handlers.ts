@@ -4,14 +4,26 @@ export const RULE_NAME = 'no-event-handlers'
 export type MessageIds = 'invalid' | 'invalidPattern'
 export type Options = [
   {
+    /**
+     * deprecated alias of ignorePatterns
+     */
     ignores?: string[]
+    /**
+     * exact event handler attributes to ignore
+     */
     ignoreAttributes?: string[]
+    /**
+     * regexp patterns used to ignore event handler names
+     */
     ignorePatterns?: string[]
   },
 ]
 
 const defaultOptions: Options[0] = {}
 
+/**
+ * Convert an unknown regex error into a readable message.
+ */
 function getPatternErrorMessage(error: unknown): string {
   if (error instanceof Error && error.message) {
     return error.message

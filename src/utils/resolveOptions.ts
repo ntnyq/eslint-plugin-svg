@@ -1,5 +1,6 @@
 /**
- * resolve rule options
+ * Resolve rule options by taking the first runtime option object,
+ * then falling back to default options.
  *
  * @param options - context.options
  * @param defaultOptions - default options

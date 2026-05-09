@@ -6,10 +6,15 @@ export const RULE_NAME = 'no-empty-container'
 export type MessageIds = 'invalid'
 export type Options = [
   {
+    /** additional element names treated as containers */
     elements?: string[]
+    /** container element names to skip */
     ignores?: string[]
+    /** whether comment nodes should be ignored */
     ignoreComments?: boolean
+    /** whether whitespace-only text nodes should be ignored */
     ignoreWhitespace?: boolean
+    /** whether the root svg element should be treated as a container */
     checkRootSvg?: boolean
   },
 ]

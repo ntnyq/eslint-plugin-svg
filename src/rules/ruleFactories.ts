@@ -1,15 +1,22 @@
 import { isNonEmptyString } from '@ntnyq/utils'
 import { createESLintRule, getTextContent } from '../utils'
 
+/**
+ * Create a rule that reports empty content for a fixed element name.
+ */
 export function createNoEmptyElementRule({
   ruleName,
   elementName,
   description,
   recommended = true,
 }: {
+  /** rule name used by ESLint */
   ruleName: string
+  /** element name to validate */
   elementName: string
+  /** rule description in metadata */
   description: string
+  /** whether the rule is enabled in recommended preset */
   recommended?: boolean
 }) {
   return createESLintRule<[], 'invalid'>({
@@ -52,6 +59,9 @@ export function createNoEmptyElementRule({
   })
 }
 
+/**
+ * Create a rule that forbids elements by name with optional configuration.
+ */
 export function createNoElementRule({
   ruleName,
   description,
@@ -60,11 +70,17 @@ export function createNoElementRule({
   recommended = true,
   allowConfigurableElements = true,
 }: {
+  /** rule name used by ESLint */
   ruleName: string
+  /** rule description in metadata */
   description: string
+  /** error message template */
   message: string
+  /** default forbidden elements */
   defaultElements?: string[]
+  /** whether the rule is enabled in recommended preset */
   recommended?: boolean
+  /** allow users to override disallowed element list */
   allowConfigurableElements?: boolean
 }) {
   if (!allowConfigurableElements) {
@@ -110,6 +126,7 @@ export function createNoElementRule({
 
   type Options = [
     {
+      /** elements to disallow for this rule */
       elements?: string[]
     },
   ]

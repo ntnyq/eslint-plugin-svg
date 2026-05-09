@@ -19,7 +19,17 @@ interface TextContainerNode {
 }
 
 export interface GetTextContentOptions {
+  /**
+   * whether comment nodes should be ignored
+   *
+   * @default true
+   */
   ignoreComments?: boolean
+  /**
+   * whether text nodes should be trimmed and empty chunks removed
+   *
+   * @default true
+   */
   ignoreWhitespace?: boolean
 }
 
@@ -28,6 +38,9 @@ const defaultOptions: Required<GetTextContentOptions> = {
   ignoreWhitespace: true,
 }
 
+/**
+ * Recursively collect text segments from a tree-like node.
+ */
 function collectText(
   node: TextContainerNode,
   options: Required<GetTextContentOptions>,
@@ -55,6 +68,9 @@ function collectText(
   return textSegments
 }
 
+/**
+ * Get joined text content from a node tree.
+ */
 export function getTextContent(
   node: TextContainerNode,
   options: GetTextContentOptions = {},

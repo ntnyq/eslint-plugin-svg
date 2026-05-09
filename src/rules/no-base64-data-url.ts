@@ -1,14 +1,44 @@
-import { createESLintRule, resolveOptions } from '../utils'
+import { createESLintRule, parseDataUrl, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'no-base64-data-url'
 export type MessageIds = 'invalid'
 export type Options = [
   {
+    /**
+     * data URL blocking mode
+     *
+     * @default 'base64-only'
+     */
     mode?: 'base64-only' | 'any-data-url'
+    /**
+     * attributes to inspect
+     *
+     * @default '*'
+     */
     attributes?: '*' | string[]
+    /**
+     * attributes excluded from checks
+     *
+     * @default []
+     */
     ignoreAttributes?: string[]
+    /**
+     * whether url(...) wrapper values should be parsed
+     *
+     * @default true
+     */
     checkUrlFunction?: boolean
+    /**
+     * MIME types allowed for data URLs
+     *
+     * @default []
+     */
     allowMimeTypes?: string[]
+    /**
+     * whether data URLs with no MIME type are allowed
+     *
+     * @default false
+     */
     allowEmptyMimeType?: boolean
   },
 ]
@@ -22,50 +52,16 @@ const defaultOptions: Required<Options[0]> = {
   allowEmptyMimeType: false,
 }
 
+/**
+ * Normalize text for case-insensitive comparisons.
+ */
 function normalize(value: string): string {
   return value.trim().toLowerCase()
 }
 
-function parseDataUrl(value: string): {
-  isDataUrl: boolean
-  isBase64: boolean
-  mimeType: string
-} {
-  const rawValue = value.trim()
-  const lowerValue = rawValue.toLowerCase()
-
-  if (!lowerValue.startsWith('data:')) {
-    return {
-      isDataUrl: false,
-      isBase64: false,
-      mimeType: '',
-    }
-  }
-
-  const commaIndex = rawValue.indexOf(',')
-
-  if (commaIndex === -1) {
-    return {
-      isDataUrl: false,
-      isBase64: false,
-      mimeType: '',
-    }
-  }
-
-  const header = rawValue.slice(5, commaIndex)
-  const parts = header.split(';').map(part => normalize(part))
-  const firstPart = parts[0] ?? ''
-  const mimeType = firstPart.includes('/') ? firstPart : ''
-
-  const isBase64 = parts.includes('base64')
-
-  return {
-    isDataUrl: true,
-    isBase64,
-    mimeType,
-  }
-}
-
+/**
+ * Extract values from CSS-like url(...) fragments.
+ */
 function extractUrlValues(value: string): string[] {
   const candidates: string[] = []
   const lowerValue = value.toLowerCase()
@@ -143,6 +139,9 @@ function extractUrlValues(value: string): string[] {
   return candidates
 }
 
+/**
+ * Check whether a candidate URL should be reported as disallowed.
+ */
 function isDisallowedDataUrl(
   value: string,
   mode: Required<Options[0]>['mode'],

@@ -1,9 +1,13 @@
 import type { AST } from './svg'
 
 export interface SourceCode {
+  /** root AST program */
   ast: AST.Program
+  /** whether source starts with BOM */
   hasBOM: boolean
+  /** source split by lines */
   lines: string[]
+  /** full source text */
   text: string
   commentsExistBetween(left: SVGNodeOrToken, right: SVGNodeOrToken): boolean
   getAllComments(): AST.CommentNode[]
@@ -35,12 +39,17 @@ export interface SourceCode {
   getTokenBefore(node: SVGNodeOrToken): AST.AnyToken | null
 
   isSpaceBetweenTokens(first: SVGToken, second: SVGToken): boolean
+  /** visitor keys map */
   visitorKeys: {
+    /** node type name */
     [nodeType: string]: string[]
   }
 
+  /** parser-specific services */
   parserServices?: {
+    /** whether parser parsed SVG */
     isSVG?: true
+    /** parser error details, if any */
     parseError?: any
   }
 
@@ -137,8 +146,11 @@ type CursorWithCountOptions =
   | number
   | FilterPredicate
   | {
+      /** maximum number of tokens */
       count?: number
+      /** predicate used to filter tokens */
       filter?: FilterPredicate
+      /** include comments in traversal */
       includeComments?: boolean
     }
 
@@ -146,8 +158,11 @@ type CursorWithSkipOptions =
   | number
   | FilterPredicate
   | {
+      /** predicate used to filter tokens */
       filter?: FilterPredicate
+      /** include comments in traversal */
       includeComments?: boolean
+      /** number of tokens to skip */
       skip?: number
     }
 

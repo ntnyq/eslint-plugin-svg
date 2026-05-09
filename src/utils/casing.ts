@@ -40,6 +40,9 @@ export const convertersMap: Record<CasingKind, (value: string) => string> = {
   SCREAMING_SNAKE_CASE: (str: string) => snakeCase(str).toUpperCase(),
 }
 
+/**
+ * Create a converter that reports both converted value and change flag.
+ */
 export function getExactConverter(caseType: string) {
   const convert = convertersMap[caseType as CasingKind]
   return (source: string) => {

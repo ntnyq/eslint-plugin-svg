@@ -5,6 +5,7 @@ export const RULE_NAME = 'no-deprecated'
 export type MessageIds = 'deprecatedElement'
 export type Options = [
   {
+    /** deprecated elements explicitly allowed */
     allowElements?: string[]
   },
 ]
