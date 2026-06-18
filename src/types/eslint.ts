@@ -144,13 +144,10 @@ export interface RuleListener {
   Program?: (node: AST.Program) => void
   'Program:exit'?: (node: AST.Program) => void
 
-  // tag (deprecated alias)
-  Tag?: (node: AST.TagNode) => void
-  'Tag:exit'?: (node: AST.TagNode) => void
-
   // text
   Text?: (node: AST.TextNode) => void
   'Text:exit'?: (node: AST.TextNode) => void
+
   [key: string]: ((node: never) => void) | undefined
 }
 export interface RuleMetaData<
