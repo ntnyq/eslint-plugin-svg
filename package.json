@@ -2,7 +2,7 @@
   "name": "eslint-plugin-svg",
   "type": "module",
   "version": "0.1.0",
-  "packageManager": "pnpm@11.7.0",
+  "packageManager": "pnpm@11.8.0",
   "description": "Rules for consistent, readable and valid SVG files.",
   "keywords": [
     "eslint",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "@ntnyq/eslint-config": "^6.1.5",
     "@ntnyq/prettier-config": "^3.0.1",
-    "@types/node": "^25.9.3",
+    "@types/node": "^25.9.4",
     "bumpp": "^11.1.0",
     "eslint": "^10.5.0",
     "eslint-plugin-eslint-plugin": "^7.4.0",
