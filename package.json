@@ -69,7 +69,7 @@
     "prettier": "^3.8.4",
     "tinyglobby": "^0.2.17",
     "tsdown": "^0.22.3",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.9"
   },
   "engines": {
