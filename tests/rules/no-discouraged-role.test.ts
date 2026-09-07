@@ -7,6 +7,9 @@ run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
+    { filename: 'regression.svg', code: '<svg role="img"/>' },
+    { filename: 'regression.svg', code: '<svg role="unknown img table"/>' },
+    { filename: 'regression.svg', code: '<svg role="note table"/>' },
     {
       description: 'no-role',
       code: $`
@@ -32,6 +35,22 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'regression.svg',
+      code: '<svg role="unknown table img"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg role="t&#97;ble note"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
     {
       description: 'discouraged-role-default-list',
       code: $`

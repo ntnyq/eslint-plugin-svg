@@ -18,6 +18,8 @@ This rule reports SVG attributes that contain disallowed `data:` URLs.
 
 By default, it only reports base64-encoded data URLs such as `data:image/png;base64,...`.
 
+XML character references are decoded before inspecting direct URLs and `url(...)` wrappers, so `data&#58;image/png;base64,...` is also reported. This rule does not implement a full CSS parser or expand DTD-defined entities; use the `security` preset to reject DOCTYPE declarations as well.
+
 ## :wrench: Options
 
 ```json

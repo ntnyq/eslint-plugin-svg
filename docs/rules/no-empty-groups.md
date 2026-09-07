@@ -11,7 +11,7 @@ since: v0.0.5
 > Disallow empty group element.
 
 - This rule is not enabled in the `recommended` config.
-- This rule is enabled in the `strict` config.
+- This rule is available as an individual rule. The `strict` config uses `svg/no-empty-container`, which already checks `g` elements, to avoid duplicate reports.
 
 ## :book: Rule Details
 

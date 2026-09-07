@@ -59,14 +59,14 @@ export default defineConfig([
 | [no-empty-desc](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-desc)                     | Disallow empty desc element               | ✅  | ✅  |     | ✅  |     |     |
 | [no-empty-text](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-text)                     | Disallow empty text element               | ✅  | ✅  |     | ✅  |     |     |
 | [no-empty-container](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-container)           | Disallow empty container element          |     | ✅  |     |     |     |     |
-| [no-empty-groups](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-groups)                 | Disallow empty g element                  |     | ✅  |     |     |     |     |
+| [no-empty-groups](https://eslint-plugin-svg.ntnyq.com/rules/no-empty-groups)                 | Disallow empty g element                  |     |     |     |     |     |     |
 | [no-base64-data-url](https://eslint-plugin-svg.ntnyq.com/rules/no-base64-data-url)           | Disallow base64 data URLs in attributes   |     |     | ✅  |     |     |     |
 | [no-inline-styles](https://eslint-plugin-svg.ntnyq.com/rules/no-inline-styles)               | Disallow inline style attribute           |     | ✅  |     |     |     |     |
 | [no-event-handlers](https://eslint-plugin-svg.ntnyq.com/rules/no-event-handlers)             | Disallow inline event handlers            |     | ✅  | ✅  |     |     |     |
 | [no-script-tags](https://eslint-plugin-svg.ntnyq.com/rules/no-script-tags)                   | Disallow script elements                  | ✅  | ✅  | ✅  |     |     |     |
 | [require-viewbox](https://eslint-plugin-svg.ntnyq.com/rules/require-viewbox)                 | Require viewBox on svg elements           | ✅  | ✅  |     |     |     |     |
 | [no-deprecated](https://eslint-plugin-svg.ntnyq.com/rules/no-deprecated)                     | Disallow deprecated elements              | ✅  | ✅  |     |     |     |     |
-| [no-doctype](https://eslint-plugin-svg.ntnyq.com/rules/no-doctype)                           | Disallow doctype                          | ✅  | ✅  |     |     | ✅  |     |
+| [no-doctype](https://eslint-plugin-svg.ntnyq.com/rules/no-doctype)                           | Disallow doctype                          | ✅  | ✅  | ✅  |     | ✅  |     |
 | [no-duplicate-ids](https://eslint-plugin-svg.ntnyq.com/rules/no-duplicate-ids)               | Disallow duplicate id attributes          | ✅  | ✅  |     |     |     |     |
 | [no-elements](https://eslint-plugin-svg.ntnyq.com/rules/no-elements)                         | Disallow elements by name                 |     |     |     |     |     |     |
 | [no-comments](https://eslint-plugin-svg.ntnyq.com/rules/no-comments)                         | Disallow comments in SVG files            |     |     |     |     |     |     |

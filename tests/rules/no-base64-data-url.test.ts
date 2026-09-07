@@ -8,6 +8,10 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'regression.svg',
+      code: '<svg><image href="data&amp;#58;image/png;base64,AAA="/></svg>',
+    },
+    {
       name: 'external-href',
       filename: 'external-href.svg',
       code: $`
@@ -97,6 +101,38 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'regression.svg',
+      code: '<svg><image href="data&#58;image/png;base64,AAA="/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><image href="d&#97;ta:image/png;base64,AAA="/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><image href="da&#10;ta:image/png;base64,AAA="/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg fill="url(&quot;data:image/png;base64,AAA=&quot;)"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
     {
       name: 'base64-in-href',
       filename: 'base64-in-href.svg',

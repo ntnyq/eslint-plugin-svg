@@ -16,7 +16,9 @@ since: v0.1.0
 
 This rule reports element names that are not in the SVG standard element list.
 
-The rule uses the plugin's built-in `ALL_ELEMENTS` constant as the source of truth.
+Names are case-sensitive: `linearGradient` is valid, while `lineargradient` is not. SVG namespace prefixes are resolved, and explicitly foreign namespaces (for example XHTML inside `foreignObject`) are skipped.
+
+The rule recognizes both current and deprecated SVG elements. Deprecated elements are handled separately by `svg/no-deprecated`, avoiding duplicate diagnostics.
 
 ## :apple: Examples
 

@@ -1,5 +1,10 @@
 import { DISCOURAGED_SVG_ARIA_ROLES } from '../constants'
-import { createESLintRule, resolveOptions } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlAttribute,
+  getEffectiveRole,
+  resolveOptions,
+} from '../utils'
 
 export const RULE_NAME = 'no-discouraged-role'
 export type MessageIds = 'discouraged'
@@ -53,11 +58,12 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Attribute(node) {
-        if (
-          !node.value
-          || node.key.value !== 'role'
-          || !discouragedRoles.has(node.value.value)
-        ) {
+        if (!node.value || node.key.value !== 'role') {
+          return
+        }
+
+        const role = getEffectiveRole(decodeXmlAttribute(node.value.value))
+        if (!role || !discouragedRoles.has(role)) {
           return
         }
 

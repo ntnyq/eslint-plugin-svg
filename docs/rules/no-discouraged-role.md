@@ -17,6 +17,8 @@ since: v0.1.0
 
 This rule reports role values that are legal ARIA roles but discouraged for SVG usage.
 
+Only the first recognized role token is checked. The common image role `img` is not discouraged by default.
+
 Use this rule together with `svg/no-invalid-role`:
 
 - `svg/no-invalid-role`: checks role validity.

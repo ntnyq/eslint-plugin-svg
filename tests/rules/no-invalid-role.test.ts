@@ -7,6 +7,17 @@ run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
+    { filename: 'regression.svg', code: '<svg role="generic"/>' },
+    { filename: 'regression.svg', code: '<svg role="grid"/>' },
+    { filename: 'regression.svg', code: '<svg role="listbox"/>' },
+    { filename: 'regression.svg', code: '<svg role="radiogroup"/>' },
+    { filename: 'regression.svg', code: '<svg role="switch checkbox"/>' },
+    { filename: 'regression.svg', code: '<svg role="unknown img"/>' },
+    { filename: 'regression.svg', code: '<svg role="widget img"/>' },
+    { filename: 'regression.svg', code: '<svg role=" graphics-document "/>' },
+    { filename: 'regression.svg', code: '<svg role="graphics-symbol"/>' },
+    { filename: 'regression.svg', code: '<svg role="graphics-object"/>' },
+    { filename: 'regression.svg', code: '<svg role="i&#109;g"/>' },
     {
       description: 'no-role',
       code: $`
@@ -53,6 +64,22 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'regression.svg',
+      code: '<svg role="unknown widget"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg role=""/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
     {
       description: 'invalid-role.svg',
       code: $`

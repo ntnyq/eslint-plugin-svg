@@ -1,4 +1,9 @@
-import { createESLintRule, parseDataUrl, resolveOptions } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlAttribute,
+  parseDataUrl,
+  resolveOptions,
+} from '../utils'
 
 export const RULE_NAME = 'no-base64-data-url'
 export type MessageIds = 'invalid'
@@ -279,10 +284,11 @@ export default createESLintRule<Options, MessageIds>({
           return
         }
 
-        const valuesToCheck = [node.value.value]
+        const value = decodeXmlAttribute(node.value.value)
+        const valuesToCheck = [value]
 
         if (checkUrlFunction) {
-          valuesToCheck.push(...extractUrlValues(node.value.value))
+          valuesToCheck.push(...extractUrlValues(value))
         }
 
         if (

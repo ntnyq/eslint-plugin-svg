@@ -8,6 +8,10 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'namespaces.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:text>Logo</s:text></s:svg>',
+    },
+    {
       filename: 'valid.svg',
       code: $`
         <svg>
@@ -27,6 +31,14 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'namespaces.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:text/></s:svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
     {
       filename: 'empty-text.svg',
       code: $`

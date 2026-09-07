@@ -8,6 +8,31 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'regression.svg',
+      code: '<svg fill="inherit" stroke="inherit"/>',
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg fill="initial" stroke="initial"/>',
+    },
+    { filename: 'regression.svg', code: '<svg fill="unset" stroke="unset"/>' },
+    {
+      filename: 'regression.svg',
+      code: '<svg fill="revert" stroke="revert"/>',
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg fill="revert-layer" stroke="revert-layer"/>',
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg fill="context-fill" stroke="context-fill"/>',
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg fill="context-stroke" stroke="context-stroke"/>',
+    },
+    {
       filename: 'current-color.svg',
       code: $`
         <svg>

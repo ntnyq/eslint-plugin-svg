@@ -1,5 +1,10 @@
 import { ALL_ARIA_ROLES, ARIA_ROLES } from '../constants'
-import { createESLintRule, resolveOptions } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlAttribute,
+  getEffectiveRole,
+  resolveOptions,
+} from '../utils'
 
 export const RULE_NAME = 'no-invalid-role'
 export type MessageIds = 'invalid'
@@ -66,7 +71,11 @@ export default createESLintRule<Options, MessageIds>({
           return
         }
 
-        if (!allowedRoles.includes(node.value.value)) {
+        const role = getEffectiveRole(
+          decodeXmlAttribute(node.value.value),
+          allRoles,
+        )
+        if (!role || !allowedRoles.includes(role)) {
           context.report({
             node: node.value,
             messageId: 'invalid',

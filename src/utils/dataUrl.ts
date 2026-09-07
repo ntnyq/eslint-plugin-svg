@@ -24,7 +24,7 @@ function normalize(value: string): string {
  * Parse a potential data URL and return normalized metadata.
  */
 export function parseDataUrl(value: string): DataUrlInfo {
-  const rawValue = value.trim()
+  const rawValue = value.replace(/[\t\n\r]/g, '').trim()
   const lowerValue = rawValue.toLowerCase()
 
   if (!lowerValue.startsWith('data:')) {

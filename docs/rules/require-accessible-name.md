@@ -19,11 +19,19 @@ This rule requires an accessible name for:
 - root `<svg>` elements
 - nested `<svg>` elements with `role="img"`
 
-An SVG is considered named when at least one of the following exists:
+SVGs hidden by `aria-hidden="true"` (including on ancestors) and non-focusable decorative SVGs with `role="none"` or `role="presentation"` are excluded. A presentational role is not treated as decorative when ARIA attributes override it.
+
+The rule resolves names from static markup:
 
 - non-empty `<title>...</title>` child
 - non-empty `aria-label`
-- non-empty `aria-labelledby`
+- `aria-labelledby` references to existing IDs with non-empty text alternatives
+
+References may point forward in the document. The first recognized role token is used, so `role="unknown img"` also requires a name on a nested SVG. XML character references are decoded before checking text.
+
+Valid `aria-labelledby` references take precedence over `aria-label` and `<title>`, even when the referenced content is empty. Missing references allow those alternatives to be checked. Chained `aria-labelledby` references are not followed, preventing cycles from creating a false name.
+
+This is a static markup check, not a complete browser accessibility-tree computation. It does not evaluate stylesheets, generated CSS content, or script-generated labels.
 
 ## :apple: Examples
 

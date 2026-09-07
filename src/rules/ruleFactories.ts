@@ -1,5 +1,5 @@
 import { isNonEmptyString } from '@ntnyq/utils'
-import { createESLintRule, getTextContent } from '../utils'
+import { createESLintRule, getSvgElementName, getTextContent } from '../utils'
 
 /**
  * Create a rule that reports empty content for a fixed element name.
@@ -36,7 +36,7 @@ export function createNoEmptyElementRule({
     create(context) {
       return {
         Element(node) {
-          if (node.name !== elementName) {
+          if (getSvgElementName(node) !== elementName) {
             return
           }
 
@@ -107,7 +107,8 @@ export function createNoElementRule({
 
         return {
           Element(node) {
-            if (!disallowedElements.has(node.name)) {
+            // Script elements can also execute in embedded XHTML content.
+            if (!disallowedElements.has(node.name.split(':').at(-1)!)) {
               return
             }
 
@@ -174,7 +175,7 @@ export function createNoElementRule({
 
       return {
         Element(node) {
-          if (!disallowedElements.has(node.name)) {
+          if (!disallowedElements.has(getSvgElementName(node) ?? node.name)) {
             return
           }
 

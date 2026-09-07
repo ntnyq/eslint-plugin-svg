@@ -1,8 +1,10 @@
 import { globSync } from 'tinyglobby'
-import { version } from '../../../package.json'
+import pkg from '../../../package.json' with { type: 'json' }
 import { resolve } from '../../../scripts/utils'
 import { packageName } from '../meta'
 import type { DefaultTheme } from 'vitepress'
+
+const { version } = pkg
 
 const VERSIONS: DefaultTheme.NavItemWithLink[] = [
   { text: `v${version} (current)`, link: '/' },
@@ -20,13 +22,14 @@ function ruleToSidebarItem(ruleId: string): DefaultTheme.SidebarItem {
 }
 
 export function getThemeConfig() {
-  const rules = globSync(resolve('src/rules/*.ts'), {
-    ignore: ['**/index.ts'],
+  const rules = globSync(resolve('docs/rules/*.md'), {
+    ignore: ['**/index.md'],
     onlyFiles: true,
     cwd: resolve(),
   })
     .map(path => path.split('/').pop()!)
-    .map(path => path.replace('.ts', ''))
+    .map(path => path.replace('.md', ''))
+    .sort()
 
   const config: DefaultTheme.Config = {
     search: {

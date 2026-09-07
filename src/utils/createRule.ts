@@ -1,4 +1,3 @@
-import { toArray } from '@ntnyq/utils'
 import { deepMerge, isObjectNotArray } from './merge'
 import type { Rule } from 'eslint'
 import type {
@@ -26,7 +25,7 @@ function createRule<
   defaultOptions,
   meta,
 }: Readonly<RuleWithMeta<TOptions, TMessageIds, PluginDocs>>): Rule.RuleModule {
-  const resolvedDefaultOptions = toArray(meta.defaultOptions)
+  const resolvedDefaultOptions = [...defaultOptions]
   return {
     create: ((
       context: Readonly<RuleContext<TMessageIds, TOptions>>,
@@ -53,7 +52,7 @@ function createRule<
     }) as unknown as Rule.RuleModule['create'],
     meta: {
       ...meta,
-      defaultOptions: resolvedDefaultOptions as unknown as any[],
+      defaultOptions: resolvedDefaultOptions,
     },
   }
 }

@@ -8,6 +8,10 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'namespaces.svg',
+      code: '<svg><g xmlns="urn:metadata"/></svg>',
+    },
+    {
       name: 'group-with-child',
       description: `allows g element containing child elements`,
       filename: 'group-with-child.svg',
@@ -45,6 +49,14 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'namespaces.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:g/></s:svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
     {
       name: 'empty-group',
       description: `reports empty g element with no children`,

@@ -1,5 +1,10 @@
 import { isNonEmptyString, toArray } from '@ntnyq/utils'
-import { createESLintRule, resolveOptions } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlAttribute,
+  getSvgElementName,
+  resolveOptions,
+} from '../utils'
 
 export const RULE_NAME = 'require-viewbox'
 export type MessageIds = 'missing' | 'invalid'
@@ -22,12 +27,19 @@ const defaultOptions: Required<Options[0]> = {
  * Validate an SVG viewBox value.
  */
 function isValidViewBoxValue(value: string): boolean {
+  // Collapse only XML whitespace, preserving empty comma-separated values.
   const parts = value
-    .trim()
-    .split(/[\s,]+/)
+    .split(/[ \t\r\n]+/)
     .filter(Boolean)
+    .join(' ')
+    .split(/ ?, ?| /)
 
-  if (parts.length !== 4) {
+  if (
+    parts.length !== 4
+    || parts.some(
+      part => !/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(part),
+    )
+  ) {
     return false
   }
 
@@ -76,7 +88,7 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Element(node) {
-        if (node.name !== 'svg') {
+        if (getSvgElementName(node) !== 'svg') {
           return
         }
         const attributes = toArray(node.attributes)
@@ -93,7 +105,7 @@ export default createESLintRule<Options, MessageIds>({
           return
         }
 
-        const value = viewBoxAttr.value?.value ?? ''
+        const value = decodeXmlAttribute(viewBoxAttr.value?.value ?? '')
 
         if (!isNonEmptyString(value.trim())) {
           context.report({

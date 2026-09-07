@@ -33,13 +33,15 @@ export default [
 
 ### The recommended preset
 
-The `recommended` config enables a subset of [the rules](#rules) that should be most useful to most users.
+The `recommended` config enables a subset of [the rules](/rules/) that should be most useful to most users.
 
 Additional presets are available for stricter or targeted checks:
 
 - `strict`: stricter checks for cleanup-oriented workflows.
-- `security`: security-focused checks (scripts, handlers, data URLs).
+- `security`: security-focused checks (scripts, handlers, data URLs, unsafe hrefs, and DOCTYPE declarations).
 - `a11y`: accessibility-focused checks for text alternatives and roles.
+
+These are static lint checks, not an SVG sanitizer. The security preset does not fully interpret CSS, scripts, external resources, or browser behavior; do not use a clean lint result as proof that untrusted SVG is safe to embed.
 
 ```ts [eslint.config.mjs] twoslash
 import pluginSVG from 'eslint-plugin-svg'

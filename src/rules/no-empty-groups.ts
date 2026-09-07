@@ -1,5 +1,5 @@
 import { isNonEmptyString } from '@ntnyq/utils'
-import { createESLintRule } from '../utils'
+import { createESLintRule, getSvgElementName } from '../utils'
 
 export const RULE_NAME = 'no-empty-groups'
 export type MessageIds = 'invalid'
@@ -22,7 +22,7 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     return {
       Element(node) {
-        if (node.name !== 'g') {
+        if (getSvgElementName(node) !== 'g') {
           return
         }
 

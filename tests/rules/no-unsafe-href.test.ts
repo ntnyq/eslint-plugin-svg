@@ -7,6 +7,18 @@ run({
   rule,
   valid: [
     {
+      filename: 'rebound-xlink.svg',
+      code: '<svg xmlns:xlink="urn:metadata"><g xlink:href="javascript:alert(1)"/></svg>',
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><a href="java&amp;#x73;cript:alert(1)"/></svg>',
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><a href="./https:icon.svg"/></svg>',
+    },
+    {
       filename: 'safe-fragment-reference.svg',
       code: $`
         <svg>
@@ -25,6 +37,62 @@ run({
   ],
   invalid: [
     {
+      filename: 'regression.svg',
+      code: '<svg><a href="javascript&#58;alert(1)"/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><a href="java&#x73;cript:alert(1)"/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><a href="java&#x0A;script:alert(1)"/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><a href="java&#9;script:alert(1)"/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg xmlns:l="http://www.w3.org/1999/xlink"><a l:href="javascript:alert(1)"/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><image href="https:example.com/icon.svg"/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><image href="data&#58;image/svg+xml,&lt;svg/>"/></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
       filename: 'javascript-href.svg',
       code: $`
         <svg>
@@ -33,6 +101,7 @@ run({
       `,
       errors(errors) {
         expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
         expect(errors[0]?.messageId).toBe('invalid')
       },
     },
@@ -45,6 +114,7 @@ run({
       `,
       errors(errors) {
         expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
         expect(errors[0]?.messageId).toBe('invalid')
       },
     },
@@ -57,6 +127,7 @@ run({
       `,
       errors(errors) {
         expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
         expect(errors[0]?.messageId).toBe('invalid')
       },
     },

@@ -8,6 +8,10 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'regression.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:rect/></s:svg>',
+    },
+    {
       name: 'no-script-present',
       description: `allows svg without script elements`,
       filename: 'no-script.svg',
@@ -31,6 +35,22 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'regression.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:script>alert(1)</s:script></s:svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg><foreignObject><h:script xmlns:h="http://www.w3.org/1999/xhtml">alert(1)</h:script></foreignObject></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
     {
       name: 'root-script',
       description: `reports script element at root level`,

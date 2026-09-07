@@ -1,17 +1,17 @@
-import { ALL_ELEMENTS } from '../constants'
-import { createESLintRule } from '../utils'
+import { ALL_ELEMENTS, DEPRECATED_ELEMENTS } from '../constants'
+import { createESLintRule, getSvgElementName } from '../utils'
 
 export const RULE_NAME = 'no-unknown-elements'
 export type MessageIds = 'invalid'
 export type Options = []
 
-const knownElements = new Set(ALL_ELEMENTS.map(name => name.toLowerCase()))
+const knownElements = new Set([...ALL_ELEMENTS, ...DEPRECATED_ELEMENTS])
 
 /**
  * Check whether an element name exists in the SVG element allowlist.
  */
 function isKnownElement(name: string): boolean {
-  return knownElements.has(name.toLowerCase())
+  return knownElements.has(name)
 }
 
 export default createESLintRule<Options, MessageIds>({
@@ -31,7 +31,8 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     return {
       Element(node) {
-        if (isKnownElement(node.name)) {
+        const name = getSvgElementName(node)
+        if (name === null || isKnownElement(name)) {
           return
         }
 

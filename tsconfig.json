@@ -19,7 +19,7 @@
     "./src/**/*.ts",
     "./tests/**/*.ts",
     "./scripts/**/*.ts",
-    "./docs/**/*/ts",
+    "./docs/**/*.ts",
     "./docs/**/*.d.ts",
     "./docs/.vitepress/**/*.ts",
     "./docs/.vitepress/**/*.vue",

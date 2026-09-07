@@ -1,60 +1,74 @@
-import { isNonEmptyString, toArray } from '@ntnyq/utils'
-import { createESLintRule, getTextContent } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlReferences,
+  getAttributeValue,
+  getEffectiveRole,
+  getParentElement,
+  getSvgElementName,
+} from '../utils'
 import type { AST } from '../types'
 
 export const RULE_NAME = 'require-accessible-name'
 export type MessageIds = 'missing'
 export type Options = []
 
-/**
- * Normalize values for case-insensitive attribute checks.
- */
-function normalize(value: string): string {
-  return value.trim().toLowerCase()
-}
-
-/**
- * Read a string attribute value by name from an SVG element.
- */
-function getAttributeValue(
-  attributes: AST.AttributeNode[],
-  name: string,
-): string | null {
-  const target = normalize(name)
-  const attr = attributes.find(node => normalize(node.key.value) === target)
-
-  return attr?.value?.value ?? null
-}
-
-/**
- * Check whether the current SVG element contains a non-empty <title> child.
- */
-function hasNonEmptyTitle(node: AST.ElementNode): boolean {
-  const children = toArray(node.children)
-
-  return children.some(child => {
-    if (child.type !== 'Element' || child.name !== 'title') {
-      return false
+/** Hidden SVGs, including descendants of aria-hidden ancestors, need no name. */
+function isHidden(node: AST.ElementNode): boolean {
+  let current: AST.ElementNode | undefined = node
+  while (current) {
+    if (
+      getAttributeValue(current, 'aria-hidden').trim().toLowerCase() === 'true'
+    ) {
+      return true
     }
-
-    const textContent = getTextContent(child, {
-      ignoreComments: true,
-      ignoreWhitespace: true,
-    })
-
-    return isNonEmptyString(textContent.trim())
-  })
+    current = getParentElement(current)
+  }
+  return false
 }
 
-/**
- * Detect whether the svg node is the root element in the document.
- */
-function isRootSvg(node: AST.ElementNode): boolean {
-  const nodeWithParent = node as AST.ElementNode & {
-    parent?: AST.AnyNode
-  }
+function isPresentational(node: AST.ElementNode): boolean {
+  const role = getEffectiveRole(getAttributeValue(node, 'role'))
+  return (
+    (role === 'none' || role === 'presentation')
+    && !node.attributes.some(
+      attribute =>
+        attribute.key.value === 'tabindex'
+        || attribute.key.value.startsWith('aria-'),
+    )
+    && getAttributeValue(node, 'focusable') !== 'true'
+  )
+}
 
-  return nodeWithParent.parent?.type === 'Document'
+/** Static text alternatives only; CSS and script-generated names are out of scope. */
+function getContentName(node: AST.ElementNode, includeHidden = false): string {
+  return node.children
+    .map(child => {
+      if (child.type === 'Text') {
+        return decodeXmlReferences(child.value)
+      }
+      if (child.type !== 'Element' || (!includeHidden && isHidden(child))) {
+        return ''
+      }
+      if (['desc', 'script', 'style'].includes(child.name.split(':').at(-1)!)) {
+        return ''
+      }
+      return (
+        getOwnName(child, includeHidden) || getContentName(child, includeHidden)
+      )
+    })
+    .join(' ')
+    .trim()
+}
+
+function getOwnName(node: AST.ElementNode, includeHidden = false): string {
+  const label = getAttributeValue(node, 'aria-label').trim()
+  if (label) {
+    return label
+  }
+  const title = node.children.find(
+    child => child.type === 'Element' && getSvgElementName(child) === 'title',
+  )
+  return title?.type === 'Element' ? getContentName(title, includeHidden) : ''
 }
 
 export default createESLintRule<Options, MessageIds>({
@@ -74,37 +88,51 @@ export default createESLintRule<Options, MessageIds>({
   },
   defaultOptions: [],
   create(context) {
+    const elementsById = new Map<string, AST.ElementNode>()
+    const targets: AST.ElementNode[] = []
+
+    function checkNames() {
+      for (const node of targets) {
+        if (isHidden(node) || isPresentational(node)) {
+          continue
+        }
+        const references = getAttributeValue(node, 'aria-labelledby')
+          .split(/[\t\n\r ]+/)
+          .map(id => elementsById.get(id))
+          .filter((element): element is AST.ElementNode => !!element)
+        // Do not follow aria-labelledby on referenced nodes: chained and cyclic
+        // references are not another labelledby traversal in the name algorithm.
+        const name = references.length
+          ? references
+              .map(
+                element =>
+                  getOwnName(element, isHidden(element))
+                  || getContentName(element, isHidden(element)),
+              )
+              .join(' ')
+              .trim()
+          : getOwnName(node)
+        if (!name) {
+          context.report({ node, messageId: 'missing' })
+        }
+      }
+    }
+
     return {
       Element(node) {
-        if (node.name !== 'svg') {
-          return
+        const id = getAttributeValue(node, 'id')
+        if (id && !elementsById.has(id)) {
+          elementsById.set(id, node)
         }
-
-        const attributes = toArray(node.attributes)
-        const role = getAttributeValue(attributes, 'role')
-        const isRoleImg = normalize(role ?? '') === 'img'
-
-        if (!isRootSvg(node) && !isRoleImg) {
-          return
-        }
-
-        const ariaLabel = getAttributeValue(attributes, 'aria-label')
-        const ariaLabelledBy = getAttributeValue(attributes, 'aria-labelledby')
-        const hasTitle = hasNonEmptyTitle(node)
-
         if (
-          hasTitle
-          || isNonEmptyString(ariaLabel?.trim() ?? '')
-          || isNonEmptyString(ariaLabelledBy?.trim() ?? '')
+          getSvgElementName(node) === 'svg'
+          && (!getParentElement(node)
+            || getEffectiveRole(getAttributeValue(node, 'role')) === 'img')
         ) {
-          return
+          targets.push(node)
         }
-
-        context.report({
-          node,
-          messageId: 'missing',
-        })
       },
+      'Document:exit': checkNames,
     }
   },
 })

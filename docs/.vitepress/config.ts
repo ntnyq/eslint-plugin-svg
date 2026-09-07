@@ -14,7 +14,6 @@ export default defineConfig({
   description: appDescription,
   lastUpdated: true,
   cleanUrls: true,
-  ignoreDeadLinks: true,
 
   head,
   themeConfig: getThemeConfig(),

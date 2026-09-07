@@ -16,10 +16,12 @@ since: v0.1.0
 
 This rule reports unsafe URL values in `href` and `xlink:href` attributes.
 
+XML character references are decoded before checking URLs, and URL tabs/newlines are normalized. For example, `java&#x73;cript:alert(1)` is reported too. Alternate prefixes bound to the XLink namespace are supported.
+
 The following URL forms are disallowed:
 
 - `javascript:` URLs
-- remote URLs like `http://`, `https://`, and protocol-relative `//...`
+- remote URLs using `http:` or `https:`, including shortened forms and protocol-relative `//...`
 - `data:` URLs
 
 ## :apple: Examples

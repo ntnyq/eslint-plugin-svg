@@ -18,6 +18,8 @@ This rule reports any `<svg>` element that omits the `viewBox` attribute, provid
 
 A proper viewBox keeps SVGs scalable and ensures responsive rendering.
 
+Validation uses SVG decimal/exponent numbers and comma/whitespace separators, not JavaScript number syntax. Hexadecimal numbers, repeated commas, and leading or trailing commas are rejected. XML character references are decoded. Positive width and height remain a rule policy; SVG itself also permits zero dimensions to disable rendering.
+
 ## :wrench: Options
 
 ```ts

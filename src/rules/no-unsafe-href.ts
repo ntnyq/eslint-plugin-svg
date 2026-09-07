@@ -1,27 +1,24 @@
-import { createESLintRule, parseDataUrl } from '../utils'
+import { createESLintRule, decodeXmlAttribute, isHrefAttribute } from '../utils'
 
 export const RULE_NAME = 'no-unsafe-href'
 export type MessageIds = 'invalid'
 export type Options = []
 
-const HREF_ATTRIBUTES = new Set(['href', 'xlink:href'])
-
 /**
  * Normalize attribute names and URL values for safe comparisons.
  */
 function normalize(value: string): string {
-  return value.trim().toLowerCase()
+  return decodeXmlAttribute(value)
+    .replace(/[\t\n\r]/g, '')
+    .trim()
+    .toLowerCase()
 }
 
 /**
  * Check whether a URL points to a remote resource.
  */
 function isUnsafeRemoteUrl(value: string): boolean {
-  return (
-    value.startsWith('http://')
-    || value.startsWith('https://')
-    || value.startsWith('//')
-  )
+  return /^https?:/.test(value) || /^[\\/]{2}/.test(value)
 }
 
 export default createESLintRule<Options, MessageIds>({
@@ -41,13 +38,7 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     return {
       Attribute(node) {
-        if (!node.value) {
-          return
-        }
-
-        const attributeName = normalize(node.key.value)
-
-        if (!HREF_ATTRIBUTES.has(attributeName)) {
+        if (!node.value || !isHrefAttribute(node)) {
           return
         }
 
@@ -60,7 +51,7 @@ export default createESLintRule<Options, MessageIds>({
 
         const isUnsafe =
           normalizedValue.startsWith('javascript:')
-          || parseDataUrl(normalizedValue).isDataUrl
+          || normalizedValue.startsWith('data:')
           || isUnsafeRemoteUrl(normalizedValue)
 
         if (!isUnsafe) {

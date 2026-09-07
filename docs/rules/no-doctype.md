@@ -17,6 +17,8 @@ since: v0.0.2
 
 This rule reports when svg includes a DOCTYPE.
 
+It is also enabled in the `security` preset because the URL checks do not expand DTD-defined entities.
+
 References:
 
 - [StackOverflow - XML declaration and DOCTYPE](https://stackoverflow.com/a/38172170/9533579)

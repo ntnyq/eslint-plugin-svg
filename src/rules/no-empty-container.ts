@@ -1,6 +1,6 @@
 import { isNonEmptyString } from '@ntnyq/utils'
 import { CONTAINER_ELEMENTS } from '../constants'
-import { createESLintRule, resolveOptions } from '../utils'
+import { createESLintRule, getSvgElementName, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'no-empty-container'
 export type MessageIds = 'invalid'
@@ -94,7 +94,7 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Element(node) {
-        if (!containerElements.has(node.name)) {
+        if (!containerElements.has(getSvgElementName(node) ?? '')) {
           return
         }
 

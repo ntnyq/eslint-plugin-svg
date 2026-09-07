@@ -1,5 +1,5 @@
 import { DEPRECATED_ELEMENTS } from '../constants'
-import { createESLintRule, resolveOptions } from '../utils'
+import { createESLintRule, getSvgElementName, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'no-deprecated'
 export type MessageIds = 'deprecatedElement'
@@ -52,7 +52,7 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Element(node) {
-        if (deprecatedElements.has(node.name)) {
+        if (deprecatedElements.has(getSvgElementName(node) ?? '')) {
           context.report({
             node,
             messageId: 'deprecatedElement',

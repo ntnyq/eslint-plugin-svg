@@ -18,6 +18,8 @@ This rule reports when attribute role value is invalid.
 
 By default, abstract roles are treated as invalid.
 
+Whitespace-separated fallback tokens are supported. The first recognized non-abstract role is checked, so `role="switch checkbox"` and `role="unknown img"` are valid. When `roles` is configured, it restricts that effective role rather than changing the fallback order. `allowAbstractRoles` also permits abstract roles in that lookup.
+
 See [MDN - WAI-ARIA Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) for detail.
 
 ## :wrench: Options

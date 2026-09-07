@@ -55,7 +55,6 @@ export const strict: Linter.Config<Linter.RulesRecord>[] = [
     'svg/no-duplicate-ids': 'error',
     'svg/no-empty-container': 'error',
     'svg/no-empty-desc': 'error',
-    'svg/no-empty-groups': 'error',
     'svg/no-empty-text': 'error',
     'svg/no-empty-title': 'error',
     'svg/no-event-handlers': 'error',
@@ -73,6 +72,7 @@ export const strict: Linter.Config<Linter.RulesRecord>[] = [
 export const security: Linter.Config<Linter.RulesRecord>[] = [
   createConfig('svg/security', {
     'svg/no-base64-data-url': 'error',
+    'svg/no-doctype': 'error',
     'svg/no-event-handlers': 'error',
     'svg/no-script-tags': 'error',
     'svg/no-unsafe-href': 'error',

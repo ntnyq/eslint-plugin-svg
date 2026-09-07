@@ -2,7 +2,6 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#1._document_structure_roles
  */
 export const documentStructureRoles = {
-  basic: ['feed', 'math', 'none', 'note', 'presentation', 'toolbar', 'tooltip'],
   avoid: [
     'application',
     'article',
@@ -24,6 +23,16 @@ export const documentStructureRoles = {
     'separator',
     'table',
     'term',
+  ],
+  basic: [
+    'feed',
+    'generic',
+    'math',
+    'none',
+    'note',
+    'presentation',
+    'toolbar',
+    'tooltip',
   ],
   completeness: [
     'associationlist',
@@ -47,7 +56,6 @@ export const documentStructureRoles = {
  * @see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#2._widget_roles
  */
 export const widgetRoles = {
-  composite: ['combobox', 'menu', 'menubar', 'tablist', 'tree', 'treegrid'],
   basic: [
     'scrollbar',
     'searchbox',
@@ -71,6 +79,17 @@ export const widgetRoles = {
     'progressbar',
     'radio',
     'textbox',
+  ],
+  composite: [
+    'combobox',
+    'grid',
+    'listbox',
+    'menu',
+    'menubar',
+    'radiogroup',
+    'tablist',
+    'tree',
+    'treegrid',
   ],
 }
 
@@ -140,6 +159,7 @@ export const ARIA_ROLES = Array.from(
       widgetRoles.completeness,
       widgetRoles.composite,
       windowRoles.basic,
+      ['graphics-document', 'graphics-object', 'graphics-symbol'],
     ].flat(),
   ),
 )
@@ -148,7 +168,7 @@ export const ARIA_ROLES = Array.from(
  * ARIA roles that are legal but often discouraged in SVG.
  */
 export const DISCOURAGED_SVG_ARIA_ROLES = Array.from(
-  new Set([...documentStructureRoles.avoid]),
+  new Set(documentStructureRoles.avoid.filter(role => role !== 'img')),
 )
 
 /**

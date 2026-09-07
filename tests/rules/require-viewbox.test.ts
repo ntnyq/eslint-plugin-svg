@@ -7,6 +7,16 @@ run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
+    { filename: 'regression.svg', code: '<svg viewBox="+0 -0 .5 1.e2"/>' },
+    { filename: 'regression.svg', code: '<svg viewBox="0, 0, 1e2, 2E+2"/>' },
+    {
+      filename: 'regression.svg',
+      code: '<svg viewBox="0&#32;0&#32;10&#32;10"/>',
+    },
+    {
+      filename: 'regression.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg" viewBox="0 0 1 1"/>',
+    },
     {
       name: 'svg-with-viewbox',
       description: `allows svg element with viewBox attribute`,
@@ -56,6 +66,62 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'regression.svg',
+      code: '<svg viewBox="0x0 0 10 10"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg viewBox="0,,0,,10,,10"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg viewBox=",0 0 10 10"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg viewBox="0 0 10 10,"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg viewBox="0 0 1e999 1"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<svg viewBox="0&#160;0 10 10"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
+    {
+      filename: 'regression.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.ruleId).toBe(RULE_NAME)
+      },
+    },
     {
       name: 'missing-viewbox',
       description: `reports svg element missing viewBox attribute`,

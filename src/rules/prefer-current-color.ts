@@ -35,6 +35,13 @@ const COLOR_FUNCTION_PATTERN =
   /^(?:rgb|rgba|hsl|hsla|hwb|lab|lch|oklab|oklch|color)\(/i
 const HEX_COLOR_PATTERN = /^#[\da-f]{3,8}$/i
 const NAMED_COLOR_PATTERN = /^[a-z]+$/i
+const CSS_WIDE_KEYWORDS = new Set([
+  'inherit',
+  'initial',
+  'unset',
+  'revert',
+  'revert-layer',
+])
 
 /**
  * Normalize values for case-insensitive color comparisons.
@@ -49,7 +56,7 @@ function normalize(value: string): string {
 function isHardcodedColor(value: string): boolean {
   const normalizedValue = normalize(value)
 
-  if (!normalizedValue) {
+  if (!normalizedValue || CSS_WIDE_KEYWORDS.has(normalizedValue)) {
     return false
   }
 
