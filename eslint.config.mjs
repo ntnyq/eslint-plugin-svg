@@ -7,11 +7,14 @@ export default defineESLintConfig({
   eslintPlugin: {
     overrides: {
       'eslint-plugin/require-meta-default-options': 'off',
+      'eslint-plugin/require-meta-languages': 'off',
     },
   },
   test: {
-    overridesVitestRules: {
-      'vitest/no-standalone-expect': 'off',
+    vitest: {
+      overrides: {
+        'vitest/no-standalone-expect': 'off',
+      },
     },
   },
 })

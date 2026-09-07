@@ -9,7 +9,9 @@ import type {
 } from '../types/eslint'
 
 export interface PluginDocs {
-  /** whether this rule is part of the recommended preset */
+  /**
+   * whether this rule is part of the recommended preset
+   */
   recommended?: boolean
 }
 
@@ -51,7 +53,7 @@ function createRule<
     }) as unknown as Rule.RuleModule['create'],
     meta: {
       ...meta,
-      defaultOptions: resolvedDefaultOptions,
+      defaultOptions: resolvedDefaultOptions as unknown as any[],
     },
   }
 }

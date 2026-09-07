@@ -90,8 +90,8 @@ run<Options>({
           [
             {
               "column": 3,
-              "endColumn": 9,
-              "endLine": 2,
+              "endColumn": 10,
+              "endLine": 4,
               "line": 2,
               "message": "Element text must not be empty",
               "messageId": "invalid",

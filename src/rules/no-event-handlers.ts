@@ -98,10 +98,10 @@ export default createESLintRule<Options, MessageIds>({
     for (const pattern of patterns) {
       try {
         validIgnorePatterns.push(new RegExp(pattern))
-      } catch (err) {
+      } catch (error) {
         invalidIgnorePatterns.push({
           pattern,
-          error: getPatternErrorMessage(err),
+          error: getPatternErrorMessage(error),
         })
       }
     }

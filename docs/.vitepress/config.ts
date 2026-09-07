@@ -32,9 +32,8 @@ export default defineConfig({
               next.info = [next.info, 'eslint-check'].filter(Boolean).join(' ')
             }
             return '<CustomWrapper type="correct">'
-          } else {
-            return '</CustomWrapper>\n'
           }
+          return '</CustomWrapper>\n'
         },
       })
 
@@ -46,9 +45,8 @@ export default defineConfig({
               next.info = [next.info, 'eslint-check'].filter(Boolean).join(' ')
             }
             return '<CustomWrapper type="incorrect">'
-          } else {
-            return '</CustomWrapper>\n'
           }
+          return '</CustomWrapper>\n'
         },
       })
     },
@@ -64,7 +62,7 @@ export default defineConfig({
         errorRendering: 'hover',
         explicitTrigger: /\beslint-check\b/,
         twoslasher: createTwoslasher({
-          eslintCodePreprocess: code => {
+          eslintCodePreprocess(code) {
             // Remove trailing newline and presentational `⏎` characters
             return code.replace(/⏎(?=\n)/gu, '').replace(/⏎$/gu, '\n')
           },

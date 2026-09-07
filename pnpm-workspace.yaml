@@ -2,8 +2,11 @@ packages:
   - docs
 
 overrides:
-  esbuild: ^0.28.1
+  esbuild: ^0.28.2
 
 allowBuilds:
   esbuild: true
   unrs-resolver: true
+
+ignoreWorkspaceRootCheck: true
+pmOnFail: warn
