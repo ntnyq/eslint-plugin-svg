@@ -53,11 +53,10 @@ function isHardcodedColor(value: string): boolean {
     return false
   }
 
-  if (HEX_COLOR_PATTERN.test(normalizedValue)) {
-    return true
-  }
-
-  if (COLOR_FUNCTION_PATTERN.test(normalizedValue)) {
+  if (
+    HEX_COLOR_PATTERN.test(normalizedValue)
+    || COLOR_FUNCTION_PATTERN.test(normalizedValue)
+  ) {
     return true
   }
 
@@ -138,19 +137,13 @@ export default createESLintRule<Options, MessageIds>({
         const rawValue = node.value.value
         const normalizedValue = normalize(rawValue)
 
-        if (!normalizedValue || normalizedValue === 'currentcolor') {
-          return
-        }
-
-        if (ignoredValues.has(normalizedValue)) {
-          return
-        }
-
-        if (allowedColors.has(normalizedValue)) {
-          return
-        }
-
-        if (!isHardcodedColor(normalizedValue)) {
+        if (
+          !normalizedValue
+          || normalizedValue === 'currentcolor'
+          || ignoredValues.has(normalizedValue)
+          || allowedColors.has(normalizedValue)
+          || !isHardcodedColor(normalizedValue)
+        ) {
           return
         }
 
