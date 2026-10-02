@@ -53,11 +53,11 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Attribute(node) {
-        if (!node.value || node.key.value !== 'role') {
-          return
-        }
-
-        if (!discouragedRoles.has(node.value.value)) {
+        if (
+          !node.value
+          || node.key.value !== 'role'
+          || !discouragedRoles.has(node.value.value)
+        ) {
           return
         }
 
