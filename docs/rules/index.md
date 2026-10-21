@@ -39,4 +39,5 @@ sidebarDepth: 0
 | [no-unknown-attributes](/rules/no-unknown-attributes) | Disallow unknown SVG attributes |  | 🔒 |  |  |  | 💡 |
 | [no-invalid-path-data](/rules/no-invalid-path-data) | Disallow invalid SVG path data | ✅ | 🔒 |  |  |  |  |
 | [prefer-href](/rules/prefer-href) | Prefer href over XLink href |  |  |  |  | ✅ |  |
+| [require-xmlns](/rules/require-xmlns) | Require SVG namespace on standalone roots |  |  |  |  |  |  |
 | [prefer-current-color](/rules/prefer-current-color)       | Prefer currentColor over hardcoded colors |     |     |     |     |     |     |

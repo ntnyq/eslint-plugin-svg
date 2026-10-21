@@ -63,6 +63,8 @@ export interface RuleContext<
   TMessageIds extends string,
   TOptions extends readonly unknown[] = [],
 > {
+  /** filename exposed by ESLint, including processor virtual filenames */
+  readonly filename: string
   /** rule id */
   id: string
   /** normalized options */

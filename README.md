@@ -80,6 +80,7 @@ export default defineConfig([
 | [no-unknown-attributes](https://eslint-plugin-svg.ntnyq.com/rules/no-unknown-attributes) | Disallow unknown SVG attributes |  | ✅ |  |  |  | 💡 |
 | [no-invalid-path-data](https://eslint-plugin-svg.ntnyq.com/rules/no-invalid-path-data) | Disallow invalid SVG path data | ✅ | ✅ |  |  |  |  |
 | [prefer-href](https://eslint-plugin-svg.ntnyq.com/rules/prefer-href) | Prefer href over XLink href |  |  |  |  | ✅ |  |
+| [require-xmlns](https://eslint-plugin-svg.ntnyq.com/rules/require-xmlns) | Require SVG namespace on standalone roots |  |  |  |  |  |  |
 | [prefer-current-color](https://eslint-plugin-svg.ntnyq.com/rules/prefer-current-color)       | Prefer currentColor over hardcoded colors |     |     |     |     |     |     |
 
 ## License

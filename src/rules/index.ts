@@ -24,6 +24,7 @@ import preferCurrentColor from './prefer-current-color'
 import preferHref from './prefer-href'
 import requireAccessibleName from './require-accessible-name'
 import requireViewbox from './require-viewbox'
+import requireXmlns from './require-xmlns'
 
 // @keep-sorted
 export const rules = {
@@ -53,4 +54,5 @@ export const rules = {
   'prefer-href': preferHref,
   'require-accessible-name': requireAccessibleName,
   'require-viewbox': requireViewbox,
+  'require-xmlns': requireXmlns,
 }

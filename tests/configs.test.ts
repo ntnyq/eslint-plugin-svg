@@ -3,6 +3,11 @@ import { describe, expect, it } from 'vitest'
 import plugin from '../src'
 
 describe('presets', () => {
+  it('keeps standalone namespaces opt-in', () => {
+    for (const config of Object.values(plugin.configs)) {
+      expect(config[0]?.rules?.['svg/require-xmlns']).toBeUndefined()
+    }
+  })
   it('keeps href migration opt-in', () => {
     for (const config of Object.values(plugin.configs)) {
       expect(config[0]?.rules?.['svg/prefer-href']).toBeUndefined()
