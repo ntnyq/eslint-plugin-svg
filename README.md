@@ -79,6 +79,7 @@ export default defineConfig([
 | [no-invalid-reference-targets](https://eslint-plugin-svg.ntnyq.com/rules/no-invalid-reference-targets) | Disallow invalid reference target types | ✅ | ✅ |  |  |  |  |
 | [no-unknown-attributes](https://eslint-plugin-svg.ntnyq.com/rules/no-unknown-attributes) | Disallow unknown SVG attributes |  | ✅ |  |  |  | 💡 |
 | [no-invalid-path-data](https://eslint-plugin-svg.ntnyq.com/rules/no-invalid-path-data) | Disallow invalid SVG path data | ✅ | ✅ |  |  |  |  |
+| [prefer-href](https://eslint-plugin-svg.ntnyq.com/rules/prefer-href) | Prefer href over XLink href |  |  |  |  | ✅ |  |
 | [prefer-current-color](https://eslint-plugin-svg.ntnyq.com/rules/prefer-current-color)       | Prefer currentColor over hardcoded colors |     |     |     |     |     |     |
 
 ## License

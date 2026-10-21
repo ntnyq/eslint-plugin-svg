@@ -21,6 +21,7 @@ import noUnknownElements from './no-unknown-elements'
 import noUnresolvedReferences from './no-unresolved-references'
 import noUnsafeHref from './no-unsafe-href'
 import preferCurrentColor from './prefer-current-color'
+import preferHref from './prefer-href'
 import requireAccessibleName from './require-accessible-name'
 import requireViewbox from './require-viewbox'
 
@@ -49,6 +50,7 @@ export const rules = {
   'no-unresolved-references': noUnresolvedReferences,
   'no-unsafe-href': noUnsafeHref,
   'prefer-current-color': preferCurrentColor,
+  'prefer-href': preferHref,
   'require-accessible-name': requireAccessibleName,
   'require-viewbox': requireViewbox,
 }

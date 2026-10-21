@@ -3,6 +3,11 @@ import { describe, expect, it } from 'vitest'
 import plugin from '../src'
 
 describe('presets', () => {
+  it('keeps href migration opt-in', () => {
+    for (const config of Object.values(plugin.configs)) {
+      expect(config[0]?.rules?.['svg/prefer-href']).toBeUndefined()
+    }
+  })
   it('checks path syntax in recommended and strict', () => {
     for (const config of [plugin.configs.recommended, plugin.configs.strict]) {
       const messages = new Linter().verify(
