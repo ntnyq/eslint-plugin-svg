@@ -12,6 +12,7 @@ import noEmptyText from './no-empty-text'
 import noEmptyTitle from './no-empty-title'
 import noEventHandlers from './no-event-handlers'
 import noInlineStyles from './no-inline-styles'
+import noInvalidPathData from './no-invalid-path-data'
 import noInvalidReferenceTargets from './no-invalid-reference-targets'
 import noInvalidRole from './no-invalid-role'
 import noScriptTags from './no-script-tags'
@@ -39,6 +40,7 @@ export const rules = {
   'no-empty-title': noEmptyTitle,
   'no-event-handlers': noEventHandlers,
   'no-inline-styles': noInlineStyles,
+  'no-invalid-path-data': noInvalidPathData,
   'no-invalid-reference-targets': noInvalidReferenceTargets,
   'no-invalid-role': noInvalidRole,
   'no-script-tags': noScriptTags,

@@ -3,6 +3,18 @@ import { describe, expect, it } from 'vitest'
 import plugin from '../src'
 
 describe('presets', () => {
+  it('checks path syntax in recommended and strict', () => {
+    for (const config of [plugin.configs.recommended, plugin.configs.strict]) {
+      const messages = new Linter().verify(
+        '<svg viewBox="0 0 10 10"><path d="M0 0L10"/></svg>',
+        config,
+        { filename: 'test.svg' },
+      )
+      expect(messages.map(message => message.ruleId)).toEqual([
+        'svg/no-invalid-path-data',
+      ])
+    }
+  })
   it('checks unknown attributes only in strict', () => {
     expect(plugin.configs.strict[0]?.rules?.['svg/no-unknown-attributes']).toBe(
       'error',
