@@ -3,6 +3,18 @@ import { describe, expect, it } from 'vitest'
 import plugin from '../src'
 
 describe('presets', () => {
+  it('checks local references in recommended and strict', () => {
+    for (const config of [plugin.configs.recommended, plugin.configs.strict]) {
+      const messages = new Linter().verify(
+        '<svg viewBox="0 0 10 10"><use href="#missing"/></svg>',
+        config,
+        { filename: 'test.svg' },
+      )
+      expect(messages.map(message => message.ruleId)).toEqual([
+        'svg/no-unresolved-references',
+      ])
+    }
+  })
   it('reports empty groups only once in strict', () => {
     const messages = new Linter().verify(
       '<svg viewBox="0 0 10 10"><g/></svg>',

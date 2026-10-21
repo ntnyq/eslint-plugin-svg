@@ -34,4 +34,5 @@ sidebarDepth: 0
 | [no-unsafe-href](/rules/no-unsafe-href)                   | Disallow unsafe href and xlink:href URLs  |     |     | 🛡️ |     |     |     |
 | [require-accessible-name](/rules/require-accessible-name) | Require an accessible name for key SVGs   |     |     |     | ♿  |     |     |
 | [no-unknown-elements](/rules/no-unknown-elements)         | Disallow non-standard SVG elements        | ✅  | 🔒  |     |     |     |     |
+| [no-unresolved-references](/rules/no-unresolved-references) | Disallow unresolved local references | ✅ | 🔒 |  |  |  |  |
 | [prefer-current-color](/rules/prefer-current-color)       | Prefer currentColor over hardcoded colors |     |     |     |     |     |     |

@@ -15,6 +15,7 @@ import noInlineStyles from './no-inline-styles'
 import noInvalidRole from './no-invalid-role'
 import noScriptTags from './no-script-tags'
 import noUnknownElements from './no-unknown-elements'
+import noUnresolvedReferences from './no-unresolved-references'
 import noUnsafeHref from './no-unsafe-href'
 import preferCurrentColor from './prefer-current-color'
 import requireAccessibleName from './require-accessible-name'
@@ -39,6 +40,7 @@ export const rules = {
   'no-invalid-role': noInvalidRole,
   'no-script-tags': noScriptTags,
   'no-unknown-elements': noUnknownElements,
+  'no-unresolved-references': noUnresolvedReferences,
   'no-unsafe-href': noUnsafeHref,
   'prefer-current-color': preferCurrentColor,
   'require-accessible-name': requireAccessibleName,
