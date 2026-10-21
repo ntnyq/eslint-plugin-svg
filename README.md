@@ -76,6 +76,7 @@ export default defineConfig([
 | [require-accessible-name](https://eslint-plugin-svg.ntnyq.com/rules/require-accessible-name) | Require an accessible name for key SVGs   |     |     |     | ✅  |     |     |
 | [no-unknown-elements](https://eslint-plugin-svg.ntnyq.com/rules/no-unknown-elements)         | Disallow non-standard SVG elements        | ✅  | ✅  |     |     |     |     |
 | [no-unresolved-references](https://eslint-plugin-svg.ntnyq.com/rules/no-unresolved-references) | Disallow unresolved local references | ✅ | ✅ |  |  |  |  |
+| [no-invalid-reference-targets](https://eslint-plugin-svg.ntnyq.com/rules/no-invalid-reference-targets) | Disallow invalid reference target types | ✅ | ✅ |  |  |  |  |
 | [prefer-current-color](https://eslint-plugin-svg.ntnyq.com/rules/prefer-current-color)       | Prefer currentColor over hardcoded colors |     |     |     |     |     |     |
 
 ## License

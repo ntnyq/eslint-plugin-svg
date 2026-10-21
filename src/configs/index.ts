@@ -32,6 +32,7 @@ function createConfig(
  */
 export const recommended: Linter.Config<Linter.RulesRecord>[] = [
   createConfig('svg/recommended', {
+    'svg/no-invalid-reference-targets': 'error',
     'svg/no-unresolved-references': 'error',
     'svg/no-deprecated': 'error',
     'svg/no-doctype': 'error',
@@ -51,6 +52,7 @@ export const recommended: Linter.Config<Linter.RulesRecord>[] = [
  */
 export const strict: Linter.Config<Linter.RulesRecord>[] = [
   createConfig('svg/strict', {
+    'svg/no-invalid-reference-targets': 'error',
     'svg/no-unresolved-references': 'error',
     'svg/no-deprecated': 'error',
     'svg/no-doctype': 'error',
