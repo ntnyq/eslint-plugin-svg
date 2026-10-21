@@ -52,6 +52,7 @@ export const recommended: Linter.Config<Linter.RulesRecord>[] = [
  */
 export const strict: Linter.Config<Linter.RulesRecord>[] = [
   createConfig('svg/strict', {
+    'svg/no-unknown-attributes': 'error',
     'svg/no-invalid-reference-targets': 'error',
     'svg/no-unresolved-references': 'error',
     'svg/no-deprecated': 'error',

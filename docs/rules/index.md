@@ -36,4 +36,5 @@ sidebarDepth: 0
 | [no-unknown-elements](/rules/no-unknown-elements)         | Disallow non-standard SVG elements        | ✅  | 🔒  |     |     |     |     |
 | [no-unresolved-references](/rules/no-unresolved-references) | Disallow unresolved local references | ✅ | 🔒 |  |  |  |  |
 | [no-invalid-reference-targets](/rules/no-invalid-reference-targets) | Disallow invalid reference target types | ✅ | 🔒 |  |  |  |  |
+| [no-unknown-attributes](/rules/no-unknown-attributes) | Disallow unknown SVG attributes |  | 🔒 |  |  |  | 💡 |
 | [prefer-current-color](/rules/prefer-current-color)       | Prefer currentColor over hardcoded colors |     |     |     |     |     |     |

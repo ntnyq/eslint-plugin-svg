@@ -3,6 +3,14 @@ import { describe, expect, it } from 'vitest'
 import plugin from '../src'
 
 describe('presets', () => {
+  it('checks unknown attributes only in strict', () => {
+    expect(plugin.configs.strict[0]?.rules?.['svg/no-unknown-attributes']).toBe(
+      'error',
+    )
+    expect(
+      plugin.configs.recommended[0]?.rules?.['svg/no-unknown-attributes'],
+    ).toBeUndefined()
+  })
   it('checks reference target types without duplicate missing-ID reports', () => {
     for (const config of [plugin.configs.recommended, plugin.configs.strict]) {
       const messages = new Linter().verify(

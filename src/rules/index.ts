@@ -15,6 +15,7 @@ import noInlineStyles from './no-inline-styles'
 import noInvalidReferenceTargets from './no-invalid-reference-targets'
 import noInvalidRole from './no-invalid-role'
 import noScriptTags from './no-script-tags'
+import noUnknownAttributes from './no-unknown-attributes'
 import noUnknownElements from './no-unknown-elements'
 import noUnresolvedReferences from './no-unresolved-references'
 import noUnsafeHref from './no-unsafe-href'
@@ -41,6 +42,7 @@ export const rules = {
   'no-invalid-reference-targets': noInvalidReferenceTargets,
   'no-invalid-role': noInvalidRole,
   'no-script-tags': noScriptTags,
+  'no-unknown-attributes': noUnknownAttributes,
   'no-unknown-elements': noUnknownElements,
   'no-unresolved-references': noUnresolvedReferences,
   'no-unsafe-href': noUnsafeHref,
