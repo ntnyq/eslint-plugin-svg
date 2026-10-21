@@ -38,7 +38,7 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     return {
       Attribute(node) {
-        if (!node.value || !isHrefAttribute(node)) {
+        if (!node.key || !node.value || !isHrefAttribute(node)) {
           return
         }
 

@@ -24,7 +24,7 @@ export default createESLintRule<Options, MessageIds>({
     return {
       Element(node) {
         const idAttribute = node.attributes?.find(
-          attr => attr.key.value === 'id',
+          attr => attr.key?.value === 'id',
         )
 
         if (!idAttribute || !idAttribute.value || !idAttribute.value.value) {

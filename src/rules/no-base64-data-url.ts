@@ -270,7 +270,7 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Attribute(node) {
-        if (!node.value) {
+        if (!node.key || !node.value) {
           return
         }
 

@@ -32,8 +32,8 @@ function isPresentational(node: AST.ElementNode): boolean {
     (role === 'none' || role === 'presentation')
     && !node.attributes.some(
       attribute =>
-        attribute.key.value === 'tabindex'
-        || attribute.key.value.startsWith('aria-'),
+        attribute.key?.value === 'tabindex'
+        || attribute.key?.value.startsWith('aria-'),
     )
     && getAttributeValue(node, 'focusable') !== 'true'
   )

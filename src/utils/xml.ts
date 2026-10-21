@@ -50,7 +50,7 @@ export function getParentElement(
 
 export function getAttributeValue(node: AST.ElementNode, name: string): string {
   return decodeXmlAttribute(
-    node.attributes.find(attribute => attribute.key.value === name)?.value
+    node.attributes.find(attribute => attribute.key?.value === name)?.value
       ?.value ?? '',
   )
 }
@@ -64,7 +64,7 @@ export function resolveNamespace(
   let current: AST.ElementNode | undefined = node
   while (current) {
     const attribute = current.attributes.find(
-      attribute => attribute.key.value === name,
+      attribute => attribute.key?.value === name,
     )
     if (attribute) {
       return decodeXmlAttribute(attribute.value?.value ?? '')
@@ -89,6 +89,9 @@ export function getSvgElementName(node: AST.ElementNode): string | null {
 
 /** Recognize XLink aliases without treating other namespaced hrefs as XLink. */
 export function isHrefAttribute(node: AST.AttributeNode): boolean {
+  if (!node.key) {
+    return false
+  }
   if (node.key.value === 'href') {
     return true
   }

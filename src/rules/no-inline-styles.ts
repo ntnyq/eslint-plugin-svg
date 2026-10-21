@@ -21,7 +21,7 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     return {
       Attribute(node) {
-        if (node.key.value !== 'style') {
+        if (!node.key || node.key.value !== 'style') {
           return
         }
 

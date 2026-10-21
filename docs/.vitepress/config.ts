@@ -1,8 +1,10 @@
+import { dirname } from 'node:path'
 import { transformerRenderWhitespace } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import pluginSVG from 'eslint-plugin-svg'
 import MarkdownItContainer from 'markdown-it-container'
 import { createTwoslasher } from 'twoslash-eslint'
+import ts from 'typescript'
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { head } from './config/head'
@@ -56,6 +58,10 @@ export default defineConfig({
       }),
       transformerTwoslash({
         explicitTrigger: /\btwoslash\b/,
+        twoslashOptions: {
+          // The TS 6 compatibility wrapper re-exports the API but not lib files.
+          tsLibDirectory: dirname(ts.getDefaultLibFilePath({})),
+        },
       }),
       transformerTwoslash({
         errorRendering: 'hover',

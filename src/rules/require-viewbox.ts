@@ -94,7 +94,7 @@ export default createESLintRule<Options, MessageIds>({
         const attributes = toArray(node.attributes)
 
         const viewBoxAttr = attributes.find(
-          attr => attr.key.value === 'viewBox',
+          attr => attr.key?.value === 'viewBox',
         )
 
         if (!viewBoxAttr) {
@@ -109,7 +109,7 @@ export default createESLintRule<Options, MessageIds>({
 
         if (!isNonEmptyString(value.trim())) {
           context.report({
-            node: viewBoxAttr.value ?? viewBoxAttr.key,
+            node: viewBoxAttr.value ?? viewBoxAttr.key ?? viewBoxAttr,
             messageId: 'missing',
           })
           return
@@ -117,7 +117,7 @@ export default createESLintRule<Options, MessageIds>({
 
         if (options.validateFormat && !isValidViewBoxValue(value)) {
           context.report({
-            node: viewBoxAttr.value ?? viewBoxAttr.key,
+            node: viewBoxAttr.value ?? viewBoxAttr.key ?? viewBoxAttr,
             messageId: 'invalid',
           })
         }
