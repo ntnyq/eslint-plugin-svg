@@ -8,6 +8,18 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'cdata-desc.svg',
+      code: '<svg><desc><![CDATA[Logo]]></desc></svg>',
+    },
+    {
+      filename: 'literal-cdata.svg',
+      code: '<svg><desc><![CDATA[&#32;]]></desc></svg>',
+    },
+    {
+      filename: 'decode-once.svg',
+      code: '<svg><desc>&amp;#32;</desc></svg>',
+    },
+    {
       filename: 'namespaces.svg',
       code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:desc>Logo</s:desc></s:svg>',
     },
@@ -31,6 +43,15 @@ run<Options>({
     },
   ],
   invalid: [
+    ...[
+      '<svg><desc>&#32;&#9;</desc></svg>',
+      '<svg><desc><tspan>&#x20;&#10;</tspan></desc></svg>',
+      '<svg><desc><![CDATA[   ]]></desc></svg>',
+    ].map(code => ({
+      filename: 'empty-content.svg',
+      code,
+      errors: ['invalid'],
+    })),
     {
       filename: 'namespaces.svg',
       code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:desc/></s:svg>',

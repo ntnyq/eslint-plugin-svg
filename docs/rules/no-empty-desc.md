@@ -16,6 +16,8 @@ since: v0.0.1
 
 This rule reports when elememt desc is empty.
 
+XML character references are decoded before checking for whitespace-only content. CDATA sections count as literal text, so references written inside CDATA are not decoded.
+
 ## :wrench: Options
 
 Nothing.

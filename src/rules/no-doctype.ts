@@ -25,7 +25,16 @@ export default createESLintRule<Options, MessageIds>({
         context.report({
           node,
           messageId: 'invalid',
-          fix: fixer => fixer.remove(node),
+          // Internal and external DTDs may declare entities or default attributes.
+          fix(fixer) {
+            if (
+              node.internalSubset !== undefined
+              || node.attributes.length !== 1
+            ) {
+              return null
+            }
+            return fixer.remove(node)
+          },
         })
       },
     }

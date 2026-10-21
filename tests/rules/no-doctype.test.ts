@@ -1,6 +1,7 @@
 import { expect } from 'vitest'
 import rule, { RULE_NAME } from '../../src/rules/no-doctype'
 import { $, run } from '../internal'
+import type { InvalidTestCase } from 'eslint-vitest-rule-tester'
 import type { Options } from '../../src/rules/no-doctype'
 
 run<Options>({
@@ -17,10 +18,26 @@ run<Options>({
     },
   ],
   invalid: [
+    ...[
+      '<!DOCTYPE svg [<!ENTITY name "Logo">]><svg><text>&name;</text></svg>',
+      '<!DOCTYPE svg [<!ATTLIST svg fill CDATA "red">]><svg/>',
+      '<!DOCTYPE svg []><svg/>',
+      '<!DOCTYPE svg SYSTEM "custom.dtd"><svg><text>&name;</text></svg>',
+      '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg/>',
+    ].map<InvalidTestCase<Options>>(code => ({
+      filename: 'preserve-dtd.svg',
+      code,
+      output: null,
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.messageId).toBe('invalid')
+        expect(errors[0]).not.toHaveProperty('fix')
+      },
+    })),
     {
       filename: 'doctype.svg',
       code: $`
-        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+        <!DOCTYPE svg>
         <svg>
           <text>foo</text>
         </svg>
@@ -38,12 +55,12 @@ run<Options>({
           [
             {
               "column": 1,
-              "endColumn": 99,
+              "endColumn": 15,
               "endLine": 1,
               "fix": {
                 "range": [
                   0,
-                  98,
+                  14,
                 ],
                 "text": "",
               },

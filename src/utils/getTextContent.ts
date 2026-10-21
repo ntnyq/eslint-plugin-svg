@@ -1,5 +1,7 @@
+import { decodeXmlReferences } from './xml'
+
 interface TextNode {
-  type: 'Text'
+  type: 'Text' | 'CDATA'
   value: string
 }
 
@@ -52,8 +54,10 @@ function collectText(
       continue
     }
 
-    if (child.type === 'Text' && 'value' in child) {
-      const value = options.ignoreWhitespace ? child.value.trim() : child.value
+    if ((child.type === 'Text' || child.type === 'CDATA') && 'value' in child) {
+      const text =
+        child.type === 'Text' ? decodeXmlReferences(child.value) : child.value
+      const value = options.ignoreWhitespace ? text.trim() : text
       if (value) {
         textSegments.push(value)
       }

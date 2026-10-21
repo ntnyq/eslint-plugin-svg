@@ -8,6 +8,10 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'decode-once.svg',
+      code: '<svg><g id="a"/><g id="&amp;#97;"/></svg>',
+    },
+    {
       name: 'unique-ids',
       description: 'allows SVG elements with unique id attributes',
       filename: 'unique-ids.svg',
@@ -43,6 +47,15 @@ run<Options>({
     },
   ],
   invalid: [
+    ...[
+      '<svg><g id="a"/><g id="&#97;"/></svg>',
+      '<svg><g id="&#x61;"/><g id="a"/></svg>',
+      '<svg><g id="a&amp;b"/><g id="a&#38;b"/></svg>',
+    ].map(code => ({
+      filename: 'encoded-duplicate.svg',
+      code,
+      errors: ['duplicate'],
+    })),
     {
       name: 'duplicate-ids',
       description: 'reports when two elements have the same id attribute',

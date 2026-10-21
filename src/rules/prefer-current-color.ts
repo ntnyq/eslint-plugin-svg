@@ -1,4 +1,4 @@
-import { createESLintRule, resolveOptions } from '../utils'
+import { createESLintRule, decodeXmlAttribute, resolveOptions } from '../utils'
 
 export const RULE_NAME = 'prefer-current-color'
 export type MessageIds = 'invalid'
@@ -142,7 +142,7 @@ export default createESLintRule<Options, MessageIds>({
         }
 
         const rawValue = node.value.value
-        const normalizedValue = normalize(rawValue)
+        const normalizedValue = normalize(decodeXmlAttribute(rawValue))
 
         if (
           !normalizedValue

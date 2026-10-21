@@ -7,6 +7,18 @@ run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
+    {
+      filename: 'embedded-xhtml.svg',
+      code: '<svg xmlns="http://www.w3.org/2000/svg"><foreignObject><div xmlns="http://www.w3.org/1999/xhtml" role="heading" aria-level="2">Heading</div></foreignObject></svg>',
+    },
+    {
+      filename: 'foreign-prefix.svg',
+      code: '<svg xmlns:h="http://www.w3.org/1999/xhtml"><foreignObject><h:div role="heading" aria-level="2">Heading</h:div></foreignObject></svg>',
+    },
+    {
+      filename: 'rebound-prefix.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:g xmlns:s="urn:metadata" role="table"/></s:svg>',
+    },
     { filename: 'regression.svg', code: '<svg role="img"/>' },
     { filename: 'regression.svg', code: '<svg role="unknown img table"/>' },
     { filename: 'regression.svg', code: '<svg role="note table"/>' },
@@ -35,6 +47,22 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      filename: 'svg-prefix.svg',
+      code: '<s:svg xmlns:s="http://www.w3.org/2000/svg" role="table"/>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.messageId).toBe('discouraged')
+      },
+    },
+    {
+      filename: 'nested-svg-namespace.svg',
+      code: '<svg><foreignObject><div xmlns="http://www.w3.org/1999/xhtml"><svg xmlns="http://www.w3.org/2000/svg" role="table"/></div></foreignObject></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.messageId).toBe('discouraged')
+      },
+    },
     {
       filename: 'regression.svg',
       code: '<svg role="unknown table img"/>',

@@ -1,4 +1,4 @@
-import { createESLintRule } from '../utils'
+import { createESLintRule, decodeXmlAttribute } from '../utils'
 
 export const RULE_NAME = 'no-duplicate-ids'
 export type MessageIds = 'duplicate'
@@ -31,7 +31,7 @@ export default createESLintRule<Options, MessageIds>({
           return
         }
 
-        const id = idAttribute.value.value
+        const id = decodeXmlAttribute(idAttribute.value.value)
 
         if (seenIds.has(id)) {
           context.report({

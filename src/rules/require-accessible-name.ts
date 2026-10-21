@@ -46,6 +46,9 @@ function getContentName(node: AST.ElementNode, includeHidden = false): string {
       if (child.type === 'Text') {
         return decodeXmlReferences(child.value)
       }
+      if (child.type === 'CDATA') {
+        return child.value
+      }
       if (child.type !== 'Element' || (!includeHidden && isHidden(child))) {
         return ''
       }

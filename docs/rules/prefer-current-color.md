@@ -18,6 +18,8 @@ This rule encourages icon-friendly SVG coloring by preferring `currentColor` ove
 
 By default, it checks `fill` and `stroke` values.
 
+XML character references are decoded before checking colors and comparing them with `ignoreValues` and `allowColors`. For example, `fill="&#35;fff"` is checked as `#fff`.
+
 CSS-wide keywords (`inherit`, `initial`, `unset`, `revert`, and `revert-layer`) are not hardcoded colors and are never reported by this rule.
 
 ## :wrench: Options

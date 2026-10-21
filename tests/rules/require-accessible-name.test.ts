@@ -6,6 +6,18 @@ run({
   name: RULE_NAME,
   rule,
   valid: [
+    {
+      filename: 'cdata-title.svg',
+      code: '<svg><title><![CDATA[Logo]]></title></svg>',
+    },
+    {
+      filename: 'literal-cdata.svg',
+      code: '<svg><title><![CDATA[&#32;]]></title></svg>',
+    },
+    {
+      filename: 'cdata-reference.svg',
+      code: '<svg aria-labelledby="label"><text id="label"><![CDATA[Logo]]></text></svg>',
+    },
     { filename: 'regression.svg', code: '<svg aria-hidden="true"/>' },
     { filename: 'regression.svg', code: '<svg role="presentation"/>' },
     { filename: 'regression.svg', code: '<svg role="none"/>' },
@@ -81,6 +93,14 @@ run({
     },
   ],
   invalid: [
+    {
+      filename: 'empty-cdata.svg',
+      code: '<svg><title><![CDATA[   ]]></title></svg>',
+      errors(errors) {
+        expect(errors).toHaveLength(1)
+        expect(errors[0]?.messageId).toBe('missing')
+      },
+    },
     {
       filename: 'regression.svg',
       code: '<svg aria-labelledby="missing"/>',

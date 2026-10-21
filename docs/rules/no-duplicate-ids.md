@@ -18,6 +18,8 @@ This rule reports an error when multiple elements within an SVG document have th
 
 IDs must be unique within a document to ensure proper element referencing and avoid unexpected behavior.
 
+XML attribute values are decoded before comparison, so `id="a"` and `id="&#97;"` are duplicates.
+
 ## :wrench: Options
 
 Nothing.

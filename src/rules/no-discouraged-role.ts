@@ -3,6 +3,8 @@ import {
   createESLintRule,
   decodeXmlAttribute,
   getEffectiveRole,
+  getParentElement,
+  getSvgElementName,
   resolveOptions,
 } from '../utils'
 
@@ -59,6 +61,11 @@ export default createESLintRule<Options, MessageIds>({
     return {
       Attribute(node) {
         if (!node.value || node.key.value !== 'role') {
+          return
+        }
+
+        const parent = getParentElement(node)
+        if (!parent || getSvgElementName(parent) === null) {
           return
         }
 

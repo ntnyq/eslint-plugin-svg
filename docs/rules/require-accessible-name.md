@@ -29,6 +29,8 @@ The rule resolves names from static markup:
 
 References may point forward in the document. The first recognized role token is used, so `role="unknown img"` also requires a name on a nested SVG. XML character references are decoded before checking text.
 
+CDATA sections contribute literal text to titles and referenced labels. Character references inside CDATA are not decoded.
+
 Valid `aria-labelledby` references take precedence over `aria-label` and `<title>`, even when the referenced content is empty. Missing references allow those alternatives to be checked. Chained `aria-labelledby` references are not followed, preventing cycles from creating a false name.
 
 This is a static markup check, not a complete browser accessibility-tree computation. It does not evaluate stylesheets, generated CSS content, or script-generated labels.

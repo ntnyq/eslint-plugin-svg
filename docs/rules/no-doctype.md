@@ -19,6 +19,8 @@ This rule reports when svg includes a DOCTYPE.
 
 It is also enabled in the `security` preset because the URL checks do not expand DTD-defined entities.
 
+Only simple declarations such as `<!DOCTYPE svg>` are automatically removed. Declarations with internal subsets or external identifiers require manual correction because they may define entities or default attributes that the SVG relies on.
+
 References:
 
 - [StackOverflow - XML declaration and DOCTYPE](https://stackoverflow.com/a/38172170/9533579)

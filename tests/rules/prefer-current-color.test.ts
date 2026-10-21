@@ -8,6 +8,24 @@ run<Options>({
   rule,
   valid: [
     {
+      filename: 'encoded-keywords.svg',
+      code: '<svg fill="current&#67;olor" stroke="n&#111;ne"/>',
+    },
+    {
+      filename: 'encoded-allowed-color.svg',
+      code: '<svg fill="&#35;fff"/>',
+      options: [{ allowColors: ['#fff'] }],
+    },
+    {
+      filename: 'encoded-ignored-color.svg',
+      code: '<svg stroke="r&#101;d"/>',
+      options: [{ ignoreValues: ['red'] }],
+    },
+    {
+      filename: 'decode-once.svg',
+      code: '<svg fill="&amp;#35;fff"/>',
+    },
+    {
       filename: 'regression.svg',
       code: '<svg fill="inherit" stroke="inherit"/>',
     },
@@ -71,6 +89,15 @@ run<Options>({
     },
   ],
   invalid: [
+    ...[
+      '<svg fill="&#35;fff"/>',
+      '<svg stroke="r&#101;d"/>',
+      '<svg fill="r&#103;b(1, 2, 3)"/>',
+    ].map(code => ({
+      filename: 'encoded-color.svg',
+      code,
+      errors: ['invalid'],
+    })),
     {
       filename: 'hex-color.svg',
       code: $`
