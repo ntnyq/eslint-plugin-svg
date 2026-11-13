@@ -1,6 +1,7 @@
 import {
   createESLintRule,
   decodeXmlAttribute,
+  getCssUrls,
   parseDataUrl,
   resolveOptions,
 } from '../utils'
@@ -62,86 +63,6 @@ const defaultOptions: Required<Options[0]> = {
  */
 function normalize(value: string): string {
   return value.trim().toLowerCase()
-}
-
-/**
- * Extract values from CSS-like url(...) fragments.
- */
-function extractUrlValues(value: string): string[] {
-  const candidates: string[] = []
-  const lowerValue = value.toLowerCase()
-  let index = 0
-
-  while (index < value.length) {
-    const openIndex = lowerValue.indexOf('url(', index)
-
-    if (openIndex === -1) {
-      break
-    }
-
-    let cursor = openIndex + 4
-
-    while (cursor < value.length && /\s/.test(value[cursor] ?? '')) {
-      cursor += 1
-    }
-
-    if (cursor >= value.length) {
-      break
-    }
-
-    let content = ''
-    const quote = value[cursor]
-
-    if (quote === '"' || quote === "'") {
-      cursor += 1
-
-      while (cursor < value.length) {
-        const char = value[cursor] ?? ''
-
-        if (char === '\\' && cursor + 1 < value.length) {
-          content += value[cursor + 1] ?? ''
-          cursor += 2
-          continue
-        }
-
-        if (char === quote) {
-          cursor += 1
-          break
-        }
-
-        content += char
-        cursor += 1
-      }
-
-      while (cursor < value.length && /\s/.test(value[cursor] ?? '')) {
-        cursor += 1
-      }
-
-      if (value[cursor] !== ')') {
-        index = openIndex + 4
-        continue
-      }
-    } else {
-      while (cursor < value.length && value[cursor] !== ')') {
-        content += value[cursor] ?? ''
-        cursor += 1
-      }
-
-      if (cursor >= value.length || value[cursor] !== ')') {
-        break
-      }
-    }
-
-    const normalizedContent = content.trim()
-
-    if (normalizedContent) {
-      candidates.push(normalizedContent)
-    }
-
-    index = cursor + 1
-  }
-
-  return candidates
 }
 
 /**
@@ -288,7 +209,9 @@ export default createESLintRule<Options, MessageIds>({
         const valuesToCheck = [value]
 
         if (checkUrlFunction) {
-          valuesToCheck.push(...extractUrlValues(value))
+          valuesToCheck.push(
+            ...getCssUrls(value, { includeNested: true, decodeEscapes: true }),
+          )
         }
 
         if (

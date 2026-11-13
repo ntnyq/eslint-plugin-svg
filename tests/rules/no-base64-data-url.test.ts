@@ -7,6 +7,14 @@ run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
+    '<svg><image href="data:image/png;base64;charset=utf-8,AAA="/></svg>',
+    '<svg><image href="data:image/png;base64;,AAA="/></svg>',
+    '<svg><image href="data:image/png;base64=1,AAA="/></svg>',
+    '<svg><image href="&#160;data:image/png;base64,AAA="/></svg>',
+    '<svg><image href="data:image/png#fragment;base64,AAA="/></svg>',
+    '<svg style="/* url(data:image/png;base64,AAA=) */ fill: red"/>',
+    '<svg style="--label: &quot;url(data:image/png;base64,AAA=)&quot;"/>',
+    '<svg fill="not-url(data:image/png;base64,AAA=)"/>',
     {
       filename: 'regression.svg',
       code: '<svg><image href="data&amp;#58;image/png;base64,AAA="/></svg>',
@@ -101,6 +109,17 @@ run<Options>({
     },
   ],
   invalid: [
+    ...[
+      '<svg><image href="data:image/png;charset=utf-8; BASE64 ,AAA="/></svg>',
+      '<svg style="fill: var(--paint, url(data:image/png;base64,AAA=))"/>',
+      '<svg style="/* ignored */ fill: url(data:image/png;base64,AAA=)"/>',
+      '<svg fill="url(\'da\\ta:image/png;base64,AAA=\')"/>',
+      '<svg fill="url(\'d\\61 ta:image/png;base64,AAA=\')"/>',
+      '<svg fill="u\\72l(data:image/png;base64,AAA=)"/>',
+    ].map(code => ({
+      code,
+      errors: [{ messageId: 'invalid' }],
+    })),
     {
       filename: 'regression.svg',
       code: '<svg><image href="data&#58;image/png;base64,AAA="/></svg>',

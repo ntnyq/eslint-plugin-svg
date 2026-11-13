@@ -18,6 +18,8 @@ This rule reports unsafe URL values in `href` and `xlink:href` attributes.
 
 XML character references are decoded before checking URLs, and URL tabs/newlines are normalized. For example, `java&#x73;cript:alert(1)` is reported too. Alternate prefixes bound to the XLink namespace are supported.
 
+Only leading and trailing ASCII C0 controls and spaces are trimmed, matching URL parsing. Unicode whitespace such as a non-breaking space remains part of a relative URL.
+
 The following URL forms are disallowed:
 
 - `javascript:` URLs

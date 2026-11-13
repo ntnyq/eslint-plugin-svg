@@ -18,7 +18,9 @@ This rule reports SVG attributes that contain disallowed `data:` URLs.
 
 By default, it only reports base64-encoded data URLs such as `data:image/png;base64,...`.
 
-XML character references are decoded before inspecting direct URLs and `url(...)` wrappers, so `data&#58;image/png;base64,...` is also reported. This rule does not implement a full CSS parser or expand DTD-defined entities; use the `security` preset to reject DOCTYPE declarations as well.
+The `base64` marker must be the last metadata item before the comma. URL fragments are excluded, and only ASCII URL whitespace is normalized. CSS comments, strings containing `url(...)` text, and other function names such as `not-url(...)` are not URL wrappers. Actual `url(...)` tokens inside nested functions such as `var()` fallbacks are checked.
+
+XML character references are decoded before inspecting direct URLs and `url(...)` wrappers, so `data&#58;image/png;base64,...` is also reported. CSS escapes in URL function names and bodies are decoded as well. This rule does not implement a full CSS parser or expand DTD-defined entities; use the `security` preset to reject DOCTYPE declarations as well.
 
 ## :wrench: Options
 

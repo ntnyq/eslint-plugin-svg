@@ -1,3 +1,5 @@
+import { getCssUrls } from './css'
+import { normalizeUrl } from './url'
 import {
   decodeXmlAttribute,
   getAttributeValue,
@@ -69,17 +71,7 @@ const fragmentDecoder = new TextDecoder('utf-8', { ignoreBOM: true })
  * Decode fragment-only URLs without treating SVG view specifications as IDs.
  */
 function getFragmentId(value: string): string | undefined {
-  value = value.replace(/[\t\n\r]/g, '')
-  let start = 0
-  let end = value.length
-  // URL parsing trims C0 controls and ASCII spaces, not Unicode whitespace.
-  while (start < end && value.codePointAt(start)! <= 0x20) {
-    start++
-  }
-  while (end > start && value.codePointAt(end - 1)! <= 0x20) {
-    end--
-  }
-  value = value.slice(start, end)
+  value = normalizeUrl(value)
   if (!value.startsWith('#') || value.length === 1) {
     return undefined
   }
@@ -95,53 +87,6 @@ function getFragmentId(value: string): string | undefined {
       ),
     )
   return /^(?:(?:svgView|xpointer)\(|(?:xywh|t)=)/.test(id) ? undefined : id
-}
-
-/**
- * Inspect top-level plain url() functions without entering CSS strings,
- * comments or conditional fallback functions such as var() and env().
- */
-function getCssUrls(value: string): string[] {
-  const urls: string[] = []
-  let depth = 0
-  let previousName = ''
-  let previousEnd = -1
-  // Consume URL bodies separately: comment markers inside an unquoted URL
-  // are literal characters, rather than CSS comments.
-  const urlPattern =
-    /[\t\n\f\r ]*(?:"((?:[^"\\\n\r\f]|\\[\s\S])*)"|'((?:[^'\\\n\r\f]|\\[\s\S])*)'|((?:[^\t\n\f\r "'()\\]|\\(?:[\da-f]{1,6}[\t\n\f\r ]?|[^\da-f]))+))[\t\n\f\r ]*\)/iy
-  const tokenPattern =
-    /\/\*[\s\S]*?(?:\*\/|$)|"(?:[^"\\]|\\[\s\S])*(?:"|$)|'(?:[^'\\]|\\[\s\S])*(?:'|$)|(?:\\(?:[\da-f]{1,6}[\t\n\f\r ]?|[^\da-f])|[-\w\u{80}-\u{10FFFF}])+|[()]/giu
-  let match: RegExpExecArray | null
-  while ((match = tokenPattern.exec(value))) {
-    const token = match[0]
-    if (token === '(') {
-      if (
-        depth === 0
-        && previousName.toLowerCase() === 'url'
-        && previousEnd === match.index
-      ) {
-        urlPattern.lastIndex = tokenPattern.lastIndex
-        const url = urlPattern.exec(value)
-        if (url) {
-          const target = url[1] ?? url[2] ?? url[3] ?? ''
-          if (!target.includes('\\')) {
-            urls.push(target)
-          }
-          tokenPattern.lastIndex = urlPattern.lastIndex
-          previousName = ''
-          previousEnd = -1
-          continue
-        }
-      }
-      depth++
-    } else if (token === ')' && depth > 0) {
-      depth--
-    }
-    previousName = token
-    previousEnd = tokenPattern.lastIndex
-  }
-  return urls
 }
 
 /**

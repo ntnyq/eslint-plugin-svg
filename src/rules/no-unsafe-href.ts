@@ -1,4 +1,9 @@
-import { createESLintRule, decodeXmlAttribute, isHrefAttribute } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlAttribute,
+  isHrefAttribute,
+  normalizeUrl,
+} from '../utils'
 
 export const RULE_NAME = 'no-unsafe-href'
 export type MessageIds = 'invalid'
@@ -8,10 +13,7 @@ export type Options = []
  * Normalize attribute names and URL values for safe comparisons.
  */
 function normalize(value: string): string {
-  return decodeXmlAttribute(value)
-    .replace(/[\t\n\r]/g, '')
-    .trim()
-    .toLowerCase()
+  return normalizeUrl(decodeXmlAttribute(value)).toLowerCase()
 }
 
 /**

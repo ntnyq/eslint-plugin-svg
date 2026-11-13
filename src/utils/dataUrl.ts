@@ -1,3 +1,5 @@
+import { normalizeUrl } from './url'
+
 export interface DataUrlInfo {
   /**
    * whether the value is a valid data URL with header and payload separator
@@ -14,17 +16,11 @@ export interface DataUrlInfo {
 }
 
 /**
- * Normalize text for case-insensitive URL checks.
- */
-function normalize(value: string): string {
-  return value.trim().toLowerCase()
-}
-
-/**
  * Parse a potential data URL and return normalized metadata.
  */
 export function parseDataUrl(value: string): DataUrlInfo {
-  const rawValue = value.replace(/[\t\n\r]/g, '').trim()
+  // A fragment is not part of the data URL's metadata or payload.
+  const rawValue = normalizeUrl(value).split('#', 1)[0]!
   const lowerValue = rawValue.toLowerCase()
 
   if (!lowerValue.startsWith('data:')) {
@@ -45,12 +41,11 @@ export function parseDataUrl(value: string): DataUrlInfo {
     }
   }
 
-  const header = rawValue.slice(5, commaIndex)
-  const parts = header.split(';').map(part => normalize(part))
-  const firstPart = parts[0] ?? ''
+  const header = rawValue.slice(5, commaIndex).replace(/^ +| +$/g, '')
+  const firstPart = header.split(';', 1)[0]!.replace(/ +$/g, '').toLowerCase()
   const mimeType = firstPart.includes('/') ? firstPart : ''
 
-  const isBase64 = parts.includes('base64')
+  const isBase64 = /; *base64$/i.test(header)
 
   return {
     isDataUrl: true,

@@ -6,6 +6,8 @@ run({
   name: RULE_NAME,
   rule,
   valid: [
+    '<svg><a href="&#160;javascript:alert(1)"/></svg>',
+    '<svg><image href="&#xFEFF;https://example.com/icon.svg"/></svg>',
     {
       filename: 'rebound-xlink.svg',
       code: '<svg xmlns:xlink="urn:metadata"><g xlink:href="javascript:alert(1)"/></svg>',
