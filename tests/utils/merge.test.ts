@@ -2,6 +2,31 @@ import { describe, expect, it } from 'vitest'
 import { deepMerge, isObjectNotArray } from '../../src/utils/merge'
 
 describe('deepMerge', () => {
+  it('preserves prototype-like keys as own data properties', () => {
+    const input: Record<string, unknown> = JSON.parse(
+      '{"__proto__":{"polluted":true},"constructor":{"custom":true}}',
+    )
+    const merged = deepMerge({}, input)
+    expect(Object.getPrototypeOf(merged)).toBe(Object.prototype)
+    expect(Object.hasOwn(merged, '__proto__')).toBe(true)
+    expect(Object.getOwnPropertyDescriptor(merged, '__proto__')?.value).toEqual(
+      {
+        polluted: true,
+      },
+    )
+    expect(merged.constructor).toEqual({ custom: true })
+    expect(merged.polluted).toBeUndefined()
+  })
+
+  it('does not merge inherited properties into own properties', () => {
+    const first: Record<string, unknown> = Object.create({
+      nested: { inherited: true },
+    })
+    expect(deepMerge(first, { nested: { own: true } })).toEqual({
+      nested: { own: true },
+    })
+  })
+
   const OBJECT_DEEP = {
     a: 1,
     b: {
