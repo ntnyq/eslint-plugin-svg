@@ -7,6 +7,21 @@ run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
+    '<svg><g><![CDATA[content]]></g></svg>',
+    '<svg><g><![CDATA[&#32;]]></g></svg>',
+    '<svg><g>&amp;#32;</g></svg>',
+    {
+      code: '<svg><g>&#32;<![CDATA[ ]]></g></svg>',
+      options: [{ ignoreWhitespace: false }],
+    },
+    {
+      code: '<svg><g><!-- content --></g></svg>',
+      options: [{ ignoreComments: false }],
+    },
+    {
+      code: '<svg><svg/></svg>',
+      options: [{ ignores: ['svg'] }],
+    },
     {
       filename: 'namespaces.svg',
       code: '<svg><g xmlns="urn:metadata"/></svg>',
@@ -42,6 +57,16 @@ run<Options>({
     },
   ],
   invalid: [
+    ...[
+      '<svg><g>&#32;&#9;&#10;</g></svg>',
+      '<svg><g><![CDATA[   ]]></g></svg>',
+      '<svg><g><![CDATA[]]></g></svg>',
+      '<svg><svg/></svg>',
+      '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:svg/></s:svg>',
+    ].map(code => ({
+      code,
+      errors: [{ messageId: 'invalid' }],
+    })),
     {
       filename: 'namespaces.svg',
       code: '<s:svg xmlns:s="http://www.w3.org/2000/svg"><s:g/></s:svg>',

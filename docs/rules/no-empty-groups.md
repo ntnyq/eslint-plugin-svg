@@ -17,7 +17,7 @@ since: v0.0.5
 
 This rule reports when a `g` element is empty.
 
-Comments and whitespace-only text nodes are ignored when determining emptiness.
+Comments and whitespace-only text or CDATA sections are ignored when determining emptiness. XML character references in text are decoded once; CDATA remains literal.
 
 ## :wrench: Options
 

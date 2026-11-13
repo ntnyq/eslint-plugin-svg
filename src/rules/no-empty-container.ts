@@ -1,6 +1,12 @@
 import { isNonEmptyString } from '@ntnyq/utils'
 import { CONTAINER_ELEMENTS } from '../constants'
-import { createESLintRule, getSvgElementName, resolveOptions } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlReferences,
+  getParentElement,
+  getSvgElementName,
+  resolveOptions,
+} from '../utils'
 
 export const RULE_NAME = 'no-empty-container'
 export type MessageIds = 'invalid'
@@ -79,14 +85,10 @@ export default createESLintRule<Options, MessageIds>({
       checkRootSvg = false,
     } = resolveOptions(context.options, defaultOptions)
 
-    const builtInContainerElements = checkRootSvg
-      ? CONTAINER_ELEMENTS
-      : CONTAINER_ELEMENTS.filter(v => v !== 'svg')
-
     const containerElements = new Set(
       [
         // built-in container elements
-        ...builtInContainerElements,
+        ...CONTAINER_ELEMENTS,
         // user defined container elements
         ...elements,
       ].filter(v => !ignores.includes(v)),
@@ -94,7 +96,11 @@ export default createESLintRule<Options, MessageIds>({
 
     return {
       Element(node) {
-        if (!containerElements.has(getSvgElementName(node) ?? '')) {
+        const name = getSvgElementName(node)
+        if (
+          !containerElements.has(name ?? '')
+          || (name === 'svg' && !checkRootSvg && !getParentElement(node))
+        ) {
           return
         }
 
@@ -103,8 +109,13 @@ export default createESLintRule<Options, MessageIds>({
           .filter(
             n =>
               !ignoreWhitespace
-              || n.type !== 'Text'
-              || isNonEmptyString(n.value.trim()),
+              || (n.type !== 'Text' && n.type !== 'CDATA')
+              || isNonEmptyString(
+                (n.type === 'Text'
+                  ? decodeXmlReferences(n.value)
+                  : n.value
+                ).trim(),
+              ),
           )
 
         if (children.length === 0) {

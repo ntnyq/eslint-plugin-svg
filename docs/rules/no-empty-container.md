@@ -15,7 +15,7 @@ since: v0.0.1
 
 ## :book: Rule Details
 
-This rule reports when container elememt is empty.
+This rule reports when a container element is empty. Comments and whitespace-only text or CDATA sections are ignored by default. XML character references in text are decoded once; CDATA remains literal.
 
 Built-in container elements:
 
@@ -29,7 +29,7 @@ Built-in container elements:
 - `switch`
 - `symbol`
 
-By default, the root `svg` element is not checked. Use `checkRootSvg: true` to include it.
+Nested `svg` elements are also checked. By default, the root `svg` element is not checked. Use `checkRootSvg: true` to include it, or `ignores: ['svg']` to exclude all `svg` elements.
 
 See [MDN - SVG container elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Element#container_elements) for detail.
 
