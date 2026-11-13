@@ -3,13 +3,13 @@ import { transformerRenderWhitespace } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import pluginSVG from 'eslint-plugin-svg'
 import MarkdownItContainer from 'markdown-it-container'
-import { createTwoslasher } from 'twoslash-eslint'
 import ts from 'typescript'
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
-import { head } from './config/head'
-import { getThemeConfig } from './config/theme'
-import { appDescription, appTitle } from './meta'
+import { createExampleTransformers } from './config/examples.ts'
+import { head } from './config/head.ts'
+import { getThemeConfig } from './config/theme.ts'
+import { appDescription, appTitle } from './meta.ts'
 
 export default defineConfig({
   title: appTitle,
@@ -25,13 +25,25 @@ export default defineConfig({
 
       type MarkdownIt = Parameters<typeof MarkdownItContainer>[0]
 
+      md.core.ruler.after('block', 'svg-rule-examples', state => {
+        const title = state.env.frontmatter?.title
+        const ruleName =
+          typeof title === 'string' && title.startsWith('svg/')
+            ? title.slice(4)
+            : undefined
+        if (!ruleName) {
+          return
+        }
+        for (const token of state.tokens) {
+          if (token.type === 'fence' && /^xml\b/.test(token.info)) {
+            token.info += ` eslint-rule=${ruleName}`
+          }
+        }
+      })
+
       MarkdownItContainer(md as unknown as MarkdownIt, 'correct', {
         render(tokens: any[], idx: number) {
           if (tokens[idx].nesting === 1) {
-            const next = tokens[idx + 1]
-            if (next.type === 'fence') {
-              next.info = [next.info, 'eslint-check'].filter(Boolean).join(' ')
-            }
             return '<CustomWrapper type="correct">'
           }
           return '</CustomWrapper>\n'
@@ -63,20 +75,7 @@ export default defineConfig({
           tsLibDirectory: dirname(ts.getDefaultLibFilePath({})),
         },
       }),
-      transformerTwoslash({
-        errorRendering: 'hover',
-        explicitTrigger: /\beslint-check\b/,
-        twoslasher: createTwoslasher({
-          eslintCodePreprocess(code) {
-            // Remove trailing newline and presentational `⏎` characters
-            return code.replace(/⏎(?=\n)/gu, '').replace(/⏎$/gu, '\n')
-          },
-          eslintConfig: [
-            // other configs
-            ...pluginSVG.configs.recommended,
-          ],
-        }),
-      }),
+      ...createExampleTransformers(pluginSVG),
     ],
   },
 })

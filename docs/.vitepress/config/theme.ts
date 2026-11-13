@@ -1,7 +1,7 @@
 import { globSync } from 'tinyglobby'
 import pkg from '../../../package.json' with { type: 'json' }
-import { resolve } from '../../../scripts/utils'
-import { packageName } from '../meta'
+import { resolve } from '../../../scripts/utils.ts'
+import { packageName } from '../meta.ts'
 import type { DefaultTheme } from 'vitepress'
 
 const { version } = pkg

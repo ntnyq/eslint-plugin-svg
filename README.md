@@ -41,7 +41,7 @@ export default defineConfig([
 ])
 ```
 
-:apple: For advanced usaged, please check [Advanced Usage](https://eslint-plugin-svg.ntnyq.com/guide/#advanced-usage)
+:apple: For advanced usage, please check [Advanced Usage](https://eslint-plugin-svg.ntnyq.com/guide/#advanced-usage).
 
 ## Rules
 

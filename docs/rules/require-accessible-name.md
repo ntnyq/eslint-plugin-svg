@@ -53,7 +53,7 @@ This is a static markup check, not a complete browser accessibility-tree computa
 ```
 
 ```xml
-<svg>
+<svg aria-label="Icon set">
   <g id="icon-name">Download</g>
   <svg role="img" aria-labelledby="icon-name">
     <path d="M0 0h10v10z" />

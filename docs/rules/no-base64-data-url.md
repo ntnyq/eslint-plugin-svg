@@ -97,7 +97,7 @@ XML character references are decoded before inspecting direct URLs and `url(...)
 }
 ```
 
-```xml eslint-check
+```xml eslint-check eslint-example=any-data-url
 <svg>
   <image href="data:image/svg+xml,%3Csvg%20/%3E" />
 </svg>

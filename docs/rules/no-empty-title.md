@@ -14,7 +14,7 @@ since: v0.0.1
 
 ## :book: Rule Details
 
-This rule reports when elememt title is empty.
+This rule reports when a `title` element is empty.
 
 XML character references are decoded before checking for whitespace-only content. CDATA sections count as literal text, so references written inside CDATA are not decoded.
 

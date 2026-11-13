@@ -82,7 +82,7 @@ When options `roles: ['list']` is set:
 
 ::: incorrect
 
-```xml eslint-check
+```xml eslint-check eslint-example=list-only
 <svg>
   <circle role="img" r="10" />
 </svg>
