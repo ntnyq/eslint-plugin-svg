@@ -7,6 +7,11 @@ run<Options>({
   name: RULE_NAME,
   rule,
   valid: [
+    '<svg><foreignObject><div xmlns="http://www.w3.org/1999/xhtml" fill="red"/></foreignObject></svg>',
+    '<svg FILL="red"/>',
+    '<svg fill="rgb(var(--channels))"/>',
+    '<svg fill="rgb(from currentColor r g b)"/>',
+    '<svg stroke="hsl(from var(--color) h s l)"/>',
     {
       filename: 'encoded-keywords.svg',
       code: '<svg fill="current&#67;olor" stroke="n&#111;ne"/>',
@@ -89,6 +94,10 @@ run<Options>({
     },
   ],
   invalid: [
+    {
+      code: '<svg fill="rgb(from red r g b / .5)"/>',
+      errors: ['invalid'],
+    },
     ...[
       '<svg fill="&#35;fff"/>',
       '<svg stroke="r&#101;d"/>',

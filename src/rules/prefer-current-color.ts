@@ -1,4 +1,10 @@
-import { createESLintRule, decodeXmlAttribute, resolveOptions } from '../utils'
+import {
+  createESLintRule,
+  decodeXmlAttribute,
+  getParentElement,
+  getSvgElementName,
+  resolveOptions,
+} from '../utils'
 
 export const RULE_NAME = 'prefer-current-color'
 export type MessageIds = 'invalid'
@@ -56,7 +62,11 @@ function normalize(value: string): string {
 function isHardcodedColor(value: string): boolean {
   const normalizedValue = normalize(value)
 
-  if (!normalizedValue || CSS_WIDE_KEYWORDS.has(normalizedValue)) {
+  if (
+    !normalizedValue
+    || CSS_WIDE_KEYWORDS.has(normalizedValue)
+    || /\b(?:var|env)\(|\bcurrentcolor\b/.test(normalizedValue)
+  ) {
     return false
   }
 
@@ -135,7 +145,12 @@ export default createESLintRule<Options, MessageIds>({
           return
         }
 
-        const attributeName = normalize(node.key.value)
+        const parent = getParentElement(node)
+        if (!parent || getSvgElementName(parent) === null) {
+          return
+        }
+
+        const attributeName = node.key.value
 
         if (!targetAttributes.has(attributeName)) {
           return
