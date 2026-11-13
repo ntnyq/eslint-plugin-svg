@@ -94,6 +94,10 @@ run({
   ],
   invalid: [
     {
+      code: `<svg aria-labelledby="label"><g id="label">${'<title>'.repeat(40)}${'</title>'.repeat(40)}</g></svg>`,
+      errors: [{ messageId: 'missing' }],
+    },
+    {
       filename: 'empty-cdata.svg',
       code: '<svg><title><![CDATA[   ]]></title></svg>',
       errors(errors) {

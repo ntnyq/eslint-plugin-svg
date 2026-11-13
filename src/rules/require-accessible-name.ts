@@ -12,6 +12,8 @@ export const RULE_NAME = 'require-accessible-name'
 export type MessageIds = 'missing'
 export type Options = []
 
+type ContentNameCache = WeakMap<AST.ElementNode, [string?, string?]>
+
 /** Hidden SVGs, including descendants of aria-hidden ancestors, need no name. */
 function isHidden(node: AST.ElementNode): boolean {
   let current: AST.ElementNode | undefined = node
@@ -40,8 +42,17 @@ function isPresentational(node: AST.ElementNode): boolean {
 }
 
 /** Static text alternatives only; CSS and script-generated names are out of scope. */
-function getContentName(node: AST.ElementNode, includeHidden = false): string {
-  return node.children
+function getContentName(
+  node: AST.ElementNode,
+  includeHidden: boolean,
+  cache: ContentNameCache,
+): string {
+  const index = includeHidden ? 1 : 0
+  const cached = cache.get(node)?.[index]
+  if (cached !== undefined) {
+    return cached
+  }
+  const name = node.children
     .map(child => {
       if (child.type === 'Text') {
         return decodeXmlReferences(child.value)
@@ -56,14 +67,23 @@ function getContentName(node: AST.ElementNode, includeHidden = false): string {
         return ''
       }
       return (
-        getOwnName(child, includeHidden) || getContentName(child, includeHidden)
+        getOwnName(child, includeHidden, cache)
+        || getContentName(child, includeHidden, cache)
       )
     })
     .join(' ')
     .trim()
+  const names = cache.get(node) ?? []
+  names[index] = name
+  cache.set(node, names)
+  return name
 }
 
-function getOwnName(node: AST.ElementNode, includeHidden = false): string {
+function getOwnName(
+  node: AST.ElementNode,
+  includeHidden: boolean,
+  cache: ContentNameCache,
+): string {
   const label = getAttributeValue(node, 'aria-label').trim()
   if (label) {
     return label
@@ -71,7 +91,9 @@ function getOwnName(node: AST.ElementNode, includeHidden = false): string {
   const title = node.children.find(
     child => child.type === 'Element' && getSvgElementName(child) === 'title',
   )
-  return title?.type === 'Element' ? getContentName(title, includeHidden) : ''
+  return title?.type === 'Element'
+    ? getContentName(title, includeHidden, cache)
+    : ''
 }
 
 export default createESLintRule<Options, MessageIds>({
@@ -93,6 +115,9 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     const elementsById = new Map<string, AST.ElementNode>()
     const targets: AST.ElementNode[] = []
+    // Empty alternatives can be visited via both title and content fallbacks.
+    // Cache both visibility modes to avoid exponential subtree traversal.
+    const contentNames: ContentNameCache = new WeakMap()
 
     function checkNames() {
       for (const node of targets) {
@@ -109,12 +134,12 @@ export default createESLintRule<Options, MessageIds>({
           ? references
               .map(
                 element =>
-                  getOwnName(element, isHidden(element))
-                  || getContentName(element, isHidden(element)),
+                  getOwnName(element, isHidden(element), contentNames)
+                  || getContentName(element, isHidden(element), contentNames),
               )
               .join(' ')
               .trim()
-          : getOwnName(node)
+          : getOwnName(node, false, contentNames)
         if (!name) {
           context.report({ node, messageId: 'missing' })
         }
