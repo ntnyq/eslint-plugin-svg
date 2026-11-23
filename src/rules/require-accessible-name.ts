@@ -17,19 +17,23 @@ type ContentNameCache = WeakMap<AST.ElementNode, [string?, string?]>
 /** Hidden SVGs, including descendants of aria-hidden ancestors, need no name. */
 function isHidden(node: AST.ElementNode): boolean {
   let current: AST.ElementNode | undefined = node
+
   while (current) {
     if (
       getAttributeValue(current, 'aria-hidden').trim().toLowerCase() === 'true'
     ) {
       return true
     }
+
     current = getParentElement(current)
   }
+
   return false
 }
 
 function isPresentational(node: AST.ElementNode): boolean {
   const role = getEffectiveRole(getAttributeValue(node, 'role'))
+
   return (
     (role === 'none' || role === 'presentation')
     && !node.attributes.some(
@@ -49,23 +53,29 @@ function getContentName(
 ): string {
   const index = includeHidden ? 1 : 0
   const cached = cache.get(node)?.[index]
+
   if (cached !== undefined) {
     return cached
   }
+
   const name = node.children
     .map(child => {
       if (child.type === 'Text') {
         return decodeXmlReferences(child.value)
       }
+
       if (child.type === 'CDATA') {
         return child.value
       }
+
       if (child.type !== 'Element' || (!includeHidden && isHidden(child))) {
         return ''
       }
+
       if (['desc', 'script', 'style'].includes(child.name.split(':').at(-1)!)) {
         return ''
       }
+
       return (
         getOwnName(child, includeHidden, cache)
         || getContentName(child, includeHidden, cache)
@@ -74,8 +84,10 @@ function getContentName(
     .join(' ')
     .trim()
   const names = cache.get(node) ?? []
+
   names[index] = name
   cache.set(node, names)
+
   return name
 }
 
@@ -85,12 +97,15 @@ function getOwnName(
   cache: ContentNameCache,
 ): string {
   const label = getAttributeValue(node, 'aria-label').trim()
+
   if (label) {
     return label
   }
+
   const title = node.children.find(
     child => child.type === 'Element' && getSvgElementName(child) === 'title',
   )
+
   return title?.type === 'Element'
     ? getContentName(title, includeHidden, cache)
     : ''
@@ -124,6 +139,7 @@ export default createESLintRule<Options, MessageIds>({
         if (isHidden(node) || isPresentational(node)) {
           continue
         }
+
         const references = getAttributeValue(node, 'aria-labelledby')
           .split(/[\t\n\r ]+/)
           .map(id => elementsById.get(id))
@@ -140,6 +156,7 @@ export default createESLintRule<Options, MessageIds>({
               .join(' ')
               .trim()
           : getOwnName(node, false, contentNames)
+
         if (!name) {
           context.report({ node, messageId: 'missing' })
         }
@@ -149,9 +166,11 @@ export default createESLintRule<Options, MessageIds>({
     return {
       Element(node) {
         const id = getAttributeValue(node, 'id')
+
         if (id && !elementsById.has(id)) {
           elementsById.set(id, node)
         }
+
         if (
           getSvgElementName(node) === 'svg'
           && (!getParentElement(node)

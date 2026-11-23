@@ -42,6 +42,7 @@ export function deepMerge(
             : secondValue,
         ]
       }
+
       return [key, secondHasKey ? secondValue : firstValue]
     }),
   )

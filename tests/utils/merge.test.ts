@@ -7,6 +7,7 @@ describe('deepMerge', () => {
       '{"__proto__":{"polluted":true},"constructor":{"custom":true}}',
     )
     const merged = deepMerge({}, input)
+
     expect(Object.getPrototypeOf(merged)).toBe(Object.prototype)
     expect(Object.hasOwn(merged, '__proto__')).toBe(true)
     expect(Object.getOwnPropertyDescriptor(merged, '__proto__')?.value).toEqual(
@@ -22,6 +23,7 @@ describe('deepMerge', () => {
     const first: Record<string, unknown> = Object.create({
       nested: { inherited: true },
     })
+
     expect(deepMerge(first, { nested: { own: true } })).toEqual({
       nested: { own: true },
     })
@@ -45,6 +47,7 @@ describe('deepMerge', () => {
     b: [3, 4, 5],
     c: 2,
   }
+
   it('should merge two objects', () => {
     expect(deepMerge(OBJECT_DEEP, OBJECT_SHALLOW)).toMatchInlineSnapshot(`
       {

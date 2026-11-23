@@ -58,9 +58,11 @@ function collectText(
       const text =
         child.type === 'Text' ? decodeXmlReferences(child.value) : child.value
       const value = options.ignoreWhitespace ? text.trim() : text
+
       if (value) {
         textSegments.push(value)
       }
+
       continue
     }
 

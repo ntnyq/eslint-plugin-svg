@@ -65,11 +65,13 @@ export default createESLintRule<Options, MessageIds>({
         }
 
         const parent = getParentElement(node)
+
         if (!parent || getSvgElementName(parent) === null) {
           return
         }
 
         const role = getEffectiveRole(decodeXmlAttribute(node.value.value))
+
         if (!role || !discouragedRoles.has(role)) {
           return
         }

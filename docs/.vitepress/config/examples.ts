@@ -24,6 +24,7 @@ export function createExampleTwoslasher(
       },
     ],
   })
+
   return (code: string) => lint(code, 'example.svg')
 }
 
@@ -42,6 +43,7 @@ export function createExampleTransformers(
     // This rule intentionally does nothing without the documented option.
     options: rule === 'no-elements' ? [{ elements: ['style', 'script'] }] : [],
   }))
+
   examples.push(
     {
       rule: 'no-base64-data-url',
@@ -54,6 +56,7 @@ export function createExampleTransformers(
       options: [{ roles: ['list'] }],
     },
   )
+
   return examples.map(({ rule, variant, options }) =>
     transformerTwoslash({
       errorRendering: 'hover',
@@ -62,6 +65,7 @@ export function createExampleTransformers(
         const meta = highlightOptions.meta?.__raw ?? ''
         const exampleRule = meta.match(/\beslint-rule=([\w-]+)/)?.[1]
         const exampleVariant = meta.match(/\beslint-example=([\w-]+)/)?.[1]
+
         return (
           lang === 'xml'
           && /\beslint-check\b/.test(meta)

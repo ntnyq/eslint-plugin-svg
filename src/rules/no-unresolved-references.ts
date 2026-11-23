@@ -52,12 +52,15 @@ export default createESLintRule<Options, MessageIds>({
     const { allowIds } = resolveOptions(context.options, defaultOptions)
     const ids = new Set(allowIds)
     const references: LocalReference[] = []
+
     return {
       Element(node) {
         const id = getAttributeValue(node, 'id')
+
         if (id) {
           ids.add(id)
         }
+
         references.push(...getLocalReferences(node))
       },
       'Document:exit': function () {

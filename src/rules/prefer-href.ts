@@ -27,12 +27,16 @@ function animatesHref(node: AST.ElementNode): boolean {
   if (!ANIMATION_ELEMENTS.has(getSvgElementName(node) ?? '')) {
     return false
   }
+
   const name = getAttributeValue(node, 'attributeName').trim()
+
   if (name === 'href') {
     return true
   }
+
   const [prefix, localName] = name.split(':')
   const namespace = resolveNamespace(node, prefix)
+
   return (
     localName === 'href'
     && (namespace === 'http://www.w3.org/1999/xlink'
@@ -58,9 +62,11 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     const targets: AST.ElementNode[] = []
     let hasHrefAnimation = false
+
     return {
       Element(node) {
         hasHrefAnimation ||= animatesHref(node)
+
         if (SVG_HREF_ELEMENTS.has(getSvgElementName(node) ?? '')) {
           targets.push(node)
         }
@@ -80,11 +86,14 @@ export default createESLintRule<Options, MessageIds>({
         attribute =>
           attribute.key?.value !== 'href' && isHrefAttribute(attribute),
       )
+
       for (const attribute of xlinkAttributes) {
         const key = attribute.key
+
         if (!key) {
           continue
         }
+
         context.report({
           node: key,
           messageId: 'deprecated',
@@ -93,12 +102,14 @@ export default createESLintRule<Options, MessageIds>({
             if (hasHrefAnimation) {
               return null
             }
+
             if (!href) {
               // Multiple aliases have no unambiguous migration order.
               return xlinkAttributes.length === 1
                 ? fixer.replaceText(key, 'href')
                 : null
             }
+
             if (
               href.value
               && attribute.value
@@ -107,6 +118,7 @@ export default createESLintRule<Options, MessageIds>({
             ) {
               return fixer.remove(attribute)
             }
+
             return null
           },
         })

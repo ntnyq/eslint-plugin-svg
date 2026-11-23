@@ -23,6 +23,7 @@ it.each(['javascript:alert(1)', 'data:image/png;base64,AAAA', 'red', 'img'])(
       ],
       { filename: 'recovered.svg' },
     )
+
     expect(messages).toEqual([])
   },
 )

@@ -75,6 +75,7 @@ export default createESLintRule<Options, MessageIds>({
           decodeXmlAttribute(node.value.value),
           allRoles,
         )
+
         if (!role || !allowedRoles.includes(role)) {
           context.report({
             node: node.value,

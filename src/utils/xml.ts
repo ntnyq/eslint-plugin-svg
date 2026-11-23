@@ -16,9 +16,11 @@ export function decodeXmlReferences(value: string): string {
       if (!reference.startsWith('#')) {
         return XML_ENTITIES[reference] ?? match
       }
+
       const codePoint = reference.startsWith('#x')
         ? Number.parseInt(reference.slice(2), 16)
         : Number(reference.slice(1))
+
       if (
         codePoint === 9
         || codePoint === 10
@@ -29,6 +31,7 @@ export function decodeXmlReferences(value: string): string {
       ) {
         return String.fromCodePoint(codePoint)
       }
+
       return match
     },
   )
@@ -45,6 +48,7 @@ export function getParentElement(
   node: AST.AnyNode,
 ): AST.ElementNode | undefined {
   const parent = (node as AST.AnyNode & { parent?: AST.AnyNode }).parent
+
   return parent?.type === 'Element' ? parent : undefined
 }
 
@@ -62,15 +66,19 @@ export function resolveNamespace(
 ): string | undefined {
   const name = prefix ? `xmlns:${prefix}` : 'xmlns'
   let current: AST.ElementNode | undefined = node
+
   while (current) {
     const attribute = current.attributes.find(
       attribute => attribute.key?.value === name,
     )
+
     if (attribute) {
       return decodeXmlAttribute(attribute.value?.value ?? '')
     }
+
     current = getParentElement(current)
   }
+
   return undefined
 }
 
@@ -79,9 +87,11 @@ export function getSvgElementName(node: AST.ElementNode): string | null {
   const separator = node.name.indexOf(':')
   const prefix = separator === -1 ? '' : node.name.slice(0, separator)
   const namespace = resolveNamespace(node, prefix)
+
   if (namespace === undefined) {
     return node.name
   }
+
   return namespace === 'http://www.w3.org/2000/svg'
     ? node.name.slice(separator + 1)
     : null
@@ -92,15 +102,20 @@ export function isHrefAttribute(node: AST.AttributeNode): boolean {
   if (!node.key) {
     return false
   }
+
   if (node.key.value === 'href') {
     return true
   }
+
   const [prefix, name] = node.key.value.split(':')
   const parent = getParentElement(node)
+
   if (name !== 'href' || !parent) {
     return false
   }
+
   const namespace = resolveNamespace(parent, prefix)
+
   return (
     namespace === 'http://www.w3.org/1999/xlink'
     || (prefix === 'xlink' && namespace === undefined)

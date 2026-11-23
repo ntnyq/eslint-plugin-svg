@@ -20,6 +20,7 @@ describe('presets', () => {
         config,
         { filename: 'test.svg' },
       )
+
       expect(messages.map(message => message.ruleId)).toEqual([
         'svg/no-invalid-path-data',
       ])
@@ -40,6 +41,7 @@ describe('presets', () => {
         config,
         { filename: 'test.svg' },
       )
+
       expect(messages.map(message => message.ruleId)).toEqual([
         'svg/no-invalid-reference-targets',
         'svg/no-unresolved-references',
@@ -53,6 +55,7 @@ describe('presets', () => {
         config,
         { filename: 'test.svg' },
       )
+
       expect(messages.map(message => message.ruleId)).toEqual([
         'svg/no-unresolved-references',
       ])
@@ -64,6 +67,7 @@ describe('presets', () => {
       plugin.configs.strict,
       { filename: 'test.svg' },
     )
+
     expect(messages.map(message => message.ruleId)).toEqual([
       'svg/no-empty-container',
     ])
@@ -74,6 +78,7 @@ describe('presets', () => {
       plugin.configs.recommended,
       { filename: 'test.svg' },
     )
+
     expect(messages.map(message => message.ruleId)).toEqual([
       'svg/no-deprecated',
     ])
@@ -84,6 +89,7 @@ describe('presets', () => {
       plugin.configs.security,
       { filename: 'test.svg' },
     )
+
     expect(messages.map(message => message.ruleId)).toEqual(['svg/no-doctype'])
   })
   it('accepts an explicitly named image in the a11y preset', () => {
@@ -92,6 +98,7 @@ describe('presets', () => {
       plugin.configs.a11y,
       { filename: 'test.svg' },
     )
+
     expect(messages).toEqual([])
   })
 })

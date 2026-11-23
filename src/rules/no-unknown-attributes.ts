@@ -22,8 +22,10 @@ const knownAttributes = new Set(ALL_ATTRIBUTES)
  */
 function getEditDistance(left: string, right: string): number {
   let previous = Array.from({ length: right.length + 1 }, (_, index) => index)
+
   for (let row = 1; row <= left.length; row++) {
     const current = [row]
+
     for (let column = 1; column <= right.length; column++) {
       current[column] = Math.min(
         current[column - 1]! + 1,
@@ -31,8 +33,10 @@ function getEditDistance(left: string, right: string): number {
         previous[column - 1]! + (left[row - 1] === right[column - 1] ? 0 : 1),
       )
     }
+
     previous = current
   }
+
   return previous[right.length]!
 }
 
@@ -44,16 +48,20 @@ function getSuggestedName(name: string): string | undefined {
   if (name.length > 40) {
     return undefined
   }
+
   let bestDistance = name.length > 3 ? 2 : 1
   let matches: string[] = []
+
   for (const candidate of ALL_ATTRIBUTES) {
     if (Math.abs(candidate.length - name.length) > bestDistance) {
       continue
     }
+
     const distance = getEditDistance(
       name.toLowerCase(),
       candidate.toLowerCase(),
     )
+
     if (distance < bestDistance) {
       bestDistance = distance
       matches = [candidate]
@@ -61,6 +69,7 @@ function getSuggestedName(name: string): string | undefined {
       matches.push(candidate)
     }
   }
+
   return matches.length === 1 ? matches[0] : undefined
 }
 
@@ -96,17 +105,22 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     const { allowAttributes } = resolveOptions(context.options, defaultOptions)
     const allowedAttributes = new Set(allowAttributes)
+
     return {
       Element(node) {
         if (getSvgElementName(node) === null) {
           return
         }
+
         for (const attribute of node.attributes) {
           const key = attribute.key
+
           if (!key) {
             continue
           }
+
           const name = key.value
+
           if (
             knownAttributes.has(name)
             || allowedAttributes.has(name)
@@ -117,7 +131,9 @@ export default createESLintRule<Options, MessageIds>({
           ) {
             continue
           }
+
           const replacement = getSuggestedName(name)
+
           context.report({
             node: key,
             messageId: 'unknown',

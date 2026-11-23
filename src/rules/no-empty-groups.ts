@@ -41,6 +41,7 @@ export default createESLintRule<Options, MessageIds>({
               child.type === 'Text'
                 ? decodeXmlReferences(child.value)
                 : child.value
+
             return isNonEmptyString(value.trim())
           })
 
