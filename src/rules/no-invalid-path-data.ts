@@ -35,9 +35,11 @@ function isValidPathData(value: string): boolean {
   if (!value || EMPTY_PATH_VALUES.has(value.toLowerCase())) {
     return true
   }
+
   if (!/^m/i.test(value)) {
     return false
   }
+
   const numberPattern = /[+-]?(?:\d*\.\d+|\d+)(?:e[+-]?\d+)?/iy
   let index = 0
   let command = ''
@@ -50,43 +52,56 @@ function isValidPathData(value: string): boolean {
 
   while (index < value.length) {
     const character = value[index]!
+
     if (/[a-z]/i.test(character)) {
       command = character.toLowerCase()
       index++
       skipWhitespace()
+
       if (command === 'z') {
         command = ''
         continue
       }
     }
+
     const parameterCount = PARAMETER_COUNTS.get(command)
+
     if (!parameterCount) {
       return false
     }
+
     for (let parameter = 0; parameter < parameterCount; parameter++) {
       if (command === 'a' && (parameter === 3 || parameter === 4)) {
         if (value[index] !== '0' && value[index] !== '1') {
           return false
         }
+
         index++
       } else {
         numberPattern.lastIndex = index
         const match = numberPattern.exec(value)
+
         if (!match || !Number.isFinite(Number(match[0]))) {
           return false
         }
+
         index = numberPattern.lastIndex
       }
+
       const separatorStart = index
+
       skipWhitespace()
+
       if (value[index] === ',') {
         index++
         skipWhitespace()
+
         // A comma must separate arguments, never commands or the end of data.
         if (index === value.length || /[a-z]/i.test(value[index]!)) {
           return false
         }
       }
+
       // Arc rotation and the first flag require a separator; the two flags
       // and the following coordinate can be concatenated (e.g. 0 0110 10).
       if (command === 'a' && parameter === 2 && index === separatorStart) {
@@ -94,6 +109,7 @@ function isValidPathData(value: string): boolean {
       }
     }
   }
+
   return true
 }
 
@@ -118,14 +134,18 @@ export default createESLintRule<Options, MessageIds>({
         if (getSvgElementName(node) !== 'path') {
           return
         }
+
         const attribute = node.attributes.find(attr => attr.key?.value === 'd')
+
         if (!attribute?.value) {
           return
         }
+
         const value = decodeXmlAttribute(attribute.value.value).replace(
           /^[\t\n\f\r ]+|[\t\n\f\r ]+$/g,
           '',
         )
+
         if (!isValidPathData(value)) {
           context.report({ node: attribute.value, messageId: 'invalid' })
         }

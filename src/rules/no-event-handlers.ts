@@ -133,6 +133,7 @@ export default createESLintRule<Options, MessageIds>({
         if (!node.key) {
           return
         }
+
         const name = node.key.value
 
         if (!name || !name.toLowerCase().startsWith('on') || isIgnored(name)) {

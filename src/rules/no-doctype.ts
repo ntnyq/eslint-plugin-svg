@@ -33,6 +33,7 @@ export default createESLintRule<Options, MessageIds>({
             ) {
               return null
             }
+
             return fixer.remove(node)
           },
         })

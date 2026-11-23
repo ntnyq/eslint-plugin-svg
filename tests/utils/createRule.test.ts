@@ -24,9 +24,11 @@ describe('createESLintRule', () => {
       defaultOptions: [defaults],
       create(_context, options) {
         received.push(options)
+
         return {}
       },
     })
+
     expect(rule.meta?.defaultOptions).toEqual([defaults])
     // Remove metadata to exercise our fallback used by ESLint versions before 9.15.
     const legacyRule = {
@@ -42,6 +44,7 @@ describe('createESLintRule', () => {
       },
     }
     const linter = new Linter()
+
     expect(linter.verify('<svg/>', [config], { filename: 'test.svg' })).toEqual(
       [],
     )

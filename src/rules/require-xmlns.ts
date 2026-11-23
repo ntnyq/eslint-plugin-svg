@@ -32,15 +32,18 @@ export default createESLintRule<Options, MessageIds>({
     if (!/\.svg$/i.test(context.filename)) {
       return {}
     }
+
     return {
       Element(node) {
         if (getParentElement(node) || node.name.split(':').at(-1) !== 'svg') {
           return
         }
+
         const separator = node.name.indexOf(':')
         const name =
           separator === -1 ? 'xmlns' : `xmlns:${node.name.slice(0, separator)}`
         const attribute = node.attributes.find(attr => attr.key?.value === name)
+
         if (!attribute) {
           context.report({ node, messageId: 'missing', data: { name } })
         } else if (

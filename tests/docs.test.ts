@@ -5,6 +5,7 @@ import plugin from '../src'
 describe('documentation examples', () => {
   it('checks an opt-in rule without unrelated recommended diagnostics', () => {
     const lint = createExampleTwoslasher(plugin, 'no-unsafe-href')
+
     expect(lint('<svg><a href="#local"/></svg>').nodes).toEqual([])
     expect(
       lint('<svg><a href="javascript:alert(1)"/></svg>').nodes,

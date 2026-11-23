@@ -32,6 +32,7 @@ export default createESLintRule<Options, MessageIds>({
     return {
       Element(node) {
         const name = getSvgElementName(node)
+
         if (name === null || isKnownElement(name)) {
           return
         }

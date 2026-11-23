@@ -97,6 +97,7 @@ export default createESLintRule<Options, MessageIds>({
     return {
       Element(node) {
         const name = getSvgElementName(node)
+
         if (
           !containerElements.has(name ?? '')
           || (name === 'svg' && !checkRootSvg && !getParentElement(node))

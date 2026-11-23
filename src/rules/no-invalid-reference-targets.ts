@@ -51,24 +51,32 @@ function isValidTarget(
 ): boolean {
   const { attribute } = reference
   const source = getParentElement(attribute)
+
   if (!source || !attribute.key) {
     return true
   }
+
   const sourceName = getSvgElementName(source) ?? ''
   const targetName = getSvgElementName(target)
+
   if (isHrefAttribute(attribute)) {
     if (sourceName === 'use') {
       return targetName !== null
     }
+
     const targets = Object.hasOwn(HREF_TARGETS, sourceName)
       ? HREF_TARGETS[sourceName]
       : undefined
+
     if (!targets) {
       return true
     }
+
     return target !== source && targets.includes(targetName ?? '')
   }
+
   const targets = ATTRIBUTE_TARGETS[attribute.key.value]
+
   return !targets || targets.includes(targetName ?? '')
 }
 
@@ -90,17 +98,21 @@ export default createESLintRule<Options, MessageIds>({
   create(context) {
     const elementsById = new Map<string, AST.ElementNode>()
     const references: LocalReference[] = []
+
     return {
       Element(node) {
         const id = getAttributeValue(node, 'id')
+
         if (id && !elementsById.has(id)) {
           elementsById.set(id, node)
         }
+
         references.push(...getLocalReferences(node))
       },
       'Document:exit': function () {
         for (const reference of references) {
           const target = elementsById.get(reference.id)
+
           // Missing IDs belong to no-unresolved-references.
           if (target && !isValidTarget(reference, target)) {
             context.report({

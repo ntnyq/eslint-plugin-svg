@@ -72,9 +72,11 @@ const fragmentDecoder = new TextDecoder('utf-8', { ignoreBOM: true })
  */
 function getFragmentId(value: string): string | undefined {
   value = normalizeUrl(value)
+
   if (!value.startsWith('#') || value.length === 1) {
     return undefined
   }
+
   // URL percent-decoding leaves malformed percent escapes literal and uses
   // replacement characters for malformed UTF-8, rather than throwing.
   const id = value
@@ -86,6 +88,7 @@ function getFragmentId(value: string): string | undefined {
         ),
       ),
     )
+
   return /^(?:(?:svgView|xpointer)\(|(?:xywh|t)=)/.test(id) ? undefined : id
 }
 
@@ -94,12 +97,15 @@ function getFragmentId(value: string): string | undefined {
  */
 function hasXmlBase(node: AST.ElementNode): boolean {
   let current: AST.ElementNode | undefined = node
+
   while (current) {
     if (getAttributeValue(current, 'xml:base')) {
       return true
     }
+
     current = getParentElement(current)
   }
+
   return false
 }
 
@@ -108,20 +114,25 @@ function hasXmlBase(node: AST.ElementNode): boolean {
  */
 export function getLocalReferences(node: AST.ElementNode): LocalReference[] {
   const elementName = getSvgElementName(node)
+
   if (elementName === null) {
     return []
   }
+
   const references: LocalReference[] = []
   const hasHref =
     SVG_HREF_ELEMENTS.has(elementName)
     && node.attributes.some(attribute => attribute.key?.value === 'href')
+
   for (const attribute of node.attributes) {
     if (!attribute.key || !attribute.value) {
       continue
     }
+
     const name = attribute.key.value
     const value = decodeXmlAttribute(attribute.value.value)
     let ids: string[] = []
+
     if (IDREF_ATTRIBUTES.has(name)) {
       ids = value.split(/[\t\n\r ]+/).filter(Boolean)
     } else if (isHrefAttribute(attribute)) {
@@ -131,24 +142,30 @@ export function getLocalReferences(node: AST.ElementNode): LocalReference[] {
       ) {
         continue
       }
+
       if ((hasHref && name !== 'href') || hasXmlBase(node)) {
         continue
       }
+
       const id = getFragmentId(value)
+
       if (id) {
         ids.push(id)
       }
     } else if (URL_ATTRIBUTES.has(name)) {
       for (const url of getCssUrls(value)) {
         const id = getFragmentId(url)
+
         if (id) {
           ids.push(id)
         }
       }
     }
+
     for (const id of new Set(ids)) {
       references.push({ attribute, id })
     }
   }
+
   return references
 }

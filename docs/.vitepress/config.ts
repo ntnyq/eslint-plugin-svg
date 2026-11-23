@@ -31,9 +31,11 @@ export default defineConfig({
           typeof title === 'string' && title.startsWith('svg/')
             ? title.slice(4)
             : undefined
+
         if (!ruleName) {
           return
         }
+
         for (const token of state.tokens) {
           if (token.type === 'fence' && /^xml\b/.test(token.info)) {
             token.info += ` eslint-rule=${ruleName}`
@@ -46,6 +48,7 @@ export default defineConfig({
           if (tokens[idx].nesting === 1) {
             return '<CustomWrapper type="correct">'
           }
+
           return '</CustomWrapper>\n'
         },
       })
@@ -54,11 +57,14 @@ export default defineConfig({
         render(tokens: any[], idx: number) {
           if (tokens[idx].nesting === 1) {
             const next = tokens[idx + 1]
+
             if (next.type === 'fence') {
               next.info = [next.info, 'eslint-check'].filter(Boolean).join(' ')
             }
+
             return '<CustomWrapper type="incorrect">'
           }
+
           return '</CustomWrapper>\n'
         },
       })

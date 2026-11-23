@@ -182,6 +182,7 @@ export default createESLintRule<Options, MessageIds>({
     if (attributes !== '*') {
       allowedAttributes = new Set(attributes.map(name => normalize(name)))
     }
+
     const ignoredAttributes = new Set(
       ignoreAttributes.map(name => normalize(name)),
     )

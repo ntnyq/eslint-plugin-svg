@@ -45,8 +45,10 @@ run<Options>({
         expect(errors).toHaveLength(1)
         expect(errors[0]?.messageId).toBe('unknown')
         const suggestion = errors[0]?.suggestions?.[0]
+
         expect(suggestion?.desc).toBe("Replace 'storke' with 'stroke'")
         const code = '<svg><path storke="red"/></svg>'
+
         expect(
           suggestion
             && code.slice(0, suggestion.fix.range[0])

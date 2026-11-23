@@ -91,6 +91,7 @@ export default createESLintRule<Options, MessageIds>({
         if (getSvgElementName(node) !== 'svg') {
           return
         }
+
         const attributes = toArray(node.attributes)
 
         const viewBoxAttr = attributes.find(
@@ -102,6 +103,7 @@ export default createESLintRule<Options, MessageIds>({
             node,
             messageId: 'missing',
           })
+
           return
         }
 
@@ -112,6 +114,7 @@ export default createESLintRule<Options, MessageIds>({
             node: viewBoxAttr.value ?? viewBoxAttr.key ?? viewBoxAttr,
             messageId: 'missing',
           })
+
           return
         }
 
